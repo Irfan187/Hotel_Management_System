@@ -40,6 +40,9 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
 use App\Models\ExtraActivity;
+use App\Models\CancelPolicy;
+use App\Models\Service;
+
 
 
 
@@ -2647,6 +2650,43 @@ class HomeController extends Controller
             return response()->json([
                 'success' => true,
                 'data' => $total_tax,
+            ]);
+        }
+    }
+
+
+    public function getServices(Request $request)
+    {
+
+        $services = Service::all();
+
+        if (count($services)) {
+            return response()->json([
+                'success' => true,
+                'data' => $services,
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'data' => "No Services",
+            ]);
+        }
+    }
+
+    public function getPolicy(Request $request)
+    {
+
+        $cpolicy = CancelPolicy::first();
+
+        if (!empty($cpolicy)) {
+            return response()->json([
+                'success' => true,
+                'data' => $cpolicy,
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'data' => "No Policy",
             ]);
         }
     }

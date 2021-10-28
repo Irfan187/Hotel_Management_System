@@ -46,3 +46,7 @@ Route::get('/getminprice', [App\Http\Controllers\HomeController::class, 'getMinP
 
 Route::post('/tax', [App\Http\Controllers\HomeController::class, 'getTax']);
 
+Route::get('/getservices', [App\Http\Controllers\HomeController::class, 'getServices']);
+Route::get('/getpolicy', [App\Http\Controllers\HomeController::class, 'getPolicy']);
+
+
