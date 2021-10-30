@@ -2498,44 +2498,53 @@ class HomeController extends Controller
             $booking->booking_no = $number;
             $booking->save();
 
-            $r_data = new RoomData();
-            $r_data->user_id = $user_id;
-            $r_data->booking_no = $number;
+            foreach($request->room_data as $d){
+                $r_data = new RoomData();
+                $r_data->user_id = $user_id;
+                $r_data->booking_no = $number;
+    
+                $r_data->room_id = $d->room_id;
+                $r_data->package_id = $d->package_id;
+                $r_data->room_name = $d->room_name;
+                $r_data->package_name = $d->name;
+                $r_data->price = $d->price;
+                $r_data->total_price = $d->totalPrice;
+                $r_data->datefrom = $d->from;
+                $r_data->dateto = $d->to;
+                $r_data->adults = $d->adults;
+                $r_data->kid1 = $d->kid1;
+                $r_data->kid2 = $d->kid2;
+                $r_data->daydiff = $d->diff_days;
+                $r_data->save();
+            }
 
-            $r_data->room_id = $request->room_id;
-            $r_data->package_id = $request->package_id;
-            $r_data->room_name = $request->room_name;
-            $r_data->package_name = $request->name;
-            $r_data->price = $request->price;
-            $r_data->total_price = $request->totalPrice;
-            $r_data->datefrom = $request->from;
-            $r_data->dateto = $request->to;
-            $r_data->adults = $request->adults;
-            $r_data->kid1 = $request->kid1;
-            $r_data->kid2 = $request->kid2;
-            $r_data->daydiff = $request->diff_days;
-            $r_data->save();
+            foreach($request->room_service as $d){
+                $r_s_data = new RoomServiceData();
+                $r_s_data->user_id = $user_id;
+                $r_s_data->booking_no = $number;
+                $r_s_data->room_id = $d->room_id;
+                $r_s_data->package_id = $d->package_id;
+                $r_s_data->service_id = $d->room_service_id;
+                $r_s_data->title = $d->room_service_title;
+                $r_s_data->price = $d->room_service_price;
+                $r_s_data->save();
+            }
+            
 
-            $r_s_data = new RoomServiceData();
-            $r_s_data->user_id = $user_id;
-            $r_s_data->booking_no = $number;
-            $r_s_data->room_id = $request->room_id;
-            $r_s_data->package_id = $request->package_id;
-            $r_s_data->service_id = $request->room_service_id;
-            $r_s_data->title = $request->room_service_title;
-            $r_s_data->price = $request->room_service_price;
-            $r_s_data->save();
+            foreach($request->room_activity as $d){
+                $r_a_data = new RoomActivityData();
+                $r_a_data->user_id = $user_id;
+                $r_a_data->booking_no = $number;
+                $r_a_data->room_id = $d->room_id;
+                $r_a_data->package_id = $d->package_id;
+                $r_a_data->activity_id = $d->activity_id;
+                $r_a_data->title = $d->activity_title;
+                $r_a_data->price = $d->activity_price;
+                $r_a_data->save();
+                
+            }
 
 
-            $r_a_data = new RoomActivityData();
-            $r_a_data->user_id = $user_id;
-            $r_a_data->booking_no = $number;
-            $r_a_data->room_id = $request->room_id;
-            $r_a_data->package_id = $request->package_id;
-            $r_a_data->activity_id = $request->activity_id;
-            $r_a_data->title = $request->activity_title;
-            $r_a_data->price = $request->activity_price;
-            $r_a_data->save();
             
 
 
@@ -2592,43 +2601,51 @@ class HomeController extends Controller
             $booking->booking_no = $number;
             $booking->save();
 
-            $r_data = new RoomData();
-            $r_data->user_id = $user_id;
-            $r_data->booking_no = $number;
-            $r_data->room_id = $request->room_id;
-            $r_data->package_id = $request->package_id;
-            $r_data->room_name = $request->room_name;
-            $r_data->package_name = $request->name;
-            $r_data->price = $request->price;
-            $r_data->total_price = $request->totalPrice;
-            $r_data->datefrom = $request->from;
-            $r_data->dateto = $request->to;
-            $r_data->adults = $request->adults;
-            $r_data->kid1 = $request->kid1;
-            $r_data->kid2 = $request->kid2;
-            $r_data->daydiff = $request->diff_days;
-            $r_data->save();
+            foreach($request->room_data as $d){
+                $r_data = new RoomData();
+                $r_data->user_id = $user_id;
+                $r_data->booking_no = $number;
+    
+                $r_data->room_id = $d->room_id;
+                $r_data->package_id = $d->package_id;
+                $r_data->room_name = $d->room_name;
+                $r_data->package_name = $d->name;
+                $r_data->price = $d->price;
+                $r_data->total_price = $d->totalPrice;
+                $r_data->datefrom = $d->from;
+                $r_data->dateto = $d->to;
+                $r_data->adults = $d->adults;
+                $r_data->kid1 = $d->kid1;
+                $r_data->kid2 = $d->kid2;
+                $r_data->daydiff = $d->diff_days;
+                $r_data->save();
+            }
 
-            $r_s_data = new RoomServiceData();
-            $r_s_data->user_id = $user_id;
-            $r_s_data->booking_no = $number;
-            $r_s_data->room_id = $request->room_id;
-            $r_s_data->package_id = $request->package_id;
-            $r_s_data->service_id = $request->room_service_id;
-            $r_s_data->title = $request->room_service_title;
-            $r_s_data->price = $request->room_service_price;
-            $r_s_data->save();
+            foreach($request->room_service as $d){
+                $r_s_data = new RoomServiceData();
+                $r_s_data->user_id = $user_id;
+                $r_s_data->booking_no = $number;
+                $r_s_data->room_id = $d->room_id;
+                $r_s_data->package_id = $d->package_id;
+                $r_s_data->service_id = $d->room_service_id;
+                $r_s_data->title = $d->room_service_title;
+                $r_s_data->price = $d->room_service_price;
+                $r_s_data->save();
+            }
+            
 
-
-            $r_a_data = new RoomActivityData();
-            $r_a_data->user_id = $user_id;
-            $r_a_data->booking_no = $number;
-            $r_a_data->room_id = $request->room_id;
-            $r_a_data->package_id = $request->package_id;
-            $r_a_data->activity_id = $request->activity_id;
-            $r_a_data->title = $request->activity_title;
-            $r_a_data->price = $request->activity_price;
-            $r_a_data->save();
+            foreach($request->room_activity as $d){
+                $r_a_data = new RoomActivityData();
+                $r_a_data->user_id = $user_id;
+                $r_a_data->booking_no = $number;
+                $r_a_data->room_id = $d->room_id;
+                $r_a_data->package_id = $d->package_id;
+                $r_a_data->activity_id = $d->activity_id;
+                $r_a_data->title = $d->activity_title;
+                $r_a_data->price = $d->activity_price;
+                $r_a_data->save();
+                
+            }
             
 
 
