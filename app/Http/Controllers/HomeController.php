@@ -2517,6 +2517,7 @@ class HomeController extends Controller
                 $r_data->daydiff = $d['diff_days'];
                 $r_data->save();
             }
+            return response()->json("Booking is Completed");
 
             foreach($request->room_service as $d){
                 $r_s_data = new RoomServiceData();
