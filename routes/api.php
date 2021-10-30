@@ -40,7 +40,6 @@ Route::post('/packagedetails', [App\Http\Controllers\HomeController::class, 'Pac
 Route::post('/coupon', [App\Http\Controllers\HomeController::class, 'getCoupon']);
 
 
-Route::post('/bookinginfo', [App\Http\Controllers\HomeController::class, 'bookingInfo']);
 
 Route::get('/getminprice', [App\Http\Controllers\HomeController::class, 'getMinPrice']);
 
@@ -48,5 +47,12 @@ Route::post('/tax', [App\Http\Controllers\HomeController::class, 'getTax']);
 
 Route::get('/getservices', [App\Http\Controllers\HomeController::class, 'getServices']);
 Route::get('/getpolicy', [App\Http\Controllers\HomeController::class, 'getPolicy']);
+
+Route::post('/bookinginfo', [App\Http\Controllers\HomeController::class, 'bookingInfo']);
+Route::get('/getbooking', [App\Http\Controllers\HomeController::class, 'getBooking']);
+
+
+
+
 
 

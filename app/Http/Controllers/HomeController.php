@@ -43,6 +43,11 @@ use App\Models\ExtraActivity;
 use App\Models\CancelPolicy;
 use App\Models\Service;
 
+use App\Models\RoomData;
+use App\Models\RoomServiceData;
+use App\Models\RoomActivityData;
+
+
 
 
 
@@ -2444,19 +2449,25 @@ class HomeController extends Controller
         // $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
 
         // $str = $response->json()['features'][0]['properties']['address']['country_code'];
+
+        $number = rand(243678,99999999);
         $user = auth()->user();
-        if ($request->paymentmethod == 'paybybank') {
+        if ($request->payment == 'bank') {
 
             
 
+            $user_id = 0;
             if ($user) {
                 $user = User::find($user->id);
                 $user->fname = $input['fname'];
                 $user->lname = $input['lname'];
                 $user->mobno = $input['mobno'];
                 $user->email = $input['email'];
+                $user->notes = $input['notes'];
+
 
                 $user->save();
+                $user_id = $user->id;
 
                 // Mail::to($user->email)->send(new PasswordSent('hhgjhg'));
                 // dd($res);
@@ -2465,62 +2476,93 @@ class HomeController extends Controller
                 $newuser = new User();
                 $newuser->name = $request->fname . " " . $request->lname;
 
-                $newuser->password = Hash::make(123456);
+                $newuser->password = $request->password;
                 $newuser->email = $request->email;
                 $newuser->mobno = $input['mobno'];
+                $newuser->notes = $input['notes'];
+
 
 
                 $newuser->save();
+
+                $user_id = $newuser->id;
+
                 $password = "123456";
                 $newuser->assignRole('Customer');
                 // Mail::to($newuser->email)->send(new PasswordSent($password));
 
                 Auth::login($newuser);
             }
+
             $booking = new Booking();
-            $booking->booking_no = rand(55555,99999999);
-            if ($user) {
-                $booking->user_id = $user->id;
-            } else {
-                $booking->user_id = $newuser->id;
-            }
-            $booking->room_id = $request->room_id;
-            $booking->package_id = $request->package_id;
-            $booking->checkin = $data['checkin'];
-            $booking->checkout = $data['checkout'];
-            $booking->booking_date_from = $data['datefrom'];
-            $booking->booking_date_to = $data['dateto'];
-            $booking->no_of_days = $data['no_of_days'];
-            $booking->pack_price = $request->pack_price;
-            $booking->act_price = $request->act_price;
-            $booking->tax = $request->tax;
-
-            $booking->status = "Confirmed";
-
-
+            $booking->booking_no = $number;
             $booking->save();
 
+            $r_data = new RoomData();
+            $r_data->user_id = $user_id;
+            $r_data->booking_no = $number;
+
+            $r_data->room_id = $request->room_id;
+            $r_data->package_id = $request->package_id;
+            $r_data->room_name = $request->room_name;
+            $r_data->package_name = $request->name;
+            $r_data->price = $request->price;
+            $r_data->total_price = $request->totalPrice;
+            $r_data->datefrom = $request->from;
+            $r_data->dateto = $request->to;
+            $r_data->adults = $request->adults;
+            $r_data->kid1 = $request->kid1;
+            $r_data->kid2 = $request->kid2;
+            $r_data->daydiff = $request->diff_days;
+            $r_data->save();
+
+            $r_s_data = new RoomServiceData();
+            $r_s_data->user_id = $user_id;
+            $r_s_data->booking_no = $number;
+            $r_s_data->room_id = $request->room_id;
+            $r_s_data->package_id = $request->package_id;
+            $r_s_data->service_id = $request->room_service_id;
+            $r_s_data->title = $request->room_service_title;
+            $r_s_data->price = $request->room_service_price;
+            $r_s_data->save();
+
+
+            $r_a_data = new RoomActivityData();
+            $r_a_data->user_id = $user_id;
+            $r_a_data->booking_no = $number;
+            $r_a_data->room_id = $request->room_id;
+            $r_a_data->package_id = $request->package_id;
+            $r_a_data->activity_id = $request->activity_id;
+            $r_a_data->title = $request->activity_title;
+            $r_a_data->price = $request->activity_price;
+            $r_a_data->save();
+            
 
 
 
 
-            $room->status = 1;
-            $room->inventory = (int)$room->inventory - (int)1;
-            $room->save();
+
+
+            // $room->status = 1;
+            // $room->inventory = (int)$room->inventory - (int)1;
+            // $room->save();
             return response()->json("Booking is Completed");
             
-        }else if ($request->paymentmethod == 'payonarrival') {
+        }else if ($request->payment == 'arrival') {
 
             
-
+            $user_id = 0;
             if ($user) {
                 $user = User::find($user->id);
                 $user->fname = $input['fname'];
                 $user->lname = $input['lname'];
                 $user->mobno = $input['mobno'];
                 $user->email = $input['email'];
+                $user->notes = $input['notes'];
+
 
                 $user->save();
+                $user_id = $user->id;
 
                 // Mail::to($user->email)->send(new PasswordSent('hhgjhg'));
                 // dd($res);
@@ -2529,12 +2571,17 @@ class HomeController extends Controller
                 $newuser = new User();
                 $newuser->name = $request->fname . " " . $request->lname;
 
-                $newuser->password = Hash::make(123456);
+                $newuser->password = $request->password;
                 $newuser->email = $request->email;
                 $newuser->mobno = $input['mobno'];
+                $newuser->notes = $input['notes'];
+
 
 
                 $newuser->save();
+
+                $user_id = $newuser->id;
+
                 $password = "123456";
                 $newuser->assignRole('Customer');
                 // Mail::to($newuser->email)->send(new PasswordSent($password));
@@ -2542,40 +2589,83 @@ class HomeController extends Controller
                 Auth::login($newuser);
             }
             $booking = new Booking();
-            $booking->booking_no = rand(55555,99999999);
-            if ($user) {
-                $booking->user_id = $user->id;
-            } else {
-                $booking->user_id = $newuser->id;
-            }
-            $booking->room_id = $request->room_id;
-            $booking->package_id = $request->package_id;
-            $booking->checkin = $data['checkin'];
-            $booking->checkout = $data['checkout'];
-            $booking->booking_date_from = $data['datefrom'];
-            $booking->booking_date_to = $data['dateto'];
-            $booking->no_of_days = $data['no_of_days'];
-            $booking->pack_price = $request->pack_price;
-            $booking->act_price = $request->act_price;
-            $booking->tax = $request->tax;
-
-            $booking->status = "Confirmed";
-
-
+            $booking->booking_no = $number;
             $booking->save();
 
+            $r_data = new RoomData();
+            $r_data->user_id = $user_id;
+            $r_data->booking_no = $number;
+            $r_data->room_id = $request->room_id;
+            $r_data->package_id = $request->package_id;
+            $r_data->room_name = $request->room_name;
+            $r_data->package_name = $request->name;
+            $r_data->price = $request->price;
+            $r_data->total_price = $request->totalPrice;
+            $r_data->datefrom = $request->from;
+            $r_data->dateto = $request->to;
+            $r_data->adults = $request->adults;
+            $r_data->kid1 = $request->kid1;
+            $r_data->kid2 = $request->kid2;
+            $r_data->daydiff = $request->diff_days;
+            $r_data->save();
+
+            $r_s_data = new RoomServiceData();
+            $r_s_data->user_id = $user_id;
+            $r_s_data->booking_no = $number;
+            $r_s_data->room_id = $request->room_id;
+            $r_s_data->package_id = $request->package_id;
+            $r_s_data->service_id = $request->room_service_id;
+            $r_s_data->title = $request->room_service_title;
+            $r_s_data->price = $request->room_service_price;
+            $r_s_data->save();
+
+
+            $r_a_data = new RoomActivityData();
+            $r_a_data->user_id = $user_id;
+            $r_a_data->booking_no = $number;
+            $r_a_data->room_id = $request->room_id;
+            $r_a_data->package_id = $request->package_id;
+            $r_a_data->activity_id = $request->activity_id;
+            $r_a_data->title = $request->activity_title;
+            $r_a_data->price = $request->activity_price;
+            $r_a_data->save();
+            
 
 
 
 
-            $room->status = 1;
-            $room->inventory = (int)$room->inventory - (int)1;
-            $room->save();
 
-            // $details = PaymentMethod::find(2);
 
+            // $room->status = 1;
+            // $room->inventory = (int)$room->inventory - (int)1;
+            // $room->save();
             return response()->json("Booking is Completed");
         }
+    }
+
+
+    public function getBOOKING(Request $request)
+    {
+
+        $booking = Booking::latest()->take(1)->first();
+
+        $r_data = RoomData::where('booking_no',$booking->booking_no)->get();
+        $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)->get();
+        $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)->get();
+
+        $all_data = [
+            'room_data' => $r_data,
+            'room_service_data' => $r_s_data,
+            'room_activity_data' => $r_a_data,
+
+        ];
+
+       
+            return response()->json([
+                'success' => true,
+                'data' => $all_data,
+            ]);
+       
     }
 
     public function getMinPrice(Request $request)
