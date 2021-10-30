@@ -2649,9 +2649,9 @@ class HomeController extends Controller
 
         $booking = Booking::latest()->take(1)->first();
 
-        $r_data = RoomData::where('booking_no',$booking->booking_no)->get();
-        $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)->get();
-        $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)->get();
+        $r_data = RoomData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
+        $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
+        $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
 
         $all_data = [
             'room_data' => $r_data,
