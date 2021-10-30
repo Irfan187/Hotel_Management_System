@@ -2451,7 +2451,7 @@ class HomeController extends Controller
         // $str = $response->json()['features'][0]['properties']['address']['country_code'];
 
         $number = rand(243678,99999999);
-        $user = auth()->user();
+        $user = User::find($request->user_id);
 
         return response()->json($user);
         if ($request->payment == 'bank') {
