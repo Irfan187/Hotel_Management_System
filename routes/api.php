@@ -49,7 +49,7 @@ Route::get('/getservices', [App\Http\Controllers\HomeController::class, 'getServ
 Route::get('/getpolicy', [App\Http\Controllers\HomeController::class, 'getPolicy']);
 
 Route::post('/bookinginfo', [App\Http\Controllers\HomeController::class, 'bookingInfo']);
-Route::get('/getbooking', [App\Http\Controllers\HomeController::class, 'getBooking']);
+Route::post('/getbooking', [App\Http\Controllers\HomeController::class, 'getBooking']);
 
 
 
