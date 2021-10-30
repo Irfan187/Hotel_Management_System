@@ -2606,20 +2606,22 @@ class HomeController extends Controller
                 $r_data->user_id = $user_id;
                 $r_data->booking_no = $number;
     
-                $r_data->room_id = $d->room_id;
-                $r_data->package_id = $d->package_id;
-                $r_data->room_name = $d->room_name;
-                $r_data->package_name = $d->name;
-                $r_data->price = $d->price;
-                $r_data->total_price = $d->totalPrice;
-                $r_data->datefrom = $d->from;
-                $r_data->dateto = $d->to;
-                $r_data->adults = $d->adults;
-                $r_data->kid1 = $d->kid1;
-                $r_data->kid2 = $d->kid2;
-                $r_data->daydiff = $d->diff_days;
+                $r_data->room_id = $d['room_id'];
+                $r_data->package_id = $d['package_id'];
+                $r_data->room_name = $d['room_name'];
+                $r_data->package_name = $d['name'];
+                $r_data->price = $d['price'];
+                $r_data->total_price = $d['totalPrice'];
+                $r_data->datefrom = $d['from'];
+                $r_data->dateto = $d['to'];
+                $r_data->adults = $d['adults'];
+                $r_data->kid1 = $d['kid1'];
+                $r_data->kid2 = $d['kid2'];
+                $r_data->daydiff = $d['diff_days'];
                 $r_data->save();
             }
+
+            return response()->json("gfgfhfhfffhfhh");
 
             foreach($request->room_service as $d){
                 $r_s_data = new RoomServiceData();
