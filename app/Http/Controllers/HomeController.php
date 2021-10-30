@@ -2458,15 +2458,7 @@ class HomeController extends Controller
 
             $user_id = 0;
             if ($user) {
-                $user = User::find($user->id);
-                $user->fname = $input['fname'];
-                $user->lname = $input['lname'];
-                $user->mobno = $input['mobno'];
-                $user->email = $input['email'];
-                $user->notes = $input['notes'];
-
-
-                $user->save();
+                
                 $user_id = $user->id;
 
                 // Mail::to($user->email)->send(new PasswordSent('hhgjhg'));
@@ -2562,15 +2554,7 @@ class HomeController extends Controller
             
             $user_id = 0;
             if ($user) {
-                $user = User::find($user->id);
-                $user->fname = $input['fname'];
-                $user->lname = $input['lname'];
-                $user->mobno = $input['mobno'];
-                $user->email = $input['email'];
-                $user->notes = $input['notes'];
-
-
-                $user->save();
+                
                 $user_id = $user->id;
 
                 // Mail::to($user->email)->send(new PasswordSent('hhgjhg'));
