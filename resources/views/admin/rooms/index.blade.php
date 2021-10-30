@@ -74,8 +74,7 @@
                         </thead>
                         @if(!empty($rooms))
                         @foreach($rooms as $room)
-                        @php $bookings =
-                        App\Models\Booking::where('room_id',$room->id)->where('status','!=','Completed')->get(); @endphp
+                        
                         <tbody>
                             <tr>
                                 <td>{{ $room->name }}</td>
