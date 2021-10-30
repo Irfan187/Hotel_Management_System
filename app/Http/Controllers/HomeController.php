@@ -2517,17 +2517,16 @@ class HomeController extends Controller
                 $r_data->daydiff = $d['diff_days'];
                 $r_data->save();
             }
-            return response()->json("Booking is Completed");
 
             foreach($request->room_service as $d){
                 $r_s_data = new RoomServiceData();
                 $r_s_data->user_id = $user_id;
                 $r_s_data->booking_no = $number;
-                $r_s_data->room_id = $d->room_id;
-                $r_s_data->package_id = $d->package_id;
-                $r_s_data->service_id = $d->room_service_id;
-                $r_s_data->title = $d->room_service_title;
-                $r_s_data->price = $d->room_service_price;
+                $r_s_data->room_id = $d['room_id'];
+                $r_s_data->package_id = $d['package_id'];
+                $r_s_data->service_id = $d['room_service_id'];
+                $r_s_data->title = $d['room_service_title'];
+                $r_s_data->price = $d['room_service_price'];
                 $r_s_data->save();
             }
             
@@ -2536,11 +2535,11 @@ class HomeController extends Controller
                 $r_a_data = new RoomActivityData();
                 $r_a_data->user_id = $user_id;
                 $r_a_data->booking_no = $number;
-                $r_a_data->room_id = $d->room_id;
-                $r_a_data->package_id = $d->package_id;
-                $r_a_data->activity_id = $d->activity_id;
-                $r_a_data->title = $d->activity_title;
-                $r_a_data->price = $d->activity_price;
+                $r_a_data->room_id = $d['room_id'];
+                $r_a_data->package_id = $d['package_id'];
+                $r_a_data->activity_id = $d['activity_id'];
+                $r_a_data->title = $d['activity_title'];
+                $r_a_data->price = $d['activity_price'];
                 $r_a_data->save();
                 
             }
@@ -2622,16 +2621,15 @@ class HomeController extends Controller
                 $r_data->save();
             }
 
-
             foreach($request->room_service as $d){
                 $r_s_data = new RoomServiceData();
                 $r_s_data->user_id = $user_id;
                 $r_s_data->booking_no = $number;
-                $r_s_data->room_id = $d->room_id;
-                $r_s_data->package_id = $d->package_id;
-                $r_s_data->service_id = $d->room_service_id;
-                $r_s_data->title = $d->room_service_title;
-                $r_s_data->price = $d->room_service_price;
+                $r_s_data->room_id = $d['room_id'];
+                $r_s_data->package_id = $d['package_id'];
+                $r_s_data->service_id = $d['room_service_id'];
+                $r_s_data->title = $d['room_service_title'];
+                $r_s_data->price = $d['room_service_price'];
                 $r_s_data->save();
             }
             
@@ -2640,11 +2638,11 @@ class HomeController extends Controller
                 $r_a_data = new RoomActivityData();
                 $r_a_data->user_id = $user_id;
                 $r_a_data->booking_no = $number;
-                $r_a_data->room_id = $d->room_id;
-                $r_a_data->package_id = $d->package_id;
-                $r_a_data->activity_id = $d->activity_id;
-                $r_a_data->title = $d->activity_title;
-                $r_a_data->price = $d->activity_price;
+                $r_a_data->room_id = $d['room_id'];
+                $r_a_data->package_id = $d['package_id'];
+                $r_a_data->activity_id = $d['activity_id'];
+                $r_a_data->title = $d['activity_title'];
+                $r_a_data->price = $d['activity_price'];
                 $r_a_data->save();
                 
             }
