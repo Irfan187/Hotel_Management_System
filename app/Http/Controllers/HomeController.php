@@ -2477,8 +2477,7 @@ class HomeController extends Controller
 
             $res1 = json_decode($res);
 
-            $order_id = $res1->orderId;
-
+            // $order_id = $res1->orderId;
             $form_url = $res1->formUrl;
 
             $user_id = 0;
