@@ -1,7 +1,5 @@
-@extends('layouts.admin-layout')
-
+@extends('layouts.customer-layout')
 @section('content')
-
 <style>
 
     .card{
@@ -19,130 +17,73 @@
         padding: 10px;
     }
 </style>
-
 <div class="page" style="margin-top: 100px;">
    <div class="page-main h-100">
 		<div class="app-content">
-        <div class="container">
-            <div class="card">
+            <div class="container">
+                <div class="card">
 
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+                    <h2 class="heading">Reservation Details</h2>
+
+                   
+                        <table id="notificationTable" class="table table-striped table-bordered mt-5">
+
+                            <thead>
+                                <tr>
+                                    <h3>Booking#: {{$booking->booking_no}}</h3>
+                                </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Room</th>
+                                    <th>Package</th>
+
+                                    <th>Room Price</th>
+                                    <th>Activity</th>
+                                    <th>Activity Price</th>
+                                    <th>Service</th>
+                                    <th>Service Price</th>
+                                    
+
+                                </tr>
+                            </thead>
+                           
+                            @php
+                                $r_data = App\Models\RoomData::where('booking_no',$booking->booking_no)
+                                                            ->get();
+                                $r_s_data = App\Models\RoomServiceData::where('booking_no',$booking->booking_no)
+                                                            ->get();
+                                $r_a_data = App\Models\RoomActivityData::where('booking_no',$booking->booking_no)
+                                                            ->get();
+                                                            $k = 1;
+                            @endphp
+                            <tbody>
+                                @for($i = 0;$i < count($r_data); $i++)
+                                    @php $package = App\Models\Package::find($r_data[$i]->package_id); @endphp
+                                    <tr>
+                                        <td>{{$k++}}</td>
+                                        <td>{{$r_data[$i]->room_name}}</td>
+                                        <td>{{$package->name}}</td>
+                                        
+                                        <td>{{$r_data[$i]->price}}</td>
+                                        <td>{{$r_a_data[$i]->title}}</td>
+                                        <td>{{$r_a_data[$i]->price}}</td>
+                                        <td>{{$r_s_data[$i]->title}}</td>
+                                        <td>{{$r_s_data[$i]->price}}</td>
+
+                                    </tr>
+                                @endfor
+                            </tbody>
+
+                        </table>
+                   
                 </div>
-            @endif
-                <h2 class="heading">Reservation Details</h2>
-                <table id="notificationTable" class="table table-striped table-bordered mt-5">
-
-                            <tr>
-                                <th>Booking #</th>
-                                <td>{{$booking->booking_no}}</td>
-                            </tr>
-                            <tr>
-                                <th>Price</th>
-                                <td>{{$booking->price}}</td>
-                            </tr>
-                            <tr>
-                                <th>Date From</th>
-                                <td>{{$booking->booking_date_from}}</td>
-                            </tr>
-                            <tr>
-                                <th>Date To</th>
-                                <td>{{$booking->booking_date_to}}</td>
-                            </tr>
-                            <tr>
-                                <th>No of Days</th>
-                                <td>{{$booking->no_of_days}}</td>
-                            </tr>
-
-
-                    </table>
-
-
-                    <!-- customer info -->
-                    @php $user = App\Models\User::find($booking->user_id); @endphp
-                    <h2 class="heading">Guest Details</h2>
-                <table id="notificationTable" class="table table-striped table-bordered mt-5">
-
-                            <tr>
-                                <th>First Name</th>
-                                <td>{{$user->fname}}</td>
-                            </tr>
-                            <tr>
-                                <th>Last Name</th>
-                                <td>{{$user->lname}}</td>
-                            </tr>
-                            <tr>
-                                <th>Email</th>
-                                <td>{{$user->email}}</td>
-                            </tr>
-                            <tr>
-                                <th>Mobile No</th>
-                                <td>{{$user->mobno}}</td>
-                            </tr>
-
-
-
-                    </table>
-
-
-                      <!-- room info -->
-                      @php
-                      $room = App\Models\Room::find($booking->room_id);
-
-                      $package = App\Models\Package::find($booking->package_id);
-                      $pack_services = App\Models\PackageService::where('package_id',$package->id)->get();
-                      @endphp
-
-                    <h2 class="heading">Room Details</h2>
-                <table id="notificationTable" class="table table-striped table-bordered mt-5">
-
-                            <tr>
-                                <th>Picture</th>
-                                <td><img src="{{ asset('/storage/'.$room->image) }}" alt="" height="150" width="150"></td>
-                            </tr>
-                            <tr>
-                                <th>Room Name</th>
-                                <td>{{$room->room_no}}</td>
-                            </tr>
-
-                            <tr>
-                                <th>Description</th>
-                                <td><div class="r_detail">{!! html_entity_decode($room->description)!!}</div></td>
-                            </tr>
-                            <tr>
-                                <th>Package</th>
-                                <td>{{$package->name}}</td>
-                            </tr>
-                            <tr>
-                                <th>Services</th>
-                                @if(!empty($pack_services))
-
-                                <td>
-                                @foreach ($pack_services as $pack_service)
-                                @php
-                                    $service = App\Models\Service::find($pack_service->service_id);
-                                @endphp
-                                @if(!empty($service))
-                                {{ $service->name }}&nbsp;|
-                                @endif
-                                @endforeach
-                                </td>
-
-                                @else
-                                <td>No service available</td>
-                                @endif
-                            </tr>
-
-
-
-
-                    </table>
             </div>
         </div>
-
-        </div>
-   </div>
+    </div>
 </div>
-
 @endsection

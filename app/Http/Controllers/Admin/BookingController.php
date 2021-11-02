@@ -11,7 +11,7 @@ class BookingController extends Controller
 {
     public function bookings(){
 
-        $bookings = Booking::where('user_id','!=',0)->orderBy('id', 'DESC')->get();
+        $bookings = Booking::orderBy('id', 'DESC')->get();
         // dd($bookings);
         return view('admin.bookings.bookings',[
             'bookings' => $bookings
