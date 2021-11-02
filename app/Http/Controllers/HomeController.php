@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Mail;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
+use App\Models\Tax;
 
 use App\Models\ExtraActivity;
 use App\Models\CancelPolicy;
@@ -2521,6 +2522,16 @@ class HomeController extends Controller
             $booking->save();
 
             foreach($request->room_data as $d){
+                $r_data = new Tax();
+                $r_data->unique_id = $d['unique_id'];
+                $r_data->booking_no = $number;
+                $r_data->room_id = $d['room_id'];
+                $r_data->package_id = $d['package_id'];
+                $r_data->tax = $d['tax'];
+                $r_data->save();
+
+            }  
+            foreach($request->room_data as $d){
                 $r_data = new RoomData();
                 $r_data->user_id = $user_id;
                 $r_data->booking_no = $number;
@@ -2615,6 +2626,18 @@ class HomeController extends Controller
 
             $booking->total_price = $request->totalprice;
             $booking->save();
+
+
+            foreach($request->room_data as $d){
+                $r_data = new Tax();
+                $r_data->unique_id = $d['unique_id'];
+                $r_data->booking_no = $number;
+                $r_data->room_id = $d['room_id'];
+                $r_data->package_id = $d['package_id'];
+                $r_data->tax = $d['tax'];
+                $r_data->save();
+
+            }  
 
             foreach($request->room_data as $d){
                 $r_data = new RoomData();
@@ -2713,6 +2736,18 @@ class HomeController extends Controller
             $booking->total_price = $request->totalprice;
             $booking->save();
 
+
+            foreach($request->room_data as $d){
+                $r_data = new Tax();
+                $r_data->unique_id = $d['unique_id'];
+                $r_data->booking_no = $number;
+                $r_data->room_id = $d['room_id'];
+                $r_data->package_id = $d['package_id'];
+                $r_data->tax = $d['tax'];
+                $r_data->save();
+            }  
+
+
             foreach($request->room_data as $d){
                 $r_data = new RoomData();
                 $r_data->user_id = $user_id;
@@ -2776,12 +2811,14 @@ class HomeController extends Controller
     {
 
         $booking = Booking::latest()->take(1)->first();
+        $tax = Tax::where('booking_no',$booking->booking_no)->get();
 
         $r_data = RoomData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
         $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
         $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
 
         $all_data = [
+            'tax' => $tax,
             'booking' => $booking,
             'room_data' => $r_data,
             'room_service_data' => $r_s_data,
