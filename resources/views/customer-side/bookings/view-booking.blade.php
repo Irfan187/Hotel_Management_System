@@ -55,7 +55,7 @@
 
                             </tr>
                         </thead>
-                    @foreach($bookings as $booking)
+                        @foreach($bookings as $booking)
                         @php
                             $r_data = App\Models\RoomData::where('booking_no',$booking->booking_no)
                                                         ->where('user_id',auth()->user()->id)->get();
@@ -85,17 +85,6 @@
 
                     </table>
 
-
-                    <!-- customer info -->
-                  
-                
-
-
-                      <!-- room info -->
-                     
-
-                  
-                
             </div>
         </div>
 
