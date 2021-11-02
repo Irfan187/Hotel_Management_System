@@ -61,7 +61,7 @@
 
                                 
                                 
-                                <td><a href="{{ route('customer-view-booking',$booking->id) }}" style="background-color: #925F0C;border:none" class="btn btn-primary">View</a></td>
+                                <td><a href="{{ route('view-booking',$booking->id) }}" style="background-color: #925F0C;border:none" class="btn btn-primary">View</a></td>
 
 
 
