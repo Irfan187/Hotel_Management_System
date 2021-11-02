@@ -1,8 +1,5 @@
 @extends('layouts.customer-layout')
-
-
 @section('content')
-
 <style>
 
     .card{
@@ -20,7 +17,6 @@
         padding: 10px;
     }
 </style>
-
 <div class="page" style="margin-top: 100px;">
    <div class="page-main h-100">
 		<div class="app-content">
@@ -34,7 +30,7 @@
                     @endif
                     <h2 class="heading">Reservation Details</h2>
 
-                    
+                    @foreach($bookings as $booking)
                         <table id="notificationTable" class="table table-striped table-bordered mt-5">
 
                             <thead>
@@ -55,7 +51,7 @@
 
                                 </tr>
                             </thead>
-                            @foreach($bookings as $booking)
+                           
                             @php
                                 $r_data = App\Models\RoomData::where('booking_no',$booking->booking_no)
                                                             ->where('user_id',auth()->user()->id)->get();
@@ -84,12 +80,10 @@
                             </tbody>
 
                         </table>
-
+                    @endforeach
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
 @endsection
