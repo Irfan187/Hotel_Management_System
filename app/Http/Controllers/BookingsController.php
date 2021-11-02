@@ -13,12 +13,12 @@ class BookingsController extends Controller
         $date = date('Y-m-d');
 
         $bookings = Booking::where('user_id',auth()->user()->id)
-                    ->where('booking_date_to','>',$date)->get();
+                    ->get();
 
         // dd($bookings);
         return view('customer-side.bookings.bookings',[
             'bookings' => $bookings,
-            'date' => $date
+           
         ]);
     }
 

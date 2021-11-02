@@ -2514,6 +2514,8 @@ class HomeController extends Controller
 
             $booking = new Booking();
             $booking->booking_no = $number;
+            $booking->user_id = $user_id;
+
             $booking->total_price = $request->totalprice;
             $booking->save();
 
@@ -2607,6 +2609,8 @@ class HomeController extends Controller
 
             $booking = new Booking();
             $booking->booking_no = $number;
+            $booking->user_id = $user_id;
+
             $booking->total_price = $request->totalprice;
             $booking->save();
 
@@ -2699,6 +2703,8 @@ class HomeController extends Controller
             }
             $booking = new Booking();
             $booking->booking_no = $number;
+            $booking->user_id = $user_id;
+
             $booking->total_price = $request->totalprice;
             $booking->save();
 
@@ -2771,6 +2777,7 @@ class HomeController extends Controller
         $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
 
         $all_data = [
+            'booking' => $booking,
             'room_data' => $r_data,
             'room_service_data' => $r_s_data,
             'room_activity_data' => $r_a_data,
