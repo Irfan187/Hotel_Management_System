@@ -2514,12 +2514,14 @@ class HomeController extends Controller
 
             $booking = new Booking();
             $booking->booking_no = $number;
+            $booking->total_price = $request->totalprice;
             $booking->save();
 
             foreach($request->room_data as $d){
                 $r_data = new RoomData();
                 $r_data->user_id = $user_id;
                 $r_data->booking_no = $number;
+                $r_data->unique_id = $d['unique_id'];
     
                 $r_data->room_id = $d['room_id'];
                 $r_data->package_id = $d['package_id'];
@@ -2605,12 +2607,14 @@ class HomeController extends Controller
 
             $booking = new Booking();
             $booking->booking_no = $number;
+            $booking->total_price = $request->totalprice;
             $booking->save();
 
             foreach($request->room_data as $d){
                 $r_data = new RoomData();
                 $r_data->user_id = $user_id;
                 $r_data->booking_no = $number;
+                $r_data->unique_id = $d['unique_id'];
     
                 $r_data->room_id = $d['room_id'];
                 $r_data->package_id = $d['package_id'];
@@ -2695,12 +2699,14 @@ class HomeController extends Controller
             }
             $booking = new Booking();
             $booking->booking_no = $number;
+            $booking->total_price = $request->totalprice;
             $booking->save();
 
             foreach($request->room_data as $d){
                 $r_data = new RoomData();
                 $r_data->user_id = $user_id;
                 $r_data->booking_no = $number;
+                $r_data->unique_id = $d['unique_id'];
     
                 $r_data->room_id = $d['room_id'];
                 $r_data->package_id = $d['package_id'];
