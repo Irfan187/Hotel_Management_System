@@ -30,7 +30,7 @@
                     @endif
                     <h2 class="heading">Reservation Details</h2>
 
-                    @foreach($bookings as $booking)
+                   
                         <table id="notificationTable" class="table table-striped table-bordered mt-5">
 
                             <thead>
@@ -80,7 +80,7 @@
                             </tbody>
 
                         </table>
-                    @endforeach
+                   
                 </div>
             </div>
         </div>
