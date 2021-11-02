@@ -68,7 +68,7 @@
                                         <td>{{$k++}}</td>
                                         <td>{{$r_data[$i]->room_name}}</td>
                                         <td>{{$package->name}}</td>
-                                        <td>{{$r_data[$i]->room_name}}</td>
+                                       
                                         <td>{{$r_data[$i]->price}}</td>
                                         <td>{{$r_a_data[$i]->title}}</td>
                                         <td>{{$r_a_data[$i]->price}}</td>
