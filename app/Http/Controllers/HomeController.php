@@ -2493,7 +2493,8 @@ class HomeController extends Controller
             } else {
                 $newuser = new User();
                 $newuser->name = $request->fname . " " . $request->lname;
-
+                $newuser->fname = $request->fname;
+                $newuser->lname = $request->lname;
                 $newuser->password = Hash::make($request->password);
                 $newuser->email = $request->email;
                 $newuser->mobno = $input['mobno'];
@@ -2588,7 +2589,8 @@ class HomeController extends Controller
             } else {
                 $newuser = new User();
                 $newuser->name = $request->fname . " " . $request->lname;
-
+                $newuser->fname = $request->fname;
+                $newuser->lname = $request->lname;
                 $newuser->password = Hash::make($request->password);
                 $newuser->email = $request->email;
                 $newuser->mobno = $input['mobno'];
@@ -2683,6 +2685,9 @@ class HomeController extends Controller
             } else {
                 $newuser = new User();
                 $newuser->name = $request->fname . " " . $request->lname;
+                $newuser->fname = $request->fname;
+                $newuser->lname = $request->lname;
+
 
                 $newuser->password = Hash::make($request->password);
                 $newuser->email = $request->email;
