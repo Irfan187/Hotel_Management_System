@@ -2812,12 +2812,14 @@ class HomeController extends Controller
     public function getBooking(Request $request)
     {
 
-        $booking = Booking::latest()->take(1)->first();
+        $booking = Booking::where('user_id',auth()->user()->id)->latest()->take(1)->first();
         $room_tax = Tax::where('booking_no',$booking->booking_no)->get();
 
         $r_data = RoomData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
         $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
         $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
+
+        Mail::to(auth()->user()->email)->send(new ConfirmationEmail($r_data,$r_a_data,$r_s_data,$booking));
 
         $all_data = [
             'room_tax' => $room_tax,

@@ -11,14 +11,25 @@ class ConfirmationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
+
+    public $r;
+    public $rs;
+    public $ra;
+    public $b;
+
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($r,$ra,$b)
     {
-        //
+        $this->r = $r;
+        $this->rs = $rs;
+        $this->b = $b;
+
+        
     }
 
     /**
@@ -28,6 +39,15 @@ class ConfirmationEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('confirmemail')
+             ->subject('Booking Confirmation Email')
+             ->with([
+            'r_data' => $this->r,
+            'r_s_data' => $this->rs,
+            'r_a_data' => $this->ra,
+            'booking' => $this->ra,
+
+
+            ]);
     }
 }
