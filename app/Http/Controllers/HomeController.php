@@ -2812,7 +2812,7 @@ class HomeController extends Controller
     public function getBooking(Request $request)
     {
 
-        $booking = Booking::where('user_id',auth()->user()->id)->latest()->take(1)->first();
+        $booking = Booking::latest()->take(1)->first();
         $room_tax = Tax::where('booking_no',$booking->booking_no)->get();
 
         $r_data = RoomData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
