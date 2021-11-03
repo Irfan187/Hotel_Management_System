@@ -24,6 +24,8 @@ use \willvincent\Rateable\Rating;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\PasswordSent;
+use App\Mail\EmailConfirmation;
+
 use App\Models\BookNowSetting;
 use App\Models\Confirmation;
 use App\Models\HomePageSetting;
@@ -2521,7 +2523,7 @@ class HomeController extends Controller
             $booking->total_price = $request->totalprice;
             $booking->save();
 
-            foreach($request->room_data as $d){
+            foreach($request->room_tax as $d){
                 $r_data = new Tax();
                 $r_data->unique_id = $d['unique_id'];
                 $r_data->booking_no = $number;
@@ -2628,7 +2630,7 @@ class HomeController extends Controller
             $booking->save();
 
 
-            foreach($request->room_data as $d){
+            foreach($request->room_tax as $d){
                 $r_data = new Tax();
                 $r_data->unique_id = $d['unique_id'];
                 $r_data->booking_no = $number;
@@ -2737,7 +2739,7 @@ class HomeController extends Controller
             $booking->save();
 
 
-            foreach($request->room_data as $d){
+            foreach($request->room_tax as $d){
                 $r_data = new Tax();
                 $r_data->unique_id = $d['unique_id'];
                 $r_data->booking_no = $number;
