@@ -332,9 +332,9 @@
 						<li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ route('customer-bookings') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Active Bookings</span></a>
                         </li>
-						<li class="slide">
+						<!-- <li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ route('booking-history') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Bookings History</span></a>
-                        </li>
+                        </li> -->
 						<li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ route('view-profile') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Profile</span></a>
 						</li>
