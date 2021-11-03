@@ -55,7 +55,7 @@ Route::get('/', function () {
 
     $ip_address = \Request::ip();
 
-
+    header("Location: https://hms-react-74e73.web.app/home");
     // dd($str);
 
     // if()
@@ -70,39 +70,39 @@ Route::get('/', function () {
     // }
     // dd($position);
 
-    $rooms = App\Models\Room::where('active', 1)->get();
-    $key = 'bdELPYQYzlqCYrKewn0cwN9tTOjxXvVK';
+    // $rooms = App\Models\Room::where('active', 1)->get();
+    // $key = 'bdELPYQYzlqCYrKewn0cwN9tTOjxXvVK';
 
-    $qualityScore = new IPQualityScore($key);
-    $ip_address = \Request::ip();
-    $result1 = $qualityScore->IPAddressVerification->getResponse($ip_address);
-    // dd($result1);
-    $result = $result1->data;
-    $user = auth()->user();
-
-
-
-    // dd($tr->setTarget('fr'));
-    // dd($tr);
-
-    $settings = HomePageSetting::all();
-    $setting = $settings[0];
-
-    // if($user->hasRole('Admin')){
-    //     return redirect()->route('dashboard');
-    // }else{
-    // $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=33.5513806&lon=73.1247913');
-    //     dd($response->json());
-    $all_data = session()->get('all_booking_data');
-    $data = session()->get('array_data');
+    // $qualityScore = new IPQualityScore($key);
+    // $ip_address = \Request::ip();
+    // $result1 = $qualityScore->IPAddressVerification->getResponse($ip_address);
+    // // dd($result1);
+    // $result = $result1->data;
+    // $user = auth()->user();
 
 
-    return view('main-home', [
-        'rooms' => $rooms,
-        'result' => $result,
-        'setting' => $setting,
-        // 'str' => $str
-    ]);
+
+    // // dd($tr->setTarget('fr'));
+    // // dd($tr);
+
+    // $settings = HomePageSetting::all();
+    // $setting = $settings[0];
+
+    // // if($user->hasRole('Admin')){
+    // //     return redirect()->route('dashboard');
+    // // }else{
+    // // $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=33.5513806&lon=73.1247913');
+    // //     dd($response->json());
+    // $all_data = session()->get('all_booking_data');
+    // $data = session()->get('array_data');
+
+
+    // return view('main-home', [
+    //     'rooms' => $rooms,
+    //     'result' => $result,
+    //     'setting' => $setting,
+    //     // 'str' => $str
+    // ]);
 
     // }
 
