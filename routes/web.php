@@ -66,9 +66,9 @@ Route::get('/', function () {
         $now = date('Y-m-d');
         $d = explode(" ",$user->created_at);
 
-        if($now < $d){
+        if($now < $d[0]){
             $date1 = DateTime::createFromFormat('Y-m-d', $now);
-            $date2 = DateTime::createFromFormat('Y-m-d', $d);
+            $date2 = DateTime::createFromFormat('Y-m-d', $d[0]);
             $datefrom = $date1->format('Y-m-d');
             $dateto = $date2->format('Y-m-d');
             $datediff = strtotime($dateto) - strtotime($datefrom);
