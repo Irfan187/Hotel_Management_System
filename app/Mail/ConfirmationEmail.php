@@ -23,10 +23,12 @@ class ConfirmationEmail extends Mailable
      *
      * @return void
      */
-    public function __construct($r,$ra,$b)
+    public function __construct($r,$ra,$rs,$b)
     {
         $this->r = $r;
         $this->rs = $rs;
+        $this->ra = $ra;
+
         $this->b = $b;
 
         
