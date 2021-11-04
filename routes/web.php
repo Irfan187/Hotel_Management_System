@@ -37,6 +37,7 @@ use Illuminate\Support\Facades\Http;
 
 use App\Mail\ReminderEmail;
 use App\Mail\WelcomeEmail;
+use App\Models\User;
 
 
 /*
