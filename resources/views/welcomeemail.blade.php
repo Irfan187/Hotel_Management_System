@@ -28,8 +28,7 @@
 
 <body>
 <h3>Dear Customer</h3>
-<p>Its reminder of Booking that you had confirmed with our Hotel <b>Dejerba Plaza</b><br>
-Your Booking Number is : <b>{{$booking->booking_no}}</b><br>
+<p>We are Warmly welcome you to our Hotel<br>
 <br>Thank you.
 </p>
 

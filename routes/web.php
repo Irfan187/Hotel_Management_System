@@ -35,6 +35,10 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 
+use App\Mail\ReminderEmail;
+use App\Mail\WelcomeEmail;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +59,31 @@ Route::get('/', function () {
 
     $ip_address = \Request::ip();
 
+    $users = User::join('bookings','bookings.user_id','users.id')
+                ->get();
+    foreach($users as $user){
+        $now = date('Y-m-d');
+        $d = explode(" ",$user->created_at);
+
+        if($now < $d){
+            $date1 = DateTime::createFromFormat('Y-m-d', $now);
+            $date2 = DateTime::createFromFormat('Y-m-d', $d);
+            $datefrom = $date1->format('Y-m-d');
+            $dateto = $date2->format('Y-m-d');
+            $datediff = strtotime($dateto) - strtotime($datefrom);
+            $days = (int)round($datediff / (60 * 60 * 24));
+    
+            if($days == 7){
+                Mail::to($user->email)->send(new ReminderEmail($user->booking_no));
+            }
+    
+            if($days == 0){
+                Mail::to($user->email)->send(new WelcomeEmail());
+            }
+        }
+       
+
+    }
 
     // dd($str);
 

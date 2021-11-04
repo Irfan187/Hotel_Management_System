@@ -69,7 +69,7 @@
                             <tr>
                                     <h3>Booking#: {{$booking->booking_no}}</h3>
                                 </tr>
-                            <tr>
+                            
                             @for($i = 0;$i < count($r_data); $i++)
                                     @php $package = App\Models\Package::find($r_data[$i]->package_id); @endphp
                                     <tr>

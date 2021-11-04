@@ -55,6 +55,7 @@
 
                             </tr>
                         </thead>
+                        @if(count($bookings) > 0)
                         @foreach($bookings as $booking)
                         @php
                                 $r_data = App\Models\RoomData::where('booking_no',$booking->booking_no)
@@ -69,7 +70,7 @@
                             <tr>
                                     <h3>Booking#: {{$booking->booking_no}}</h3>
                                 </tr>
-                            <tr>
+                            
                             @for($i = 0;$i < count($r_data); $i++)
                                     @php $package = App\Models\Package::find($r_data[$i]->package_id); @endphp
                                     <tr>
@@ -98,6 +99,7 @@
                             </tr>
                         </tbody>
                         @endforeach
+                        @endif
                     </table>
             </div>
         </div>
