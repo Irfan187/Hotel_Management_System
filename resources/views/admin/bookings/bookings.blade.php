@@ -49,7 +49,6 @@
                                 <th>Room Price</th>
                                 <th>Activity</th>
 
-                                <th>Action</th>
 
 
 
