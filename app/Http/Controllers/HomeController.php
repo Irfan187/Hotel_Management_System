@@ -2266,6 +2266,16 @@ class HomeController extends Controller
     public function activities(Request $request)
     {
 
+        
+
+        
+
+        
+        
+
+
+
+
         $activities = ExtraActivity::all();
 
         if (count($activities) > 0) {
@@ -2880,12 +2890,6 @@ class HomeController extends Controller
         $Atax = 0;
         $CTax = 0;
         $total_tax = 0;
-
-
-       
-        
-
-    
             if ($days <= 7) {
                 $Atax = $days * 3;
             } else {
@@ -2947,6 +2951,89 @@ class HomeController extends Controller
                 'data' => "No Policy",
             ]);
         }
+    }
+
+
+    public function enable(){
+        $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
+
+        $str = $response->json()['features'][0]['properties']['address']['country_code'];
+
+
+        $cc = PaymentMethod::find(1);
+        $bank = PaymentMethod::find(2);
+        $arrival = PaymentMethod::find(3);
+
+        $c1 = "";
+        $b1 = "";
+        $a1 = "";
+
+        if($str == "tn"){
+            $str = "TN";
+            if($cc->enable == 1){
+                $c = PMCountry::where('country_code',$str)->where('cc','!=',0)->first();
+                if($c){
+                    $c1 = "enabled";
+                }
+            }
+        }else{
+            $str = "other";
+            if($cc->enable == 1){
+                $c = PMCountry::where('country_code',$str)->where('cc','!=',0)->first();
+                if($c){
+                    $c1 = "enabled";
+                }
+            }
+        }
+
+
+        if($str == "tn"){
+            $str = "TN";
+            if($bank->enable == 1){
+                $c = PMCountry::where('country_code',$str)->where('bank_transfer','!=',0)->first();
+                if($c){
+                    $b1 = "enabled";
+                }
+            }
+        }else{
+            $str = "other";
+            if($bank->enable == 1){
+                $c = PMCountry::where('country_code',$str)->where('bank_transfer','!=',0)->first();
+                if($c){
+                    $b1 = "enabled";
+                }
+            }
+        }
+
+        if($str == "tn"){
+            $str = "TN";
+            if($arrival->enable == 1){
+                $c = PMCountry::where('country_code',$str)->where('in_person','!=',0)->first();
+                if($c){
+                    $a1 = "enabled";
+                }
+            }
+        }else{
+            $str = "other";
+            if($arrival->enable == 1){
+                $c = PMCountry::where('country_code',$str)->where('in_person','!=',0)->first();
+                if($c){
+                    $a1 = "enabled";
+                }
+            }
+        }
+
+        $data = [
+            'cc' => $c1,
+            'bank' => $b1,
+            'arrival' => $a1,
+
+        ];
+
+        return response()->json([
+            'error' => true,
+            'data' => $data,
+        ]);
     }
     
 }

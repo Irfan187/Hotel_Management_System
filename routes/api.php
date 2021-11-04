@@ -51,6 +51,9 @@ Route::get('/getpolicy', [App\Http\Controllers\HomeController::class, 'getPolicy
 Route::post('/bookinginfo', [App\Http\Controllers\HomeController::class, 'bookingInfo']);
 Route::post('/getbooking', [App\Http\Controllers\HomeController::class, 'getBooking']);
 
+Route::post('/enable', [App\Http\Controllers\HomeController::class, 'enable']);
+
+
 
 
 
