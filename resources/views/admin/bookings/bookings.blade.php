@@ -42,8 +42,12 @@
                 <table id="notificationTable" class="table table-striped table-bordered mt-5">
                         <thead>
                             <tr>
-                                <th>Booking #</th>
-                                <th>Total Price</th>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>Room</th>
+                                <th>Package</th>
+                                <th>Room Price</th>
+                                <th>Activity</th>
 
                                 <th>Action</th>
 
@@ -52,11 +56,35 @@
                             </tr>
                         </thead>
                         @foreach($bookings as $booking)
-                        
+                        @php
+                                $r_data = App\Models\RoomData::where('booking_no',$booking->booking_no)
+                                                            ->get();
+                                $r_s_data = App\Models\RoomServiceData::where('booking_no',$booking->booking_no)
+                                                            ->get();
+                                $r_a_data = App\Models\RoomActivityData::where('booking_no',$booking->booking_no)
+                                                            ->get();
+                                                            $k = 1;
+                            @endphp
                         <tbody>
                             <tr>
-                                <td>{{ $booking->booking_no }}</td>
-                                <td>{{ $booking->total_price }}</td>
+                                    <h3>Booking#: {{$booking->booking_no}}</h3>
+                                </tr>
+                            <tr>
+                            @for($i = 0;$i < count($r_data); $i++)
+                                    @php $package = App\Models\Package::find($r_data[$i]->package_id); @endphp
+                                    <tr>
+                                        <td>{{$k++}}</td>
+                                        <td><img src="{{asset('storage/'.$r_data[$i]->image)}}" alt="" height="100" width="100"></td>
+                                        <td>{{$r_data[$i]->room_name}}</td>
+                                        <td>{{$package->name}}</td>
+                                        
+                                        <td>{{$r_data[$i]->price}}</td>
+                                        <td>{{$r_a_data[$i]->title}}</td>
+                                        
+
+                                    </tr>
+                                @endfor
+                                
 
 
                                 
