@@ -47,7 +47,7 @@ class ConfirmationEmail extends Mailable
             'r_data' => $this->r,
             'r_s_data' => $this->rs,
             'r_a_data' => $this->ra,
-            'booking' => $this->ra,
+            'booking' => $this->b,
 
 
             ]);
