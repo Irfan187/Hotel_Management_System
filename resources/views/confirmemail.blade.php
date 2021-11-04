@@ -64,6 +64,7 @@
                            
                           
                             <tbody>
+                                @php $k=1; @endphp
                                 @for($i = 0;$i < count($r_data); $i++)
                                     @php $package = App\Models\Package::find($r_data[$i]->package_id); @endphp
                                     <tr>
