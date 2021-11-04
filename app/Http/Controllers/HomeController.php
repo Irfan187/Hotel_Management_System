@@ -24,7 +24,7 @@ use \willvincent\Rateable\Rating;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\PasswordSent;
-use App\Mail\EmailConfirmation;
+use App\Mail\ConfirmationEmail;
 
 use App\Models\BookNowSetting;
 use App\Models\Confirmation;
@@ -2282,10 +2282,7 @@ class HomeController extends Controller
     }
     public function signIn(Request $request)
     {
-        // $validator = $request->validate([
-        //     'email' => 'required|email',
-        //     'password' => 'required'
-        // ]);
+        
 
         if (!empty($request->email) && !empty($request->password)) {
 
