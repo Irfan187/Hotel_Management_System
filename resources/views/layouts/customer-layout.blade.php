@@ -280,6 +280,9 @@
 										<a href="#" class="dropdown-item text-center">View all</a>
 									</div>
 								</div> -->
+								<div>
+								<a href="https://hms-react-74e73.web.app/home"><i class="fa fa-home"></i></a>
+								</div>
 								<div class="dropdown ">
 									<a href="#" class="nav-link pr-0 leading-none user-img" data-toggle="dropdown">
 										<img src="{{ asset('/storage/'. auth()->user()->avatar)}}" alt="profile-img" class="avatar avatar-md brround">
