@@ -38,51 +38,12 @@
                             <p>{{ $message }}</p>
                         </div>
                     @endif
-                    <h2 class="heading">Reservation Details</h2>
+                    <h2>Dear Customer</h2>
+                    <p>Your Booking has been confirmed and your booking number is  <b>{{$booking->booking_no}}</b></p>
+                    <p>Thank you</p>
 
                    
-                        <table id="notificationTable" class="table table-striped table-bordered mt-5">
-
-                            <thead>
-                                <tr>
-                                    <h3>Booking#: {{$booking->booking_no}}</h3>
-                                </tr>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Room</th>
-                                    <th>Package</th>
-
-                                    <th>Room Price</th>
-                                    <th>Activity</th>
-                                    <th>Activity Price</th>
-                                    <th>Service</th>
-                                    <th>Service Price</th>
-                                    
-
-                                </tr>
-                            </thead>
-                           
-                          
-                            <tbody>
-                                @php $k=1; @endphp
-                                @for($i = 0;$i < count($r_data); $i++)
-                                    @php $package = App\Models\Package::find($r_data[$i]->package_id); @endphp
-                                    <tr>
-                                        <td>{{$k++}}</td>
-                                        <td>{{$r_data[$i]->room_name}}</td>
-                                        <td>{{$package->name}}</td>
-                                        
-                                        <td>{{$r_data[$i]->price}}</td>
-                                        <td>{{$r_a_data[$i]->title}}</td>
-                                        <td>{{$r_a_data[$i]->price}}</td>
-                                        <td>{{$r_s_data[$i]->title}}</td>
-                                        <td>{{$r_s_data[$i]->price}}</td>
-
-                                    </tr>
-                                @endfor
-                            </tbody>
-
-                        </table>
+                       
                    
                 </div>
             </div>
