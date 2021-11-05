@@ -3033,7 +3033,7 @@ class HomeController extends Controller
         ];
 
         return response()->json([
-            'error' => true,
+            'success' => true,
             'data' => $data,
         ]);
     }
