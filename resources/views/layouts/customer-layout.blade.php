@@ -281,11 +281,7 @@
 									</div>
 								</div> -->
 								<div>
-								<a href="https://hms-react-74e73.web.app/home"><i style="margin-top: 20
-px
-;
-    color: white;
-    font-size: 25px;" class="fa fa-home"></i></a>
+								<a href="https://hms-react-74e73.web.app/home"><i style="margin-top: 20px !important;color: white;font-size: 25px;" class="fa fa-home"></i></a>
 								</div>
 								<div class="dropdown ">
 									<a href="#" class="nav-link pr-0 leading-none user-img" data-toggle="dropdown">
