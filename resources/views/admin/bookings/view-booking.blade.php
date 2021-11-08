@@ -1,4 +1,4 @@
-@extends('layouts.customer-layout')
+@extends('layouts.admin-layout')
 @section('content')
 <style>
 
