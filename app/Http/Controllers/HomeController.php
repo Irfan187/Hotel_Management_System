@@ -275,7 +275,11 @@ class HomeController extends Controller
                                 ];
                             }
                         }
-                        array_push($new_array, $data);
+                            if(!empty($data)){
+                            array_push($new_array, $data);
+
+                        }
+
                         // array_push($new_pricing, $pricing);
                     }
                 }
@@ -394,7 +398,10 @@ class HomeController extends Controller
                                             }
                                         }
                                     }
-                                    array_push($new_array, $data);
+                                    if(!empty($data)){
+                            array_push($new_array, $data);
+
+                        }
                                 }
                             }
                         } elseif ($kid1 == 0 && $kid2 == 1 && $adults == 1) { // SECOND Condition
@@ -507,7 +514,10 @@ class HomeController extends Controller
                                             }
                                         }
                                     }
-                                    array_push($new_array, $data);
+                                    if(!empty($data)){
+                            array_push($new_array, $data);
+
+                        }
                                    
                                 }
                             }
@@ -613,7 +623,10 @@ class HomeController extends Controller
                                             }
                                         }
                                     }
-                                    array_push($new_array, $data);
+                                    if(!empty($data)){
+                            array_push($new_array, $data);
+
+                        }
                                     
                                 }
                             }
@@ -722,7 +735,10 @@ class HomeController extends Controller
                                             }
                                         }
                                     }
-                                    array_push($new_array, $data);
+                                    if(!empty($data)){
+                            array_push($new_array, $data);
+
+                        }
                                     
                                 }
                             }
@@ -782,7 +798,10 @@ class HomeController extends Controller
                                             ];
                                         }
                                     }
-                                    array_push($new_array, $data);
+                                    if(!empty($data)){
+                            array_push($new_array, $data);
+
+                        }
                                     
                                 }
                             }
