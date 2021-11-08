@@ -375,6 +375,10 @@
                                 Methods</span></a>
                     </li>
                     <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('customers.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
+                                Customers</span></a>
+                    </li>
+                    <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('admin.discount') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
                                 Discount</span></a>
                     </li>

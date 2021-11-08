@@ -27,6 +27,8 @@ use App\Http\Controllers\Admin\PMCountriesController;
 use App\Http\Controllers\Admin\PMOrderPriceController;
 use App\Http\Controllers\Admin\PaymentMethodsController;
 use App\Http\Controllers\Admin\CancelationPolicyController;
+use App\Http\Controllers\Admin\CustomersController;
+
 use App\Http\Controllers\BadgesController;
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\ExtraActivityController;
@@ -188,6 +190,8 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     Route::resource('activities', ExtraActivityController::class);
     Route::resource('badges', BadgesController::class);
+    Route::resource('customers', CustomersController::class);
+
 
 
 
