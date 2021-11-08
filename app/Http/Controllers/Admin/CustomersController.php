@@ -169,4 +169,40 @@ class CustomersController extends Controller
 
 
     }
+
+
+    public function updateProfile(Request $request){
+
+        $customer = User::find($request->id);
+        // return response(json_encode($request->email));
+        
+        if(!empty($request->password)){
+            $customer->password = Hash::make($request->password);
+        }
+        if(!empty($request->name)){
+            $customer->name = $request->name;
+        }
+        if(!empty($request->email)){
+            $customer->email = $request->email;
+        }
+        if(!empty($request->phone)){
+            $customer->mobno = $request->phone;
+        }
+
+        if($customer->save()){
+            $response = [
+                'success' => "true",
+                'data' => "Profile Updated"
+            ];
+
+            return response(json_encode($response));
+        }else{
+            $response = [
+                'error' => "true",
+                'data' => "Something wrong"
+            ];
+
+            return response(json_encode($response));
+        }
+    }
 }

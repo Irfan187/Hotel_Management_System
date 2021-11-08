@@ -8,19 +8,129 @@ use \willvincent\Rateable\Rating;
 use App\Models\User;
 class BookingsController extends Controller
 {
-    public function bookings(){
 
-        $date = date('Y-m-d');
 
-        $bookings = Booking::where('user_id',auth()->user()->id)
+    public function bookings(Request $request){
+
+        
+
+        $bookings = Booking::where('user_id',$request->id)
                     ->get();
 
-        // dd($bookings);
-        return view('customer-side.bookings.bookings',[
-            'bookings' => $bookings,
-           
-        ]);
+        $all_data = [];
+        foreach($bookings as $booking){
+            $r_data = RoomData::where('booking_no',$booking->booking_no)
+                ->where('user_id',$request->id)->get();
+            $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)
+                        ->where('user_id',$request->id)->get();
+            $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
+                        ->where('user_id',$request->id)->get();
+            $a = "";
+            $b = "";
+            $s = "";
+            $r = "";
+
+            if(!empty($booking)){
+                $b = $booking;
+            }
+
+            if(count($r_data) > 0){
+                $r = $r_data;
+            }
+            if(count($r_s_data) > 0){
+                $s = $r_s_data;
+            }
+            if(count($r_a_data) > 0){
+                $a = $r_a_data;
+            }
+
+            $all_data = [
+                'booking' => $b,
+                'room_data' => $r,
+                'room_service_data' => $s,
+                'room_activity_data' => $a
+            ];
+
+ 
+        }
+
+        $response = [
+            'success' => "true",
+            'data' => $all_data
+        ];
+
+        return response(json_encode($response));
+
     }
+
+
+
+
+
+    public function viewCustBooking(Request $request){
+
+
+        $booking = Booking::find($request->booking_id);
+
+        $all_data = [];
+        
+            $r_data = RoomData::where('booking_no',$booking->booking_no)
+                ->where('user_id',$request->id)->get();
+            $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)
+                        ->where('user_id',$request->id)->get();
+            $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
+                        ->where('user_id',$request->id)->get();
+            $a = "";
+            $b = "";
+            $s = "";
+            $r = "";
+
+            if(!empty($booking)){
+                $b = $booking;
+            }
+
+            if(count($r_data) > 0){
+                $r = $r_data;
+            }
+            if(count($r_s_data) > 0){
+                $s = $r_s_data;
+            }
+            if(count($r_a_data) > 0){
+                $a = $r_a_data;
+            }
+
+            $all_data = [
+                'booking' => $b,
+                'room_data' => $r,
+                'room_service_data' => $s,
+                'room_activity_data' => $a
+            ];
+
+ 
+       
+
+            $response = [
+                'success' => "true",
+                'data' => $all_data
+            ];
+
+            return response(json_encode($response));
+
+    }
+
+    // public function bookings(){
+
+    //     $date = date('Y-m-d');
+
+    //     $bookings = Booking::where('user_id',auth()->user()->id)
+    //                 ->get();
+
+    //     // dd($bookings);
+    //     return view('customer-side.bookings.bookings',[
+    //         'bookings' => $bookings,
+           
+    //     ]);
+    // }
 
     public function viewBooking($booking_id){
 

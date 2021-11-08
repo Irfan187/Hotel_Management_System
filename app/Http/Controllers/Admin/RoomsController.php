@@ -203,9 +203,9 @@ class RoomsController extends Controller
      */
     public function destroy($id)
     {
-        RangePrice::where('room_id', $id)->delete();
-        PackageRoom::where('room_id', $id)->delete();
-        Booking::where('room_id', $id)->delete();
+        // RangePrice::where('room_id', $id)->delete();
+        // PackageRoom::where('room_id', $id)->delete();
+        // Booking::where('room_id', $id)->delete();
 
         Room::find($id)->delete();
 

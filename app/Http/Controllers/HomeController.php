@@ -736,9 +736,8 @@ class HomeController extends Controller
                                         }
                                     }
                                     if(!empty($data)){
-                            array_push($new_array, $data);
-
-                        }
+                                        array_push($new_array, $data);
+                                    }
                                     
                                 }
                             }

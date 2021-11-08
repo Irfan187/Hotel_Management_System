@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,24 @@ Route::post('/bookinginfo', [App\Http\Controllers\HomeController::class, 'bookin
 Route::post('/getbooking', [App\Http\Controllers\HomeController::class, 'getBooking']);
 
 Route::post('/enable', [App\Http\Controllers\HomeController::class, 'enable']);
+
+
+Route::post('/customerbookings', [App\Http\Controllers\BookingsController::class, 'bookings']);
+    Route::post('/viewcustomerbooking', [App\Http\Controllers\BookingsController::class, 'viewCustBooking']);
+    Route::post('/updateprofile', [App\Http\Controllers\Admin\CustomersController::class, 'updateProfile']);
+
+Route::group(['middleware' => ['auth', 'role:Customer']], function () {
+    // Route::get('/viewcustomerbooking/{id}', [App\Http\Controllers\BookingsController::class, 'viewBooking'])->name('customer-view-booking');
+    // Route::get('/bookingshistory', [App\Http\Controllers\BookingsController::class, 'bookingHistory'])->name('booking-history');
+
+    // Route::get('/profile', [App\Http\Controllers\CustomerProfileSettings::class, 'viewProfile'])->name('view-profile');
+    // Route::post('/updateprofile', [App\Http\Controllers\CustomerProfileSettings::class, 'updateProfile'])->name('update-profile');
+
+    // Route::get('/review-view/{id}', [App\Http\Controllers\BookingsController::class, 'reviewView'])->name('review-view');
+    // Route::post('/give-review/{id}', [App\Http\Controllers\BookingsController::class, 'giveReview'])->name('give-review');
+
+    // Route::get('/ratings', [App\Http\Controllers\BookingsController::class, 'Ratings'])->name('ratings');
+});
 
 
 
