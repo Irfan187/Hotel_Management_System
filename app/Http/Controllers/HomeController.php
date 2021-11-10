@@ -2503,7 +2503,8 @@ class HomeController extends Controller
 
         // $order_id = $res1->orderId;
         $form_url = $res1->formUrl;
-        dd($form_url);
+
+        return response()->json($form_url);
         return redirect($form_url);
 
         if ($request->payment == 'card') {
