@@ -55,6 +55,9 @@ Route::post('/getbooking', [App\Http\Controllers\HomeController::class, 'getBook
 Route::post('/enable', [App\Http\Controllers\HomeController::class, 'enable']);
 Route::get('/flatrate', [App\Http\Controllers\HomeController::class, 'getFlatRate']);
 
+Route::get('/footer', [App\Http\Controllers\HomeController::class, 'Footer']);
+
+
 
 
 Route::post('/customerbookings', [App\Http\Controllers\BookingsController::class, 'bookings']);
