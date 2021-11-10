@@ -180,7 +180,8 @@ class HomeController extends Controller
 
         $k = 0;
         foreach ($rooms as $room) {
-$facilities = Facility::where('room_id',$room->id)->get();
+            $facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
+
             
             if($room->no_of_rooms > 0){
                 if ($kid1 == 0 && $kid2 == 0 && $adults == 1) {
@@ -316,7 +317,7 @@ $facilities = Facility::where('room_id',$room->id)->get();
                 // return response()->json($new_array);
                 if ($k != 1) {
                     foreach ($rooms as $room) {
-$facilities = Facility::where('room_id',$room->id)->get();
+$facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
                         if (!empty($room) && $room->no_of_rooms > 0) {
     
                             $discounts = DiscountRoom::where('room_id', $room->id)->get();
