@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\Booking;
+use App\Models\RoomData;
+use App\Models\RoomActivityData;
+use App\Models\RoomServiceData;
+
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use \willvincent\Rateable\Rating;

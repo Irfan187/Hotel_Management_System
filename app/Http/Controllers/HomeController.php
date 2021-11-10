@@ -2521,7 +2521,7 @@ class HomeController extends Controller
             // $order_id = $res1->orderId;
             $form_url = $res1->formUrl;
 
-            return redirect($form_url);
+            // return redirect($form_url);
 
             $user_id = 0;
             if ($user) {

@@ -179,8 +179,8 @@ class CustomersController extends Controller
         if(!empty($request->password)){
             $customer->password = Hash::make($request->password);
         }
-        if(!empty($request->name)){
-            $customer->name = $request->name;
+        if(!empty($request->last_name) && !empty($request->first_name)){
+            $customer->name = $request->first_name." ".$request->last_name;
         }
         if(!empty($request->email)){
             $customer->email = $request->email;
