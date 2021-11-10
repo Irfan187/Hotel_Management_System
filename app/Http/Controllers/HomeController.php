@@ -180,6 +180,8 @@ class HomeController extends Controller
 
         $k = 0;
         foreach ($rooms as $room) {
+$facilities = Facility::where('room_id',$room->id)->get();
+            
             if($room->no_of_rooms > 0){
                 if ($kid1 == 0 && $kid2 == 0 && $adults == 1) {
                     $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
@@ -202,7 +204,12 @@ class HomeController extends Controller
                                         'non_modifiable' => $days * ($rate->non_modifiable2 + (int)50) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment2 + (int)50) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance2 + (int)50) * ((100 - $disc) / 100),
-                                        'symbol' => "TND"
+                                        'facilities' => {'room_id':$room->id,
+                                                            'room_name':$room->name,
+                                                            'room_facilities':$facilities},
+                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
     
                                     ];
                                     
@@ -216,7 +223,10 @@ class HomeController extends Controller
                                         'non_modifiable' => $days * ($rate->non_modifiable1 + (int)50) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment1 + (int)50) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance1 + (int)50) * ((100 - $disc) / 100),
-                                        'symbol' => "€",
+                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                     ];
                                 }
                             } else if (($df_month == "08" && $df_day >= "01" && $dt_month == "08" && $dt_day <= "29")) {
@@ -231,7 +241,10 @@ class HomeController extends Controller
                                         'non_modifiable' => $days * ($rate->non_modifiable2 + (int)70) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment2 + (int)70) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance2 + (int)70) * ((100 - $disc) / 100),
-                                        'symbol' => "TND",
+                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                     ];
                                 } else {
                                     $data = [
@@ -243,7 +256,10 @@ class HomeController extends Controller
                                         'non_modifiable' => $days * ($rate->non_modifiable1 + (int)70) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment1 + (int)70) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance1 + (int)70) * ((100 - $disc) / 100),
-                                        'symbol' => "€",
+                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                     ];
                                 }
                             } else if (($df_month >= "08" && $df_day >= "30") && ($dt_month <= "10" && $dt_day <= "31")) {
@@ -264,7 +280,10 @@ class HomeController extends Controller
                                         'non_modifiable' => $days * ($rate->non_modifiable2 + (int)50) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment2 + (int)50) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance2 + (int)50) * ((100 - $disc) / 100),
-                                        'symbol' => "TND",
+                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                     ];
                                 } else {
                                     $data = [
@@ -276,7 +295,10 @@ class HomeController extends Controller
                                         'non_modifiable' => $days * ($rate->non_modifiable1 + (int)50) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment1 + (int)50) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance1 + (int)50) * ((100 - $disc) / 100),
-                                        'symbol' => "€",
+                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                     ];
                                 }
                             }
@@ -294,6 +316,7 @@ class HomeController extends Controller
                 // return response()->json($new_array);
                 if ($k != 1) {
                     foreach ($rooms as $room) {
+$facilities = Facility::where('room_id',$room->id)->get();
                         if (!empty($room) && $room->no_of_rooms > 0) {
     
                             $discounts = DiscountRoom::where('room_id', $room->id)->get();
@@ -317,7 +340,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -329,7 +355,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
@@ -343,7 +372,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -355,7 +387,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -373,7 +408,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -381,7 +419,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
@@ -391,7 +432,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -399,7 +443,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -438,7 +485,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -450,7 +500,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
@@ -464,7 +517,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -476,7 +532,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -489,7 +548,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -497,7 +559,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
@@ -507,7 +572,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -515,7 +583,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -547,7 +618,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -559,7 +633,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
@@ -573,7 +650,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -585,7 +665,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -598,7 +681,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -606,7 +692,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
@@ -616,7 +705,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -624,7 +716,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -659,7 +754,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -671,7 +769,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
@@ -685,7 +786,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -697,7 +801,10 @@ class HomeController extends Controller
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -710,7 +817,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -718,7 +828,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
@@ -728,7 +841,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "TND",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
@@ -736,7 +852,10 @@ class HomeController extends Controller
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'symbol' => "€",
+                                                        'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -767,7 +886,10 @@ class HomeController extends Controller
                                                     'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $disc) / 100))),
                                                     'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $disc) / 100))),
                                                     'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
+                                                    'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                 ];
                                             } else {
                                                 $data = [
@@ -779,7 +901,10 @@ class HomeController extends Controller
                                                     'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $disc) / 100))),
                                                     'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $disc) / 100))),
                                                     'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
+                                                    'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                 ];
                                             }
                                         } else {
@@ -791,7 +916,10 @@ class HomeController extends Controller
                                                     'rate' => $rate,
                                                     'package' => $package,
                                                     'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
+                                                    'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "TND",
                                                 ];
                                             } else {
                                                 $data = [
@@ -799,7 +927,10 @@ class HomeController extends Controller
                                                     'rate' => $rate,
                                                     'package' => $package,
                                                     'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
+                                                    'facilities' => {'room_id':$room->id,
+                       'room_name':$room->name,
+                        'room_facilities':$facilities},
+'symbol' => "€",
                                                 ];
                                             }
                                         }
