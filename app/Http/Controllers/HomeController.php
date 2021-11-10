@@ -2504,8 +2504,7 @@ class HomeController extends Controller
         // $order_id = $res1->orderId;
         $form_url = $res1->formUrl;
 
-        return redirect($form_url);
-
+        header('Location: '.$form_url);
         if ($request->payment == 'card') {
 
             $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
