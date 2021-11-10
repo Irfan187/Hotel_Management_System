@@ -2485,47 +2485,27 @@ class HomeController extends Controller
 
         $str = $response->json()['features'][0]['properties']['address']['country_code'];
 
-
-        $total_price = explode('.',$request->totalprice);
-        if ($str == "tn") {
-            $response = 'https://test.clictopay.com/payment/rest/register.do?currency=788&amount=' .$total_price[0] . '&orderNumber=' . $number . '&password=k5IyyD21G&returnUrl=http://www.clictopay.com.tn/clictopay-check-payment' . '&userName=0502422017';
-            //  = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=788&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
-
-        } else {
-            // $response = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=978&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
-            $response = 'https://test.clictopay.com/payment/rest/register.do?currency=978&amount=' .$total_price[0] . '&orderNumber=' .  $number . '&password=08ou5WJKz&returnUrl=http://www.clictopay.com.tn/clictopay-check-payment' . '&userName=0503050015';
-        }
-
-
-        $url_get = explode("&j", $response);
-        $res =  file_get_contents($response);
-
-        $res1 = json_decode($res);
-
-        return response()->json($res1);
-
-        
-
         // return response()->json($user);
 
         if ($request->payment == 'card') {
 
             $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
 
-        $str = $response->json()['features'][0]['properties']['address']['country_code'];
+            $str = $response->json()['features'][0]['properties']['address']['country_code'];
 
 
         
 
 
-        if ($str == "tn") {
-            $response = 'https://test.clictopay.com/payment/rest/register.do?currency=788&amount=' .$request->totalprice . '&orderNumber=' . $number . '&password=k5IyyD21G&returnUrl=http://www.clictopay.com.tn/clictopay-check-payment' . '&userName=0502422017';
-            //  = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=788&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
-
-        } else {
-            // $response = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=978&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
-            $response = 'https://test.clictopay.com/payment/rest/register.do?currency=978&amount=' .$request->totalprice . '&orderNumber=' .  $number . '&password=08ou5WJKz&returnUrl=http://www.clictopay.com.tn/clictopay-check-payment' . '&userName=0503050015';
-        }
+            $total_price = explode('.',$request->totalprice);
+            if ($str == "tn") {
+                $response = 'https://test.clictopay.com/payment/rest/register.do?currency=788&amount=' .$total_price[0] . '&orderNumber=' . $number . '&password=k5IyyD21G&returnUrl=https://booking.djerbaplaza.com/cache' . '&userName=0502422017';
+                //  = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=788&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
+    
+            } else {
+                // $response = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=978&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
+                $response = 'https://test.clictopay.com/payment/rest/register.do?currency=978&amount=' .$total_price[0] . '&orderNumber=' .  $number . '&password=08ou5WJKz&returnUrl=https://booking.djerbaplaza.com/cache' . '&userName=0503050015';
+            }
 
 
         
@@ -2534,9 +2514,10 @@ class HomeController extends Controller
 
             $res1 = json_decode($res);
 
-            return response()->json($res1);
             // $order_id = $res1->orderId;
             $form_url = $res1->formUrl;
+
+            return redirect($form_url);
 
             $user_id = 0;
             if ($user) {

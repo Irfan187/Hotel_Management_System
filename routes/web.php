@@ -37,6 +37,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
+
 
 
 use App\Mail\ReminderEmail;
@@ -55,9 +57,12 @@ use App\Models\User;
 |
 */
 
-Route::get('cache', function () {
-    Artisan::call('config:cache');
-    return "done";
+Route::get('cache', function (Request $request) {
+    // Artisan::call('config:cache');
+    // return "done";
+    dd($request->all());
+
+
 });
 
 Route::get('/', function () {
