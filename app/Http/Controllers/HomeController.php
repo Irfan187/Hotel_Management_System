@@ -2498,7 +2498,8 @@ class HomeController extends Controller
         }
 
 
-    dd($response);
+        return response()->json($response);
+
     $url_get = explode("&j", $response);
         $res =  file_get_contents($response);
 
