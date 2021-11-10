@@ -11,6 +11,8 @@ use App\Models\Room;
 use App\Models\Package;
 use App\Models\RoomRate;
 use Illuminate\Http\Request;
+use App\Models\FlatRate;
+
 
 class RateController extends Controller
 {
@@ -159,13 +161,7 @@ class RateController extends Controller
         return view('admin.rates.edit', compact('roomrate', 'packages', 'rooms', 'room', 'rates'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, $id)
     {
         // dd($request->all());
@@ -286,5 +282,43 @@ class RateController extends Controller
 
         Rate::find($id)->delete();
         return back()->with('success', 'Data removed successfully!');
+    }
+
+
+
+    public function getFlatRate()
+    {
+        $flatrate = FlatRate::first();
+
+
+        return view('admin.rates.flatrateindex', compact('flatrate'));
+    }
+
+    public function editFlatRate($id)
+    {
+        $flatrate = FlatRate::find($id);
+
+
+        return view('admin.rates.editflatrate', compact('flatrate'));
+    }
+
+   
+    public function updateFlatRate(Request $request, $id)
+    {
+        // dd($request->all());
+        $flatrate = FlatRate::find($id);
+        if(!empty($request->name)){
+            $flatrate->name = $request->name;
+        }
+
+        if(!empty($request->discount)){
+            $flatrate->discount = $request->discount;
+        }
+
+        $flatrate->save();
+
+        
+        return redirect()->route('flatrates.index')->with('success', 'Data Updated successfully!');
+        
     }
 }

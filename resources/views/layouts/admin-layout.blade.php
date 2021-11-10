@@ -360,6 +360,10 @@
                                 Rates</span></a>
                     </li>
                     <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('flatrates.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
+                                Flat Rate</span></a>
+                    </li>
+                    <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('facilities.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
                                 Facilities</span></a>
                     </li>

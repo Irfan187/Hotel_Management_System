@@ -8,6 +8,8 @@ use App\Models\Package;
 // use App\Models\Service;
 use App\Models\RangePrice;
 use App\Models\Room;
+use App\Models\FlatRate;
+
 use DateTime;
 use App\Models\Booking;
 use App\Models\CustDetail;
@@ -158,7 +160,7 @@ class HomeController extends Controller
         }
 
         $rooms = Room::all();
-        $data = [];
+        // $data = [];
         $data = [];
         $new_pricing = [];
         $new_array = [];
@@ -174,647 +176,650 @@ class HomeController extends Controller
 
         $k = 0;
         foreach ($rooms as $room) {
-            if ($kid1 == 0 && $kid2 == 0 && $adults == 1) {
-                $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
-                    ->where('rates.room_id', $room->id)->get();
-                // dd($rates);
-                if (count($rates) > 0) {
-                    foreach ($rates as $rate) {
-                        $package = Package::find($rate->package_id);
-                        if (($df_month == "07" && $df_day >= "19" && $dt_month == "07" && $dt_day <= "31")) {
-
-                            $k = 1;
-
-                            if ($str == "tn") {
-                                $data = [
-                                    'room' => $room,
-                                    'rate' => $rate,
-                                    'package' => $package,
-                                    'price' => $days * ($rate->price_per_night2 + (int)50) * ((100 - $disc) / 100),
-                                    'non_refundable' => $days * ($rate->non_refundable2 + (int)50) * ((100 - $disc) / 100),
-                                    'non_modifiable' => $days * ($rate->non_modifiable2 + (int)50) * ((100 - $disc) / 100),
-                                    'prepayment' => $days * ($rate->prepayment2 + (int)50) * ((100 - $disc) / 100),
-                                    'no_advance' => $days * ($rate->no_advance2 + (int)50) * ((100 - $disc) / 100),
-                                    'symbol' => "TND"
-
-                                ];
+            if($room->no_of_rooms > 0){
+                if ($kid1 == 0 && $kid2 == 0 && $adults == 1) {
+                    $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                        ->where('rates.room_id', $room->id)->get();
+                    // dd($rates);
+                    if (count($rates) > 0) {
+                        foreach ($rates as $rate) {
+                            $package = Package::find($rate->package_id);
+                            if (($df_month == "07" && $df_day >= "19" && $dt_month == "07" && $dt_day <= "31")) {
+    
+                                $k = 1;
+    
+                                if ($str == "tn") {
+                                    $data = [
+                                        'room' => $room,
+                                        'rate' => $rate,
+                                        'package' => $package,
+                                        'price' => $days * ($rate->price_per_night2 + (int)50) * ((100 - $disc) / 100),
+                                        'non_refundable' => $days * ($rate->non_refundable2 + (int)50) * ((100 - $disc) / 100),
+                                        'non_modifiable' => $days * ($rate->non_modifiable2 + (int)50) * ((100 - $disc) / 100),
+                                        'prepayment' => $days * ($rate->prepayment2 + (int)50) * ((100 - $disc) / 100),
+                                        'no_advance' => $days * ($rate->no_advance2 + (int)50) * ((100 - $disc) / 100),
+                                        'symbol' => "TND"
+    
+                                    ];
+                                    
+                                } else {
+                                    $data = [
+                                        'room' => $room,
+                                        'rate' => $rate,
+                                        'package' => $package,
+                                        'price' => $days * ($rate->price_per_night1 + (int)50) * ((100 - $disc) / 100),
+                                        'non_refundable' => $days * ($rate->non_refundable1 + (int)50) * ((100 - $disc) / 100),
+                                        'non_modifiable' => $days * ($rate->non_modifiable1 + (int)50) * ((100 - $disc) / 100),
+                                        'prepayment' => $days * ($rate->prepayment1 + (int)50) * ((100 - $disc) / 100),
+                                        'no_advance' => $days * ($rate->no_advance1 + (int)50) * ((100 - $disc) / 100),
+                                        'symbol' => "€",
+                                    ];
+                                }
+                            } else if (($df_month == "08" && $df_day >= "01" && $dt_month == "08" && $dt_day <= "29")) {
+                                $k = 1;
+                                if ($str == "tn") {
+                                    $data = [
+                                        'room' => $room,
+                                        'rate' => $rate,
+                                        'package' => $package,
+                                        'price' => $days * ($rate->price_per_night2 + (int)70) * ((100 - $disc) / 100),
+                                        'non_refundable' => $days * ($rate->non_refundable2 + (int)70) * ((100 - $disc) / 100),
+                                        'non_modifiable' => $days * ($rate->non_modifiable2 + (int)70) * ((100 - $disc) / 100),
+                                        'prepayment' => $days * ($rate->prepayment2 + (int)70) * ((100 - $disc) / 100),
+                                        'no_advance' => $days * ($rate->no_advance2 + (int)70) * ((100 - $disc) / 100),
+                                        'symbol' => "TND",
+                                    ];
+                                } else {
+                                    $data = [
+                                        'room' => $room,
+                                        'rate' => $rate,
+                                        'package' => $package,
+                                        'price' => $days * ($rate->price_per_night1 + (int)70) * ((100 - $disc) / 100),
+                                        'non_refundable' => $days * ($rate->non_refundable1 + (int)70) * ((100 - $disc) / 100),
+                                        'non_modifiable' => $days * ($rate->non_modifiable1 + (int)70) * ((100 - $disc) / 100),
+                                        'prepayment' => $days * ($rate->prepayment1 + (int)70) * ((100 - $disc) / 100),
+                                        'no_advance' => $days * ($rate->no_advance1 + (int)70) * ((100 - $disc) / 100),
+                                        'symbol' => "€",
+                                    ];
+                                }
+                            } else if (($df_month >= "08" && $df_day >= "30") && ($dt_month <= "10" && $dt_day <= "31")) {
                                 // $data = [
-                                //     ,
+                                //     'room'  => $room,
+                                //     'rate' => $rate,
+                                //     'package'  => $package,
+    
                                 // ];
-                            } else {
-                                $data = [
-                                    'room' => $room,
-                                    'rate' => $rate,
-                                    'package' => $package,
-                                    'price' => $days * ($rate->price_per_night1 + (int)50) * ((100 - $disc) / 100),
-                                    'non_refundable' => $days * ($rate->non_refundable1 + (int)50) * ((100 - $disc) / 100),
-                                    'non_modifiable' => $days * ($rate->non_modifiable1 + (int)50) * ((100 - $disc) / 100),
-                                    'prepayment' => $days * ($rate->prepayment1 + (int)50) * ((100 - $disc) / 100),
-                                    'no_advance' => $days * ($rate->no_advance1 + (int)50) * ((100 - $disc) / 100),
-                                    'symbol' => "€",
-                                ];
-                            }
-                        } else if (($df_month == "08" && $df_day >= "01" && $dt_month == "08" && $dt_day <= "29")) {
-                            $k = 1;
-                            if ($str == "tn") {
-                                $data = [
-                                    'room' => $room,
-                                    'rate' => $rate,
-                                    'package' => $package,
-                                    'price' => $days * ($rate->price_per_night2 + (int)70) * ((100 - $disc) / 100),
-                                    'non_refundable' => $days * ($rate->non_refundable2 + (int)70) * ((100 - $disc) / 100),
-                                    'non_modifiable' => $days * ($rate->non_modifiable2 + (int)70) * ((100 - $disc) / 100),
-                                    'prepayment' => $days * ($rate->prepayment2 + (int)70) * ((100 - $disc) / 100),
-                                    'no_advance' => $days * ($rate->no_advance2 + (int)70) * ((100 - $disc) / 100),
-                                    'symbol' => "TND",
-                                ];
-                            } else {
-                                $data = [
-                                    'room' => $room,
-                                    'rate' => $rate,
-                                    'package' => $package,
-                                    'price' => $days * ($rate->price_per_night1 + (int)70) * ((100 - $disc) / 100),
-                                    'non_refundable' => $days * ($rate->non_refundable1 + (int)70) * ((100 - $disc) / 100),
-                                    'non_modifiable' => $days * ($rate->non_modifiable1 + (int)70) * ((100 - $disc) / 100),
-                                    'prepayment' => $days * ($rate->prepayment1 + (int)70) * ((100 - $disc) / 100),
-                                    'no_advance' => $days * ($rate->no_advance1 + (int)70) * ((100 - $disc) / 100),
-                                    'symbol' => "€",
-                                ];
-                            }
-                        } else if (($df_month >= "08" && $df_day >= "30") && ($dt_month <= "10" && $dt_day <= "31")) {
-                            // $data = [
-                            //     'room'  => $room,
-                            //     'rate' => $rate,
-                            //     'package'  => $package,
-
-                            // ];
-                            $k = 1;
-                            if ($str == "tn") {
-                                $data = [
-                                    'room' => $room,
-                                    'rate' => $rate,
-                                    'package' => $package,
-                                    'price' => $days * ($rate->price_per_night2 + (int)50) * ((100 - $disc) / 100),
-                                    'non_refundable' => $days * ($rate->non_refundable2 + (int)50) * ((100 - $disc) / 100),
-                                    'non_modifiable' => $days * ($rate->non_modifiable2 + (int)50) * ((100 - $disc) / 100),
-                                    'prepayment' => $days * ($rate->prepayment2 + (int)50) * ((100 - $disc) / 100),
-                                    'no_advance' => $days * ($rate->no_advance2 + (int)50) * ((100 - $disc) / 100),
-                                    'symbol' => "TND",
-                                ];
-                            } else {
-                                $data = [
-                                    'room' => $room,
-                                    'rate' => $rate,
-                                    'package' => $package,
-                                    'price' => $days * ($rate->price_per_night1 + (int)50) * ((100 - $disc) / 100),
-                                    'non_refundable' => $days * ($rate->non_refundable1 + (int)50) * ((100 - $disc) / 100),
-                                    'non_modifiable' => $days * ($rate->non_modifiable1 + (int)50) * ((100 - $disc) / 100),
-                                    'prepayment' => $days * ($rate->prepayment1 + (int)50) * ((100 - $disc) / 100),
-                                    'no_advance' => $days * ($rate->no_advance1 + (int)50) * ((100 - $disc) / 100),
-                                    'symbol' => "€",
-                                ];
-                            }
-                        }
-                            if(!empty($data)){
-                            array_push($new_array, $data);
-
-                        }
-
-                        // array_push($new_pricing, $pricing);
-                    }
-                }
-            }
-
-            // return response()->json($new_array);
-            if ($k != 1) {
-                foreach ($rooms as $room) {
-                    if (!empty($room)) {
-
-                        $discounts = DiscountRoom::where('room_id', $room->id)->get();
-                        if ($kid1 == 1 && $kid2 == 0 && $adults <= 2) { // FIRST Condition
-                            $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
-                                ->where('rates.room_id', $room->id)->get();
-                            if (count($rates) > 0) {
-                                foreach ($rates as $rate) {
-                                    $package = Package::find($rate->package_id);
-
-                                    if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
-                                       
-                                        if (count($discounts) > 0) {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        } else {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        }
-                                    } else {
-                                        // $data = [
-                                        //     'room'  => $room,
-                                        //     'rate' => $rate,
-                                        //     'package'  => $package,
-
-                                        // ];
-                                        if (count($discounts) > 0) {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        } else {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        }
-                                    }
-                                    if(!empty($data)){
-                            array_push($new_array, $data);
-
-                        }
+                                $k = 1;
+                                if ($str == "tn") {
+                                    $data = [
+                                        'room' => $room,
+                                        'rate' => $rate,
+                                        'package' => $package,
+                                        'price' => $days * ($rate->price_per_night2 + (int)50) * ((100 - $disc) / 100),
+                                        'non_refundable' => $days * ($rate->non_refundable2 + (int)50) * ((100 - $disc) / 100),
+                                        'non_modifiable' => $days * ($rate->non_modifiable2 + (int)50) * ((100 - $disc) / 100),
+                                        'prepayment' => $days * ($rate->prepayment2 + (int)50) * ((100 - $disc) / 100),
+                                        'no_advance' => $days * ($rate->no_advance2 + (int)50) * ((100 - $disc) / 100),
+                                        'symbol' => "TND",
+                                    ];
+                                } else {
+                                    $data = [
+                                        'room' => $room,
+                                        'rate' => $rate,
+                                        'package' => $package,
+                                        'price' => $days * ($rate->price_per_night1 + (int)50) * ((100 - $disc) / 100),
+                                        'non_refundable' => $days * ($rate->non_refundable1 + (int)50) * ((100 - $disc) / 100),
+                                        'non_modifiable' => $days * ($rate->non_modifiable1 + (int)50) * ((100 - $disc) / 100),
+                                        'prepayment' => $days * ($rate->prepayment1 + (int)50) * ((100 - $disc) / 100),
+                                        'no_advance' => $days * ($rate->no_advance1 + (int)50) * ((100 - $disc) / 100),
+                                        'symbol' => "€",
+                                    ];
                                 }
                             }
-                        } elseif ($kid1 == 0 && $kid2 == 1 && $adults == 1) { // SECOND Condition
-                            $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
-                                ->where(
-                                    'rates.room_id',
-                                    $room->id
-                                )->get();
-                            if (count($rates) > 0) {
-                                foreach ($rates as $rate) {
-                                    $package = Package::find($rate->package_id);
-
-                                    if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
-                                        // $data = [
-                                        //     'room'  => $room,
-                                        //     'rate' => $rate,
-                                        //     'package'  => $package,
-
-                                        // ];
-                                        if (count($discounts) > 0) {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        } else {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        }
-                                    } else {
-                                        
-                                        if (count($discounts) > 0) {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        } else {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        }
-                                    }
-                                    if(!empty($data)){
-                            array_push($new_array, $data);
-
-                        }
-                                   
-                                }
+                                if(!empty($data)){
+                                array_push($new_array, $data);
+    
                             }
-                        } elseif ($kid1 == 0 && ($kid2 == 1 || $kid2 == 2) && $adults <= 2) {   // THIRD Condition
-                            $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
-                                ->where('rates.room_id', $room->id)->get();
-                            if (count($rates) > 0) {
-                                foreach ($rates as $rate) {
-                                    $package = Package::find($rate->package_id);
-
-                                    if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
-                                       
-                                        if (count($discounts) > 0) {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        } else {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        }
-                                    } else {
-                                        
-                                        if (count($discounts) > 0) {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        } else {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        }
-                                    }
-                                    if(!empty($data)){
-                            array_push($new_array, $data);
-
-                        }
-                                    
-                                }
-                            }
-                        } elseif (($kid2 == 1 || $kid2 == 2 || $kid2 == 3) && $kid1 == 0 && $adults == 0) { // FOURTH Condition
-                            $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
-                                ->where(
-                                    'rates.room_id',
-                                    $room->id
-                                )->get();
-                            if (count($rates) > 0) {
-                                foreach ($rates as $rate) {
-                                    $package = Package::find($rate->package_id);
-
-                                    if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
-                                        
-                                        if (count($discounts) > 0) {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        } else {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        }
-                                    } else {
-                                        
-                                        if (count($discounts) > 0) {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        } else {
-                                            if ($str == "tn") {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "TND",
-                                                ];
-                                            } else {
-                                                $data = [
-                                                    'room'  => $room,
-                                                    'rate' => $rate,
-                                                    'package'  => $package,
-                                                    'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                    'symbol' => "€",
-                                                ];
-                                            }
-                                        }
-                                    }
-                                    if(!empty($data)){
-                                        array_push($new_array, $data);
-                                    }
-                                    
-                                }
-                            }
-                        } else { // Else Condition with no child discounts
-                            $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
-                                ->where('rates.room_id', $room->id)->get();
-                            if (count($rates) > 0) {
-                                foreach ($rates as $rate) {
-                                    $package = Package::find($rate->package_id);
-
-                                    if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
-                                       
-                                        if ($str == "tn") {
-                                            $data = [
-                                                
-                                                'room' => $room,
-                                                'rate' => $rate,
-                                                'package' => $package,
-                                                'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $disc) / 100))),
-                                                'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $disc) / 100))),
-                                                'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $disc) / 100))),
-                                                'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $disc) / 100))),
-                                                'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $disc) / 100))),
-                                                'symbol' => "TND",
-                                            ];
-                                        } else {
-                                            $data = [
-                                                'room' => $room,
-                                                'rate' => $rate,
-                                                'package' => $package,
-                                                'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $disc) / 100))),
-                                                'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $disc) / 100))),
-                                                'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $disc) / 100))),
-                                                'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $disc) / 100))),
-                                                'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $disc) / 100))),
-                                                'symbol' => "€",
-                                            ];
-                                        }
-                                    } else {
-                                       
-
-                                        if ($str == "tn") {
-                                            $data = [
-                                                'room' => $room,
-                                                'rate' => $rate,
-                                                'package' => $package,
-                                                'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $disc) / 100))),
-                                                'symbol' => "TND",
-                                            ];
-                                        } else {
-                                            $data = [
-                                                'room' => $room,
-                                                'rate' => $rate,
-                                                'package' => $package,
-                                                'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $disc) / 100))),
-                                                'symbol' => "€",
-                                            ];
-                                        }
-                                    }
-                                    if(!empty($data)){
-                            array_push($new_array, $data);
-
-                        }
-                                    
-                                }
-                            }
+    
+                            // array_push($new_pricing, $pricing);
                         }
                     }
                 }
+        }
+    
+                // return response()->json($new_array);
+                if ($k != 1) {
+                    foreach ($rooms as $room) {
+                        if (!empty($room) && $room->no_of_rooms > 0) {
+    
+                            $discounts = DiscountRoom::where('room_id', $room->id)->get();
+                            if ($kid1 == 1 && $kid2 == 0 && $adults <= 2) { // FIRST Condition
+                                $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                                    ->where('rates.room_id', $room->id)->get();
+                                if (count($rates) > 0) {
+                                    foreach ($rates as $rate) {
+                                        $package = Package::find($rate->package_id);
+    
+                                        if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
+                                           
+                                            if (count($discounts) > 0) {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            } else {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            }
+                                        } else {
+                                            // $data = [
+                                            //     'room'  => $room,
+                                            //     'rate' => $rate,
+                                            //     'package'  => $package,
+    
+                                            // ];
+                                            if (count($discounts) > 0) {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            } else {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            }
+                                        }
+                                        if(!empty($data)){
+                                array_push($new_array, $data);
+    
+                            }
+                                    }
+                                }
+                            } elseif ($kid1 == 0 && $kid2 == 1 && $adults == 1) { // SECOND Condition
+                                $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                                    ->where(
+                                        'rates.room_id',
+                                        $room->id
+                                    )->get();
+                                if (count($rates) > 0) {
+                                    foreach ($rates as $rate) {
+                                        $package = Package::find($rate->package_id);
+    
+                                        if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
+                                            // $data = [
+                                            //     'room'  => $room,
+                                            //     'rate' => $rate,
+                                            //     'package'  => $package,
+    
+                                            // ];
+                                            if (count($discounts) > 0) {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            } else {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            }
+                                        } else {
+                                            
+                                            if (count($discounts) > 0) {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            } else {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            }
+                                        }
+                                        if(!empty($data)){
+                                array_push($new_array, $data);
+    
+                            }
+                                       
+                                    }
+                                }
+                            } elseif ($kid1 == 0 && ($kid2 == 1 || $kid2 == 2) && $adults <= 2) {   // THIRD Condition
+                                $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                                    ->where('rates.room_id', $room->id)->get();
+                                if (count($rates) > 0) {
+                                    foreach ($rates as $rate) {
+                                        $package = Package::find($rate->package_id);
+    
+                                        if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
+                                           
+                                            if (count($discounts) > 0) {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            } else {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            }
+                                        } else {
+                                            
+                                            if (count($discounts) > 0) {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            } else {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            }
+                                        }
+                                        if(!empty($data)){
+                                array_push($new_array, $data);
+    
+                            }
+                                        
+                                    }
+                                }
+                            } elseif (($kid2 == 1 || $kid2 == 2 || $kid2 == 3) && $kid1 == 0 && $adults == 0) { // FOURTH Condition
+                                $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                                    ->where(
+                                        'rates.room_id',
+                                        $room->id
+                                    )->get();
+                                if (count($rates) > 0) {
+                                    foreach ($rates as $rate) {
+                                        $package = Package::find($rate->package_id);
+    
+                                        if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
+                                            
+                                            if (count($discounts) > 0) {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            } else {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            }
+                                        } else {
+                                            
+                                            if (count($discounts) > 0) {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            } else {
+                                                if ($str == "tn") {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "TND",
+                                                    ];
+                                                } else {
+                                                    $data = [
+                                                        'room'  => $room,
+                                                        'rate' => $rate,
+                                                        'package'  => $package,
+                                                        'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
+                                                        'symbol' => "€",
+                                                    ];
+                                                }
+                                            }
+                                        }
+                                        if(!empty($data)){
+                                            array_push($new_array, $data);
+                                        }
+                                        
+                                    }
+                                }
+                            } else { // Else Condition with no child discounts
+                                $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                                    ->where('rates.room_id', $room->id)->get();
+                                if (count($rates) > 0) {
+                                    foreach ($rates as $rate) {
+                                        $package = Package::find($rate->package_id);
+    
+                                        if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
+                                           
+                                            if ($str == "tn") {
+                                                $data = [
+                                                    
+                                                    'room' => $room,
+                                                    'rate' => $rate,
+                                                    'package' => $package,
+                                                    'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $disc) / 100))),
+                                                    'non_refundable' => ($adults * $rate->non_refundable2 * $days) + (((($kids * $days * $rate->non_refundable2)) * ((100 - $disc) / 100))),
+                                                    'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $disc) / 100))),
+                                                    'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $disc) / 100))),
+                                                    'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $disc) / 100))),
+                                                    'symbol' => "TND",
+                                                ];
+                                            } else {
+                                                $data = [
+                                                    'room' => $room,
+                                                    'rate' => $rate,
+                                                    'package' => $package,
+                                                    'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $disc) / 100))),
+                                                    'non_refundable' => ($adults * $rate->non_refundable1 * $days) + (((($kids * $days * $rate->non_refundable1)) * ((100 - $disc) / 100))),
+                                                    'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $disc) / 100))),
+                                                    'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $disc) / 100))),
+                                                    'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $disc) / 100))),
+                                                    'symbol' => "€",
+                                                ];
+                                            }
+                                        } else {
+                                           
+    
+                                            if ($str == "tn") {
+                                                $data = [
+                                                    'room' => $room,
+                                                    'rate' => $rate,
+                                                    'package' => $package,
+                                                    'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $disc) / 100))),
+                                                    'symbol' => "TND",
+                                                ];
+                                            } else {
+                                                $data = [
+                                                    'room' => $room,
+                                                    'rate' => $rate,
+                                                    'package' => $package,
+                                                    'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $disc) / 100))),
+                                                    'symbol' => "€",
+                                                ];
+                                            }
+                                        }
+                                        if(!empty($data)){
+                                array_push($new_array, $data);
+    
+                            }
+                                        
+                                    }
+                                }
+                            }
+                        
+                    }
+                }
+    
             }
-
-            return response()->json([
-                'success'               =>  true,
-                'data_array'            =>  $dataarray,
-                'data'                  =>  $new_array,
-                // 'pricing'               =>  $new_pricing
-            ], 200);
+                return response()->json([
+                    'success'               =>  true,
+                    'data_array'            =>  $dataarray,
+                    'data'                  =>  $new_array,
+                    // 'pricing'               =>  $new_pricing
+                ], 200);
+            
+            
         }
     } // END of ROOM Search Room function
 
@@ -2579,6 +2584,13 @@ class HomeController extends Controller
                 $r_data->kid2 = $d['kid2'];
                 $r_data->daydiff = $d['diff_days'];
                 $r_data->save();
+
+                $room = Room::find($d['room_id']);
+                if($room->no_of_rooms > 0){
+                    $room->no_of_rooms = (int)$room->no_of_rooms - (int)1;
+                    $room->save();
+                }
+
             }
 
             foreach($request->room_service as $d){
@@ -2687,6 +2699,13 @@ class HomeController extends Controller
                 $r_data->kid2 = $d['kid2'];
                 $r_data->daydiff = $d['diff_days'];
                 $r_data->save();
+
+
+                $room = Room::find($d['room_id']);
+                if($room->no_of_rooms > 0){
+                    $room->no_of_rooms = (int)$room->no_of_rooms - (int)1;
+                    $room->save();
+                }
             }
 
             foreach($request->room_service as $d){
@@ -2796,6 +2815,12 @@ class HomeController extends Controller
                 $r_data->kid2 = $d['kid2'];
                 $r_data->daydiff = $d['diff_days'];
                 $r_data->save();
+
+                $room = Room::find($d['room_id']);
+                if($room->no_of_rooms > 0){
+                    $room->no_of_rooms = (int)$room->no_of_rooms - (int)1;
+                    $room->save();
+                }
             }
 
             foreach($request->room_service as $d){
@@ -3054,6 +3079,25 @@ class HomeController extends Controller
             'success' => true,
             'data' => $data,
         ]);
+    }
+
+    public function getFlatRate()
+    {
+        $flatrate = FlatRate::first();
+        if(!empty($flatrate)){
+            return response()->json([
+                'success' => true,
+                'data' => $flatrate,
+            ]);
+        }else{
+            return response()->json([
+                'error' => true,
+                'data' => "No Flat Rate",
+            ]);
+        }
+
+
+        return view('admin.rates.flatrateindex', compact('flatrate'));
     }
     
 }

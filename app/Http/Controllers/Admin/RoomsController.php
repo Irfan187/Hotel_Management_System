@@ -15,6 +15,11 @@ use App\Models\PackageRoom;
 use App\Models\RangePrice;
 use App\Models\RoomType;
 use App\Models\RoomFacility;
+use App\Models\RoomData;
+use App\Models\RoomServiceData;
+use App\Models\RoomActivityData;
+use App\Models\RoomRate;
+
 
 class RoomsController extends Controller
 {
@@ -203,9 +208,18 @@ class RoomsController extends Controller
      */
     public function destroy($id)
     {
-        // RangePrice::where('room_id', $id)->delete();
-        // PackageRoom::where('room_id', $id)->delete();
-        // Booking::where('room_id', $id)->delete();
+        $b = RoomData::where('room_id', $id)->first();
+        RoomData::where('room_id', $id)->delete();
+        RoomServiceData::where('room_id', $id)->delete();
+        RoomActivityData::where('room_id', $id)->delete();
+        RoomActivityData::where('room_id', $id)->delete();
+        RoomFacility::where('room_id', $id)->delete();
+        Rate::where('room_id', $id)->delete();
+        RoomRate::where('room_id', $id)->delete();
+        $bb = Booking::where('booking_no',$b->booking_no)->first();
+        $bb->delete();
+
+
 
         Room::find($id)->delete();
 

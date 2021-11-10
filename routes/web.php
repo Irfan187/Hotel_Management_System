@@ -36,6 +36,8 @@ use App\Models\HomePageSetting;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+
 
 use App\Mail\ReminderEmail;
 use App\Mail\WelcomeEmail;
@@ -273,6 +275,10 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/rates/{id}/edit', [RateController::class, 'edit'])->name('rates.edit');
     Route::put('/rates/{id}', [RateController::class, 'update'])->name('rates.update');
     Route::get('/rates/destroy/{id}', [RateController::class, 'destroy'])->name('rates.destroy');
+
+    Route::get('/flatrates', [RateController::class, 'getFlatRate'])->name('flatrates.index');
+    Route::get('/flatrates/{id}/edit', [RateController::class, 'editFlatRate'])->name('flatrates.edit');
+    Route::post('/flatrates/{id}', [RateController::class, 'updateFlatRate'])->name('flatrates.update');
 });
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('do-logout');

@@ -78,10 +78,14 @@
                         <tbody>
                             <tr>
                                 <td>{{ $room->name }}</td>
-                                <td>{{ $room->max_child }}</td>
+                                <td><span class="badge badge-success">{{ $room->max_child }}</span></td>
 
-                                <td>{{ $room->max_adults }}</td>
-                                <td>{{ $room->no_of_rooms }}</td>
+                                <td><span class="badge badge-success">{{ $room->max_adults }}</span></td>
+                                @if($room->no_of_rooms <= 0)
+                                <td><span class="badge badge-danger">No Rooms Available</span></td>
+                                @else
+                                <td><span class="badge badge-success">{{ $room->no_of_rooms }}</span></td>
+                                @endif
 
 
                                 <td>
