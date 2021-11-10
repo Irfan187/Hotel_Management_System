@@ -204,12 +204,12 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                         'non_modifiable' => $days * ($rate->non_modifiable2 + (int)50) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment2 + (int)50) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance2 + (int)50) * ((100 - $disc) / 100),
-                                        'facilities' => {'room_id':$room->id,
-                                                            'room_name':$room->name,
-                                                            'room_facilities':$facilities},
-                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                       
+                                        'facilities' => [
+                                            'room_id'=>$room->id,
+                                        'room_name'=>$room->name,
+                                            'room_facilities'=>$facilities],
+                                            'symbol' => "TND",
     
                                     ];
                                     
@@ -223,9 +223,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                         'non_modifiable' => $days * ($rate->non_modifiable1 + (int)50) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment1 + (int)50) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance1 + (int)50) * ((100 - $disc) / 100),
-                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                     ];
                                 }
@@ -241,9 +241,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                         'non_modifiable' => $days * ($rate->non_modifiable2 + (int)70) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment2 + (int)70) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance2 + (int)70) * ((100 - $disc) / 100),
-                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                     ];
                                 } else {
@@ -256,9 +256,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                         'non_modifiable' => $days * ($rate->non_modifiable1 + (int)70) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment1 + (int)70) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance1 + (int)70) * ((100 - $disc) / 100),
-                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                     ];
                                 }
@@ -280,9 +280,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                         'non_modifiable' => $days * ($rate->non_modifiable2 + (int)50) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment2 + (int)50) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance2 + (int)50) * ((100 - $disc) / 100),
-                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                     ];
                                 } else {
@@ -295,9 +295,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                         'non_modifiable' => $days * ($rate->non_modifiable1 + (int)50) * ((100 - $disc) / 100),
                                         'prepayment' => $days * ($rate->prepayment1 + (int)50) * ((100 - $disc) / 100),
                                         'no_advance' => $days * ($rate->no_advance1 + (int)50) * ((100 - $disc) / 100),
-                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                     ];
                                 }
@@ -340,9 +340,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -355,9 +355,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -372,9 +372,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -387,9 +387,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -408,9 +408,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -419,9 +419,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -432,9 +432,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -443,9 +443,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -485,9 +485,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -500,9 +500,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -517,9 +517,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -532,9 +532,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -548,9 +548,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -559,9 +559,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -572,9 +572,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -583,9 +583,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -618,9 +618,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -633,9 +633,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -650,9 +650,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -665,9 +665,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -681,9 +681,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -692,9 +692,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -705,9 +705,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -716,9 +716,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -754,9 +754,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -769,9 +769,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -786,9 +786,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -801,9 +801,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -817,9 +817,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -828,9 +828,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -841,9 +841,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                     ];
                                                 } else {
@@ -852,9 +852,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
-                                                        'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                        'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                     ];
                                                 }
@@ -886,9 +886,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                     'non_modifiable' => ($adults * $rate->non_modifiable2 * $days) + (((($kids * $days * $rate->non_modifiable2)) * ((100 - $disc) / 100))),
                                                     'prepayment' => ($adults * $rate->prepayment2 * $days) + (((($kids * $days * $rate->prepayment2)) * ((100 - $disc) / 100))),
                                                     'no_advance' => ($adults * $rate->no_advance2 * $days) + (((($kids * $days * $rate->no_advance2)) * ((100 - $disc) / 100))),
-                                                    'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                    'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                 ];
                                             } else {
@@ -901,9 +901,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                     'non_modifiable' => ($adults * $rate->non_modifiable1 * $days) + (((($kids * $days * $rate->non_modifiable1)) * ((100 - $disc) / 100))),
                                                     'prepayment' => ($adults * $rate->prepayment1 * $days) + (((($kids * $days * $rate->prepayment1)) * ((100 - $disc) / 100))),
                                                     'no_advance' => ($adults * $rate->no_advance1 * $days) + (((($kids * $days * $rate->no_advance1)) * ((100 - $disc) / 100))),
-                                                    'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                    'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                 ];
                                             }
@@ -916,9 +916,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                     'rate' => $rate,
                                                     'package' => $package,
                                                     'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $disc) / 100))),
-                                                    'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                    'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "TND",
                                                 ];
                                             } else {
@@ -927,9 +927,9 @@ $facilities = Facility::where('room_id',$room->id)->get();
                                                     'rate' => $rate,
                                                     'package' => $package,
                                                     'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $disc) / 100))),
-                                                    'facilities' => {'room_id':$room->id,
-                       'room_name':$room->name,
-                        'room_facilities':$facilities},
+                                                    'facilities' => ['room_id'=>$room->id,
+                       'room_name'=>$room->name,
+                        'room_facilities'=>$facilities],
 'symbol' => "€",
                                                 ];
                                             }
