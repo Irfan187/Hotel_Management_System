@@ -2480,22 +2480,6 @@ class HomeController extends Controller
 
         $input = $request->all();
 
-        // $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
-
-        // $str = $response->json()['features'][0]['properties']['address']['country_code'];
-
-        $number = rand(243678,99999999);
-        $user = User::find($request->user_id);
-
-        // return response()->json($user);
-
-        if ($request->payment == 'card') {
-
-            $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
-
-        $str = $response->json()['features'][0]['properties']['address']['country_code'];
-
-
         $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
 
         $str = $response->json()['features'][0]['properties']['address']['country_code'];
@@ -2512,6 +2496,20 @@ class HomeController extends Controller
 
 
         return response(json_encode($response));
+
+        $number = rand(243678,99999999);
+        $user = User::find($request->user_id);
+
+        // return response()->json($user);
+
+        if ($request->payment == 'card') {
+
+            $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
+
+        $str = $response->json()['features'][0]['properties']['address']['country_code'];
+
+
+        
 
 
         if ($str == "tn") {
