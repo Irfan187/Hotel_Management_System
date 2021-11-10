@@ -57,10 +57,41 @@ use App\Models\User;
 |
 */
 
+Route::get('form', function (Request $request) {
+    $number = rand(243678,99999999);
+    $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
+
+    $str = $response->json()['features'][0]['properties']['address']['country_code'];
+        if ($str == "tn") {
+            $response = 'https://test.clictopay.com/payment/rest/register.do?currency=788&amount=20000&orderNumber=' . $number . '&password=k5IyyD21G&returnUrl=http://localhost:8000/cache' . '&userName=0502422017';
+            //  = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=788&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
+
+        } else {
+            // $response = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=978&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
+            $response = 'https://test.clictopay.com/payment/rest/register.do?currency=978&amount=30000&orderNumber=' .  $number . '&password=08ou5WJKz&returnUrl=http://localhost:8000/cache' . '&userName=0503050015';
+        }
+
+
+
+        $url_get = explode("&j", $response);
+        $res =  file_get_contents($response);
+
+        $res1 = json_decode($res);
+
+        // $order_id = $res1->orderId;
+        $form_url = $res1->formUrl;
+
+        // return response()->json($form_url);
+        return redirect($form_url);
+
+
+});
+
 Route::get('cache', function (Request $request) {
     // Artisan::call('config:cache');
     // return "done";
-    dd($request->all());
+    // dd($request->all());
+    return redirect('https://test.clictopay.com/payment/rest/deposit.do?amount=20000&currency=788&language='.$request->lang.'&orderId='.$request->orderId.'&password=k5IyyD21G&userName=0503050015');
 
 
 });

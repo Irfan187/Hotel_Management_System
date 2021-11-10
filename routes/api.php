@@ -57,6 +57,11 @@ Route::get('/flatrate', [App\Http\Controllers\HomeController::class, 'getFlatRat
 
 Route::get('/footer', [App\Http\Controllers\HomeController::class, 'Footer']);
 
+Route::get('/allpacks', [App\Http\Controllers\HomeController::class, 'allPackages']);
+Route::get('/allfacilities', [App\Http\Controllers\HomeController::class, 'allFacilities']);
+
+
+
 
 
 
