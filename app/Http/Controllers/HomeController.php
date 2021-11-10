@@ -277,9 +277,8 @@ class HomeController extends Controller
                                 }
                             }
                                 if(!empty($data)){
-                                array_push($new_array, $data);
-    
-                            }
+                                    array_push($new_array, $data);  
+                                }
     
                             // array_push($new_pricing, $pricing);
                         }
@@ -2507,7 +2506,7 @@ class HomeController extends Controller
         }
 
 
-        // return response(json_encode($request->all()));
+        return response(json_encode($response));
         $url_get = explode("&j", $response);
             $res =  file_get_contents($response);
 
