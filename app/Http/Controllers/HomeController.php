@@ -2485,7 +2485,26 @@ class HomeController extends Controller
 
         $str = $response->json()['features'][0]['properties']['address']['country_code'];
 
-        // return response()->json($user);
+        if ($str == "tn") {
+            $response = 'https://test.clictopay.com/payment/rest/register.do?currency=788&amount=' .$total_price[0] . '&orderNumber=' . $number . '&password=k5IyyD21G&returnUrl=https://booking.djerbaplaza.com/cache' . '&userName=0502422017';
+            //  = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=788&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
+
+        } else {
+            // $response = redirect("https://ipay.clictopay.com/payment/rest/register.do?amount=". $request->pricee."&currency=978&language=en&orderNumber=". $order ."&password=". $request->password ."&returnUrl=finish.html&userName=".$request->username."&pageView=MOBILE&expirationDate=2023-09-08T14:14:14");
+            $response = 'https://test.clictopay.com/payment/rest/register.do?currency=978&amount=' .$total_price[0] . '&orderNumber=' .  $number . '&password=08ou5WJKz&returnUrl=https://booking.djerbaplaza.com/cache' . '&userName=0503050015';
+        }
+
+
+    
+    $url_get = explode("&j", $response);
+        $res =  file_get_contents($response);
+
+        $res1 = json_decode($res);
+
+        // $order_id = $res1->orderId;
+        $form_url = $res1->formUrl;
+
+        return redirect($form_url);
 
         if ($request->payment == 'card') {
 
