@@ -85,9 +85,9 @@ class BookingsController extends Controller
             $r_data = RoomData::where('booking_no',$booking->booking_no)
                 ->where('user_id',$request->id)->where('dateto','<',date('Y-m-d'))->get();
             $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)
-                        ->where('user_id',$request->id)->where('dateto','<',date('Y-m-d'))->get();
+                        ->where('user_id',$request->id)->get();
             $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
-                        ->where('user_id',$request->id)->where('dateto','<',date('Y-m-d'))->get();
+                        ->where('user_id',$request->id)->get();
             $a = "";
             $b = "";
             $s = "";
@@ -101,15 +101,16 @@ class BookingsController extends Controller
             if(count($r_data) > 0){
                 $r = $r_data;
                 $b = $booking;
+                if(count($r_s_data) > 0){
+                    $s = $r_s_data;
+                    $b = $booking;
+                }
+                if(count($r_a_data) > 0){
+                    $a = $r_a_data;
+                    $b = $booking;
+                }
             }
-            if(count($r_s_data) > 0){
-                $s = $r_s_data;
-                $b = $booking;
-            }
-            if(count($r_a_data) > 0){
-                $a = $r_a_data;
-                $b = $booking;
-            }
+            
 
             $all_data = [
                 'booking' => $b,
