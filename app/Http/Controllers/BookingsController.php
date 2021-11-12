@@ -109,17 +109,21 @@ class BookingsController extends Controller
                     $a = $r_a_data;
                     $b = $booking;
                 }
+
+                $all_data = [
+                    'booking' => $b,
+                    'room_data' => $r,
+                    'room_service_data' => $s,
+                    'room_activity_data' => $a
+                ];
+
+                array_push($data,$all_data);
             }
             
 
-            $all_data = [
-                'booking' => $b,
-                'room_data' => $r,
-                'room_service_data' => $s,
-                'room_activity_data' => $a
-            ];
+            
 
-            array_push($data,$all_data);
+            
 
  
         }
