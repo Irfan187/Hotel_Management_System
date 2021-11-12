@@ -29,34 +29,36 @@ class BookingsController extends Controller
                         ->where('user_id',$request->id)->get();
             $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
                         ->where('user_id',$request->id)->get();
-            $a = "";
-            $b = "";
-            $s = "";
-            $r = "";
+            $a = [];
+            $b = [];
+            $s = [];
+            $r = [];
 
             if(!empty($booking)){
-                $b = $booking;
+                array_push($b,$booking);
             }
 
             if(count($r_data) > 0){
-                $r = $r_data;
+                array_push($b,$r_data);
             }
             if(count($r_s_data) > 0){
-                $s = $r_s_data;
+                array_push($b,$r_s_data);
             }
             if(count($r_a_data) > 0){
-                $a = $r_a_data;
+                array_push($b,$r_a_data);
             }
 
-            $all_data = [
+            
+
+ 
+        }
+
+        $all_data = [
                 'booking' => $b,
                 'room_data' => $r,
                 'room_service_data' => $s,
                 'room_activity_data' => $a
             ];
-
- 
-        }
 
         $response = [
             'success' => "true",
