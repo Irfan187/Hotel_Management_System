@@ -72,6 +72,67 @@ class BookingsController extends Controller
     }
 
 
+    public function pbookingHistory(Request $request){
+
+        
+
+        $bookings = Booking::where('user_id',$request->id)
+                    ->get();
+        $data = [];
+
+        $all_data = [];
+        foreach($bookings as $booking){
+            $r_data = RoomData::where('booking_no',$booking->booking_no)
+                ->where('user_id',$request->id)->where('dateto','<',date('Y-m-d'))->get();
+            $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)
+                        ->where('user_id',$request->id)->where('dateto','<',date('Y-m-d'))->get();
+            $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
+                        ->where('user_id',$request->id)->where('dateto','<',date('Y-m-d'))->get();
+            $a = "";
+            $b = "";
+            $s = "";
+            $r = "";
+            
+
+            if(!empty($booking)){
+                
+            }
+
+            if(count($r_data) > 0){
+                $r = $r_data;
+                $b = $booking;
+            }
+            if(count($r_s_data) > 0){
+                $s = $r_s_data;
+                $b = $booking;
+            }
+            if(count($r_a_data) > 0){
+                $a = $r_a_data;
+                $b = $booking;
+            }
+
+            $all_data = [
+                'booking' => $b,
+                'room_data' => $r,
+                'room_service_data' => $s,
+                'room_activity_data' => $a
+            ];
+
+            array_push($data,$all_data);
+
+ 
+        }
+
+        $response = [
+            'success' => "true",
+            'data' => $data
+        ];
+
+        return response(json_encode($response));
+
+    }
+
+
 
 
 
