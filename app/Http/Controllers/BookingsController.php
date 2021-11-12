@@ -20,6 +20,7 @@ class BookingsController extends Controller
 
         $bookings = Booking::where('user_id',$request->id)
                     ->get();
+        $data = [];
 
         $all_data = [];
         foreach($bookings as $booking){
@@ -33,7 +34,7 @@ class BookingsController extends Controller
             $b = "";
             $s = "";
             $r = "";
-            $data = [];
+            
 
             if(!empty($booking)){
                 $b = $booking;
