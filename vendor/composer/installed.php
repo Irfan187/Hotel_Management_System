@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3f2c6abbe542e5e8eeb60974aaa04fdb3c77ce11',
+        'reference' => '697faafe77639bb027bb0dcacc0b61037142fef2',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -562,7 +562,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3f2c6abbe542e5e8eeb60974aaa04fdb3c77ce11',
+            'reference' => '697faafe77639bb027bb0dcacc0b61037142fef2',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
@@ -644,15 +644,6 @@
             'install_path' => __DIR__ . '/../league/oauth1-client',
             'aliases' => array(),
             'reference' => '88dd16b0cff68eb9167bfc849707d2c40ad91ddc',
-            'dev_requirement' => false,
-        ),
-        'livewire/livewire' => array(
-            'pretty_version' => 'v2.7.2',
-            'version' => '2.7.2.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../livewire/livewire',
-            'aliases' => array(),
-            'reference' => '991e5bd8a48e450d23cd55336964f916e92a6464',
             'dev_requirement' => false,
         ),
         'maxmind-db/reader' => array(
