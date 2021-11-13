@@ -43,11 +43,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Image</th>
-                                <th>Room</th>
+                                <th>Booking#</th>
+                                <th>Rooms</th>
                                 <th>Package</th>
-                                <th>Room Price</th>
-                                <th>Activity</th>
+                                <th>Total Price</th>
+                                <th>Action</th>
 
 
 
@@ -63,33 +63,47 @@
                                                             ->get();
                                 $r_a_data = App\Models\RoomActivityData::where('booking_no',$booking->booking_no)
                                                             ->get();
-                                                            $k = 1;
+                                                     $k = 1;
+                                                     
+                                $room_names = "";
+                                $package_names = "";
+
+                                
                             @endphp
                         <tbody>
-                            <tr>
-                                    <h3>Booking#: {{$booking->booking_no}}</h3>
-                                </tr>
-                            
-                            @for($i = 0;$i < count($r_data); $i++)
-                                    @php $package = App\Models\Package::find($r_data[$i]->package_id); @endphp
+                           
+                           
+                       
                                     <tr>
                                         <td>{{$k++}}</td>
-                                        <td><img src="{{asset('storage/'.$r_data[$i]->image)}}" alt="" height="100" width="100"></td>
-                                        <td>{{$r_data[$i]->room_name}}</td>
-                                        <td>{{$package->name}}</td>
+                                       <td>{{$booking->booking_no}}</td>
+                                        <td>
+                                        @foreach($r_data as $r)
+                                           
+                                            <span class="badge badge-info">{{$r->room_name}}</span><br>
+
+                                        @endforeach
+                                        </td>
+                                        <td>
+                                        @foreach($r_data as $r)
+                                           
+                                            <span class="badge badge-warning">{{$r->package_name}}</span><br>
+
+                                        @endforeach
+                                        </td>
                                         
-                                        <td>{{$r_data[$i]->price}}</td>
-                                        <td>{{$r_a_data[$i]->title}}</td>
+                                        <td>{{$booking->total_price}}</td>
+                                        <td><a href="{{ route('view-booking',$booking->id) }}" style="background-color: #925F0C;border:none" class="btn btn-primary">View</a></td>
+
                                         
 
                                     </tr>
-                                @endfor
+                               
                                 
 
 
                                 
                                 
-                                <td><a href="{{ route('view-booking',$booking->id) }}" style="background-color: #925F0C;border:none" class="btn btn-primary">View</a></td>
 
 
 

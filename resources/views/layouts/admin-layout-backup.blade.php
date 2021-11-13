@@ -69,12 +69,6 @@
             font-size:19px;
         }
 
-        .app-sidebar ul li a {
-        
-        color: black !important;
-        font-weight: 500;
-    }
-
         /* tr td{
 			background-color: #a29b91;
 			color: white;
@@ -351,7 +345,7 @@
                                 Packages</span></a>
                     </li>
                     <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('activities.index') }}"><img src="{{asset('/img/active.jpeg')}}" alt="">&nbsp;&nbsp;<span class="side-menu__label">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('activities.index') }}"><i class="side-menu__icon fa fa-hiking"></i><span class="side-menu__label">
                                 Activities</span></a>
                     </li>
                     <li class="slide">
@@ -378,7 +372,7 @@
                                 Facilities</span></a>
                     </li>
                     <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('bookings') }}"><i class="side-menu__icon fa fa-list"></i><span class="side-menu__label">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('bookings') }}"><i class="side-menu__icon fa fa-book-open"></i><span class="side-menu__label">
                                 Bookings</span></a>
                     </li>
                     <li class="slide">
@@ -386,7 +380,7 @@
                                 Customers</span></a>
                     </li>
                     <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('admin.discount') }}"><i class="side-menu__icon fa fa-percentage">%</i><span class="side-menu__label">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('admin.discount') }}"><i class="side-menu__icon fa fa-percentage"></i><span class="side-menu__label">
                                 Discount</span></a>
                     </li>
                     <li class="slide">
@@ -406,20 +400,23 @@
                                 class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Back to
                                 Home</span></a>
                     </li> --}}
-                    
                     <li class="slide">
-                        <div class="dropdown">
-                        <i class="fa fa-cogs"></i><button class="btn dropdown-toggle" style="font-weight: 500;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Site Settings
+                        <div class="dropup">
+                            <button class="btn dropdown-toggle" style="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Site Settings
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.newhome') }}"><i class="side-menu__icon fa fa-home"></i><span class="side-menu__label">
+                            <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.newhome') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
                                 Home Page </span></a>
-                              
+                                <!-- <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.home') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Home Page</span></a> -->
 
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.header') }}"><i class="side-menu__icon fa fa-heading"></i><span class="side-menu__label">Header/Footer</span></a>
+                                <!-- <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.booknow') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Book Now Page</span></a> -->
 
-                               
+                                <!-- <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.confirm') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Confirmation Page</span></a> -->
+
+                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.header') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Header/Footer</span></a>
+
+                                <!-- <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.logreg') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Login/Register</span></a> -->
 
                             </div>
 
@@ -427,8 +424,8 @@
                     </li>
                     <li class="slide">
                         <div class="dropdown">
-                        <i class=" fa fa-cogs"></i><button class="btn dropdown-toggle" style="font-weight: 500;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Payment Methods
+                            <button class="btn dropdown-toggle" style="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Payment Methods Setting
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('payment_methods.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Payment

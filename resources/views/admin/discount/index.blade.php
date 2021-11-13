@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title', 'All Roles')
+@section('title', 'Discounts')
 @section('content')
 <!--App-Content-->
 <div class="app-content">
@@ -9,7 +9,7 @@
             <h4 class="page-title">Discount</h4>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Role</li>
+                <li class="breadcrumb-item active" aria-current="page">Discount</li>
             </ol>
         </div>
         <!--/Page-Header-->
@@ -23,6 +23,16 @@
                         <button type="button" data-toggle="modal" class="btn btn-success"
                             data-target="#RoleModalCreate"><i class="fa fa-plus">Add Discount</i></button>
                     </div>
+                    @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                    @endif
+                    @if ($message = Session::get('error'))
+                    <div class="alert alert-danger">
+                        <p>{{ $message }}</p>
+                    </div>
+                    @endif
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered">

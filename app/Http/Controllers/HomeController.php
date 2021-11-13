@@ -2664,26 +2664,49 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 // dd($res);
 
             } else {
-                $newuser = new User();
-                $newuser->name = $request->fname . " " . $request->lname;
-                $newuser->fname = $request->fname;
-                $newuser->lname = $request->lname;
-                $newuser->password = Hash::make($request->password);
-                $newuser->email = $request->email;
-                $newuser->mobno = $input['mobno'];
-                $newuser->notes = $input['notes'];
+                if(!empty($request->guest)){
+                    $newuser = new User();
+                    $newuser->name = $request->fname . " " . $request->lname;
+                    $newuser->fname = $request->fname;
+                    $newuser->lname = $request->lname;
+    
+    
+                    
+                    $newuser->email = $request->email;
+                    $newuser->mobno = $input['mobno'];
+                    $newuser->notes = $input['notes'];
+    
+    
+    
+                    $newuser->save();
+    
+                    $user_id = $newuser->id;
+    
+                    $password = "123456";
+                    $newuser->assignRole('Guest');
+                }else{
+                    $newuser = new User();
+                    $newuser->name = $request->fname . " " . $request->lname;
+                    $newuser->fname = $request->fname;
+                    $newuser->lname = $request->lname;
+    
+    
+                    $newuser->password = Hash::make($request->password);
+                    $newuser->email = $request->email;
+                    $newuser->mobno = $input['mobno'];
+                    $newuser->notes = $input['notes'];
+    
+    
+    
+                    $newuser->save();
+    
+                    $user_id = $newuser->id;
+    
+                    $password = "123456";
+                    $newuser->assignRole('Customer');
 
-
-
-                $newuser->save();
-
-                $user_id = $newuser->id;
-
-                $password = "123456";
-                $newuser->assignRole('Customer');
-                // Mail::to($newuser->email)->send(new PasswordSent($password));
-
-                Auth::login($newuser);
+                    Auth::login($newuser);
+                }
             }
 
             $booking = new Booking();
@@ -2777,26 +2800,49 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 // dd($res);
 
             } else {
-                $newuser = new User();
-                $newuser->name = $request->fname . " " . $request->lname;
-                $newuser->fname = $request->fname;
-                $newuser->lname = $request->lname;
-                $newuser->password = Hash::make($request->password);
-                $newuser->email = $request->email;
-                $newuser->mobno = $input['mobno'];
-                $newuser->notes = $input['notes'];
+                if(!empty($request->guest)){
+                    $newuser = new User();
+                    $newuser->name = $request->fname . " " . $request->lname;
+                    $newuser->fname = $request->fname;
+                    $newuser->lname = $request->lname;
+    
+    
+                    
+                    $newuser->email = $request->email;
+                    $newuser->mobno = $input['mobno'];
+                    $newuser->notes = $input['notes'];
+    
+    
+    
+                    $newuser->save();
+    
+                    $user_id = $newuser->id;
+    
+                    $password = "123456";
+                    $newuser->assignRole('Guest');
+                }else{
+                    $newuser = new User();
+                    $newuser->name = $request->fname . " " . $request->lname;
+                    $newuser->fname = $request->fname;
+                    $newuser->lname = $request->lname;
+    
+    
+                    $newuser->password = Hash::make($request->password);
+                    $newuser->email = $request->email;
+                    $newuser->mobno = $input['mobno'];
+                    $newuser->notes = $input['notes'];
+    
+    
+    
+                    $newuser->save();
+    
+                    $user_id = $newuser->id;
+    
+                    $password = "123456";
+                    $newuser->assignRole('Customer');
 
-
-
-                $newuser->save();
-
-                $user_id = $newuser->id;
-
-                $password = "123456";
-                $newuser->assignRole('Customer');
-                // Mail::to($newuser->email)->send(new PasswordSent($password));
-
-                Auth::login($newuser);
+                    Auth::login($newuser);
+                }
             }
 
             $booking = new Booking();
@@ -2892,28 +2938,51 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 // dd($res);
 
             } else {
-                $newuser = new User();
-                $newuser->name = $request->fname . " " . $request->lname;
-                $newuser->fname = $request->fname;
-                $newuser->lname = $request->lname;
+                if(!empty($request->guest)){
+                    $newuser = new User();
+                    $newuser->name = $request->fname . " " . $request->lname;
+                    $newuser->fname = $request->fname;
+                    $newuser->lname = $request->lname;
+    
+    
+                    
+                    $newuser->email = $request->email;
+                    $newuser->mobno = $input['mobno'];
+                    $newuser->notes = $input['notes'];
+    
+    
+    
+                    $newuser->save();
+    
+                    $user_id = $newuser->id;
+    
+                    $password = "123456";
+                    $newuser->assignRole('Guest');
+                }else{
+                    $newuser = new User();
+                    $newuser->name = $request->fname . " " . $request->lname;
+                    $newuser->fname = $request->fname;
+                    $newuser->lname = $request->lname;
+    
+    
+                    $newuser->password = Hash::make($request->password);
+                    $newuser->email = $request->email;
+                    $newuser->mobno = $input['mobno'];
+                    $newuser->notes = $input['notes'];
+    
+    
+    
+                    $newuser->save();
+    
+                    $user_id = $newuser->id;
+    
+                    $password = "123456";
+                    $newuser->assignRole('Customer');
 
-
-                $newuser->password = Hash::make($request->password);
-                $newuser->email = $request->email;
-                $newuser->mobno = $input['mobno'];
-                $newuser->notes = $input['notes'];
-
-
-
-                $newuser->save();
-
-                $user_id = $newuser->id;
-
-                $password = "123456";
-                $newuser->assignRole('Customer');
-                // Mail::to($newuser->email)->send(new PasswordSent($password));
-
-                Auth::login($newuser);
+                    Auth::login($newuser);
+                }
+  
+                
             }
             $booking = new Booking();
             $booking->booking_no = $number;

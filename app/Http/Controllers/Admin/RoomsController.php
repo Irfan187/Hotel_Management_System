@@ -36,13 +36,13 @@ class RoomsController extends Controller
 
         $user = auth()->user();
 
-        // if ($user->hasRole('Admin')) {
+        if ($user->hasRole('Admin')) {
             return view('admin.rooms.index', [
                 'rooms' => $rooms
             ]);
-        // } else {
-        //     return redirect('/');
-        // }
+        } else {
+            return redirect('/');
+        }
     }
 
     /**
