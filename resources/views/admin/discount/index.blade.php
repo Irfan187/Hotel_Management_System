@@ -17,7 +17,7 @@
             <div class="col-md-12 col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Dicount</div>
+                        <div class="card-title">Discount</div>
                     </div>
                     <div class="col-md-12 text-right pt-2 px-5">
                         <button type="button" data-toggle="modal" class="btn btn-success"
@@ -30,7 +30,7 @@
                                     <tr>
                                         <th class="wd-15p">#</th>
                                         <th class="wd-20p">3 day</th>
-                                        <th class="wd-10p">4 day</th>
+                                        <th class="wd-10p">More than 3 days</th>
                                         <th class="wd-10p">Date From</th>
                                         <th class="wd-15p">Date To</th>
                                         <th class="wd-25p">Action</th>

@@ -15,7 +15,7 @@
 		<div class="app-content">
         <div class="container">
             <div class="card">
-            <div class="row mt-5 ml-5">
+            <div class="row mt-5">
                 <div class="col-6">
                     <h2>Coupons</h2>
                 </div>
@@ -42,8 +42,7 @@
                                 <th>CC</th>
                                 <th>In Person</th>
                                 <th>Bank Transfer</th>
-                                <th>% UpFront</th>
-                                <th>% Arrival</th>
+                                
 
 
                                 <th>Action</th>
@@ -58,11 +57,22 @@
                                <td>{{ $coupon->coupon_price1 }}</td>
                                <td>{{ $coupon->coupon_price2 }}</td>
 
-                                <td>{{ $coupon->cc }}</td>
-                                <td>{{ $coupon->in_person }}</td>
-                                <td>{{ $coupon->bank_transfer }}</td>
-                                <td>{{ $coupon->percentage_upfront }}</td>
-                                <td>{{ $coupon->percentage_arrival }}</td>
+                                
+                                @if($coupon->cc != 0)
+                                <td>Active</td>
+                                @else
+                                <td>Disable</td>
+                                @endif
+                                @if($coupon->in_person != 0)
+                                <td>Active</td>
+                                @else
+                                <td>Disable</td>
+                                @endif
+                                @if($coupon->bank_transfer != 0)
+                                <td>Active</td>
+                                @else
+                                <td>Disable</td>
+                                @endif
 
 
                                 <td>

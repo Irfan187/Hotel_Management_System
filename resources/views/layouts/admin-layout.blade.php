@@ -48,7 +48,7 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <link href="{{ asset('assets/plugins/fullcalendar/fullcalendar.css')}}" rel='stylesheet' />
     <link href="{{ asset('/assets/plugins/fullcalendar/fullcalendar.print.min.css')}}" rel='stylesheet' media='print' />
-
+    <link href="{{asset('/assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css" />
     <!-- floara editotr -->
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <style>
@@ -63,6 +63,10 @@
             height: 110px;
             overflow: scroll;
             padding: 10px;
+        }
+
+        label {
+            font-size:19px;
         }
 
         /* tr td{
@@ -80,12 +84,11 @@
         <header class="bg-white shadow">
             <!-- <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8"> -->
             <!--App-Header-->
-            <div class="app-header1 header py-1 d-flex" style="background: #a29b91 !important;">
+            <div class="app-header1 header py-1 d-flex" style="background: #a7947a !important;">
                 <div class="container-fluid">
                     <div class="d-flex">
                         <a class="header-brand" href="/dashboard">
-                            <!-- <h3 class="logo-name"><img src="" style="background-color: white;border-radius:10px;width: 100px;height: 50px;" alt="" height="80" width="100"></h3> -->
-                            <!-- <img src="" class="header-brand-img" alt="Lmslist logo"> -->
+                            <marque style="color:white;margin-top:5px">Djerba Plaza Admin</marque>
                         </a>
                         <!--<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>-->
                         <!--<div class="header-navicon">
@@ -237,7 +240,7 @@
 								</div> -->
 
                             <div class="dropdown d-none d-md-flex">
-                                <a href="{{ url('/') }}" class="nav-link icon">
+                                <a href="https://book.djerbaplaza.com/" class="nav-link icon">
                                     <i class="fa fa-home fa-2x"></i>
                                 </a>
                                 {{-- <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow  app-selector">
@@ -331,8 +334,23 @@
 							<a class="side-menu__item" data-toggle="slide" href="{{ route('dashboard') }}"><i class="side-menu__icon fe fe-airplay"></i><span class="side-menu__label">Dashboard</span></a>
                     </li> --}}
                     <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('packages.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('rooms.index') }}"><i class="side-menu__icon fa fa-home"></i><span class="side-menu__label"> Rooms</span></a>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('rates.index') }}"><i class="side-menu__icon fa fa-dollar"></i><span class="side-menu__label">
+                                Rates</span></a>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('packages.index') }}"><i class="side-menu__icon fas fa-box"></i><span class="side-menu__label">
                                 Packages</span></a>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('activities.index') }}"><i class="side-menu__icon fa fa-hiking"></i><span class="side-menu__label">
+                                Activities</span></a>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('services.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
+                                Services</span></a>
                     </li>
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('badges.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
@@ -340,25 +358,11 @@
                     </li>
 
 
-                    <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('rooms.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Rooms</span></a>
-                    </li>
-                    <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('policy.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Cancellation
-                                Policy</span></a>
-                    </li>
-                    <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('services.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
-                                Services</span></a>
-                    </li>
-                    <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('activities.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
-                                Activities</span></a>
-                    </li>
-                    <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('rates.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
-                                Rates</span></a>
-                    </li>
+                    
+                    
+                    
+                    
+                   
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('flatrates.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
                                 Flat Rate</span></a>
@@ -371,13 +375,6 @@
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('bookings') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
                                 Bookings</span></a>
                     </li>
-                    <!-- <li class="slide">
-							<a class="side-menu__item" data-toggle="slide" href="{{ route('coupons.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Coupons</span></a>
-                        </li> -->
-                    <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('payment_methods.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Payment
-                                Methods</span></a>
-                    </li>
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('customers.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
                                 Customers</span></a>
@@ -386,10 +383,18 @@
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('admin.discount') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
                                 Discount</span></a>
                     </li>
-                     <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('setting.newhome') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
-                                Home Page Setting</span></a>
+                    <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('policy.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Cancellation
+                                Policy</span></a>
                     </li>
+                    <!-- <li class="slide">
+							<a class="side-menu__item" data-toggle="slide" href="{{ route('coupons.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Coupons</span></a>
+                        </li> -->
+                   
+                    
+                     <!-- <li class="slide">
+                        
+                    </li> -->
                     {{-- <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="/projects/HMS/public/"><i
                                 class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Back to
@@ -398,18 +403,20 @@
                     <li class="slide">
                         <div class="dropup">
                             <button class="btn dropdown-toggle" style="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Settings
+                                Site Settings
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.home') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Home Page</span></a>
+                            <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.newhome') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
+                                Home Page </span></a>
+                                <!-- <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.home') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Home Page</span></a> -->
 
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.booknow') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Book Now Page</span></a>
+                                <!-- <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.booknow') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Book Now Page</span></a> -->
 
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.confirm') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Confirmation Page</span></a>
+                                <!-- <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.confirm') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Confirmation Page</span></a> -->
 
                                 <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.header') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Header/Footer</span></a>
 
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.logreg') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Login/Register</span></a>
+                                <!-- <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.logreg') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Login/Register</span></a> -->
 
                             </div>
 
@@ -418,16 +425,17 @@
                     <li class="slide">
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" style="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Allot Payment Methods
+                                Payment Methods Setting
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('payment_methods.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Payment
+                                Methods</span></a>
                                 <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('countries.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> PM
                                         Countries</span></a>
 
                                 <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('order_prices.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> PM Order
                                         Prices</span></a>
 
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('seasons.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> PM Seasons</span></a>
                                 <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('coupons.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> PM Coupons</span></a>
 
                             </div>
@@ -474,6 +482,9 @@
     <script src="{{ asset('/assets/js/fullcalendar.js')}}"></script>
     <script src="{{asset('assets/plugins/select2/select2.full.min.js')}}"></script>
     <script src="{{asset('assets/js/select2.js')}}"></script>
+    <script src="{{asset('/assets/plugins/fileuploads/js/fileupload.js')}}"></script>
+    <script src="{{asset('/assets/js/formelements.js')}}"></script>
+
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/js/froala_editor.pkgd.min.js">
     </script>

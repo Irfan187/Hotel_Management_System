@@ -28,6 +28,8 @@ use App\Http\Controllers\Admin\PMOrderPriceController;
 use App\Http\Controllers\Admin\PaymentMethodsController;
 use App\Http\Controllers\Admin\CancelationPolicyController;
 use App\Http\Controllers\Admin\CustomersController;
+use App\Http\Controllers\Auth\GoogleController;
+
 
 use App\Http\Controllers\BadgesController;
 use App\Http\Controllers\BookingsController;
@@ -38,7 +40,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Auth\FbController;
 
 
 use App\Mail\ReminderEmail;
@@ -56,6 +58,16 @@ use App\Models\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('auth/google/callback', [App\Http\Controllers\Auth\GoogleController::class, 'handleGoogleCallback']);
+Route::get('auth/google', [App\Http\Controllers\Auth\GoogleController::class, 'redirectToGoogle']);
+
+
+
+
+Route::get('auth/facebook', [FbController::class, 'redirectToFacebook']);
+
+Route::get('auth/facebook/callback', [FbController::class, 'facebookSignin']);
+
 
 Route::get('form', function (Request $request) {
     $number = rand(243678,99999999);

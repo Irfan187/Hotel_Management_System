@@ -14,7 +14,7 @@
         <div class="app-content">
             <div class="container">
                 <div class="card">
-                    <div class="row mt-5 ml-5">
+                    <div class="row mt-5">
                         <div class="col-6">
                             <h2>Rates</h2>
                         </div>
@@ -35,7 +35,7 @@
                             <tr>
 
                                 <th>#</th>
-                                <th>Name</th>
+                                
                                 <th>Room</th>
                                 <th>Packages</th>
                                 <th>Start Dates</th>
@@ -58,7 +58,7 @@
 
                             <tr>
                                 <td>{{$i++}}</td>
-                                <td>{{$rate->rate}}</td>
+                               
                                 <td>{{$room->name}}</td>
                                 <td>
                                     @foreach($rat1 as $r)

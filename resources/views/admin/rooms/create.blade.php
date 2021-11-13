@@ -43,9 +43,8 @@
                                     <input type="text" class="form-control" name="name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="image">Room Image</label>
-                                    <input accept="image/*" type='file' id="imgInp" class="form-control" name="image" id="image" required>
-                                    <img id="blah" src="#" alt="your image" />
+                                    <label for="image">Image</label>
+                                    <input type="file" class="dropify" data-default-file="../assets/images/media/media1.jpg" data-height="180" name="image" id="image" required />
                                 </div>
                                 {{-- <div class="form-group">
                         <label for="status">Status</label>
@@ -90,22 +89,27 @@
                                 <div class="form-group">
                                     <label for="">Room detail</label><br><br>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            1. Maximum children<br><br><br>
-                                            2. Maximum adults<br><br><br>
-                                            <!-- 3. Maximum people<br><br><br>
-                                            4. Minimum people<br><br><br> -->
-                                            5. Number of rooms<br><br><br>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="number" min="1" max="100" id="max_child" name="max_child"><br><br><br>
-                                            <input type="number" min="1" max="100" id="max_adults" name="max_adults"><br><br><br>
-                                            <!-- <input type="number" min="1" max="100" id="max_people" name="max_people"><br><br><br>
-                                            <input type="number" min="1" max="100" id="min_people" name="min_people"><br><br><br> -->
-                                            <input type="number" min="1" max="100" id="no_of_rooms" name="no_of_rooms"><br><br><br>
 
-                                        </div>
-                                    </div>
+                                            <div class="col-md-4">
+                                            Maximum children
+                                            </div>
+                                            <div class="col-md-4">
+                                            Maximum adults
+                                            </div>
+                                            <div class="col-md-4">
+                                            Number of rooms
+                                            </div>
+                                            <div class="col-md-4">
+                                            <input class="form-control" type="number" min="1" max="100" id="max_child" name="max_child">
+                                            </div>
+                                            <div class="col-md-4">
+                                            <input class="form-control" type="number" min="1" max="100" id="max_adults" name="max_adults" >
+                                            </div>
+                                            <div class="col-md-4">
+                                            <input class="form-control" type="number" min="1" max="100" id="no_of_rooms" name="no_of_rooms" >
+                                            </div>
+                                            
+                                            </div>
 
 
                                 </div>

@@ -38,17 +38,17 @@
             <div class="row">
                 <div class="col-12">
                     `<div class="form-group">
-                        <label for="name">Image</label>
-                        <input type="file" class="form-control" name="image" id="image"  required>
-                    </div>
+                                    <label for="image">Image</label>
+                                    <input type="file" class="dropify" data-default-file="../assets/images/media/media1.jpg" data-height="180" name="image" id="image" required />
+                                </div>
                     <div class="form-group">
                         <label for="name">Title</label>
                         <input type="text" class="form-control" name="title" id="title"  required>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="name">Sub Title</label>
                         <input type="text" class="form-control" name="subtitle" id="subtitle"  required>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="name">Description</label>
                         <textarea class="form-control" name="description" id="description"  required></textarea>
@@ -74,10 +74,42 @@
                         <input type="text" class="form-control" name="price2" id="price2"  required>
                     </div>
                     <div class="form-group">
-                        <label for="name">Duration</label>
-                        <input type="number" min="1" class="form-control" name="duration" id="duration"  required>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="name">Days</label>
+                                <select name="day" id="day" class="form-control">
+                                    @for($i = 1;$i <= 10; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="name">Hours</label>
+                                <select name="hours" id="hours" class="form-control">
+                                @for($i = 1;$i <= 12; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                                    
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="name">Minutes</label>
+                                <select name="minutes" id="minutes" class="form-control">
+                                    @for($i = 1;$i <= 60; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                    @endfor
+                                    
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="">Total Duration</label>
+                                <input type="text" name="total" id="total" class="form-control" readonly>
+                            </div>
+                        </div>
+                        
+
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="name">Duration Type</label>
 
                         <select name="duration_type" id="duration_type" class="form-control" required>
@@ -86,8 +118,8 @@
                             <option value="days">Days</option>
 
                         </select>
-                    </div>
-                    <div class="form-group">
+                    </div> -->
+                    <!-- <div class="form-group">
                         <label for="name">Latitude</label>
                         <input type="number" class="form-control" name="latitude" id="latitude" step="0.01"  required>
                     </div>
@@ -95,7 +127,7 @@
                     <div class="form-group">
                         <label for="name">Longitude</label>
                         <input type="number" step="0.01" class="form-control" name="longitude" id="longitude"  required>
-                    </div>
+                    </div> -->
 
 
 
@@ -120,6 +152,47 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
+      var h = 0;
+      var m = 0;
+      var d = 0;
+      $('#day').on('change', function() {
+        d = this.value;
+        if(m != 0 && h != 0){
+                var dd = d;
+                var ddd = Math.floor(h/24);
+                var mmm = Math.floor(m/3600);
+
+                var total = d + ddd + mmm;
+                $('#total').val(total);
+                
+            }
+        });
+        $('#hours').on('change', function() {
+        h = this.value;
+        if(d != 0 && m != 0){
+                var dd = d;
+                var ddd = Math.floor(h/24);
+                var mmm = Math.floor(m/3600);
+
+                var total = d + ddd + mmm;
+                $('#total').val(total);
+                
+            }
+        });
+        $('#minutes').on('change', function() {
+        m = this.value;
+            if(d != 0 && h != 0){
+                var dd = d;
+                var ddd = Math.floor(h/24);
+                var mmm = Math.floor(m/3600);
+
+                var total = d + ddd + mmm;
+                $('#total').val(total);
+                
+            }
+        });
+
+        
     $("#max_people").focusout(function(){
         var c = $('#max_child').val();
         var a = $('#max_adults').val();

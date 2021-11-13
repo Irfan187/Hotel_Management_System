@@ -14,7 +14,7 @@
         <div class="app-content">
             <div class="container">
                 <div class="card">
-                    <div class="row mt-5 ml-5">
+                    <div class="row mt-5">
                         <div class="col-6">
                             <h2>Countries</h2>
                         </div>
@@ -62,8 +62,7 @@
                                 <th>CC</th>
                                 <th>In Person</th>
                                 <th>Bank Transfer</th>
-                                <th>% UpFront</th>
-                                <th>% Arrival</th>
+                               
 
 
                                 <th>Action</th>
@@ -75,11 +74,22 @@
                             <tr>
                                 <td>{{ $country->country_name }}</td>
                                 <td>{{ $country->country_code }}</td>
-                                <td>{{ $country->cc }}</td>
-                                <td>{{ $country->in_person }}</td>
-                                <td>{{ $country->bank_transfer }}</td>
-                                <td>{{ $country->percentage_upfront }}</td>
-                                <td>{{ $country->percentage_arrival }}</td>
+                               
+                                @if($country->cc != 0)
+                                <td>Active</td>
+                                @else
+                                <td>Disable</td>
+                                @endif
+                                @if($country->in_person != 0)
+                                <td>Active</td>
+                                @else
+                                <td>Disable</td>
+                                @endif
+                                @if($country->bank_transfer != 0)
+                                <td>Active</td>
+                                @else
+                                <td>Disable</td>
+                                @endif
 
 
                                 <td>

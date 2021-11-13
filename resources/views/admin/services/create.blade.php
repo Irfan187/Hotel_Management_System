@@ -37,16 +37,36 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control"  name="description" id="description"  required></textarea>
+                        <textarea name="description" required class="form-control" id="description" cols="100" rows="4"></textarea>
+                                    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+                                    <script>
+                                        CKEDITOR.replace('description', {
+                                            filebrowserUploadUrl: "",
+                                            filebrowserUploadMethod: 'form'
+                                        });
+                                    </script>
                     </div>
 
                     <div class="form-group">
                         <label for="price1">Price per person per night (€)</label>
-                        <input type="text" class="form-control" name="price1" id="price1"  required>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">€</span>
+                            </div>
+                            <input type="text" class="form-control" name="price1" id="price1"  required>
+
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="price2">Price per person per night (TND)</label>
-                        <input type="text" class="form-control" name="price2" id="price2"  required>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">TND</span>
+                            </div>
+                            <input type="text" class="form-control" name="price1" id="price1"  required>
+
+                        </div>
                     </div>
 
 

@@ -236,7 +236,7 @@ class DashboardController extends Controller
 
     public function newhomePageUpdate(Request $request,$id){
 
-        
+        // dd($request->all());
         $setting = NewHomeSetting::find($id);
 
         if (!empty($request->logo)) {

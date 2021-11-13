@@ -126,9 +126,9 @@ class RateController extends Controller
                     $discount_price->save();
                 }
             }
-            return back()->with('success', 'Data inserted successfully!');
+            return redirect()->route('rates.index')->with('success', 'Data inserted successfully!');
         } catch (\Exception $e) {
-            return back()->with('fail', 'Something went wrong!');
+            return redirect()->route('rates.index')->with('fail', 'Something went wrong!');
         }
     }
 
@@ -265,9 +265,9 @@ class RateController extends Controller
 
 
 
-            return back()->with('success', 'Data inserted successfully!');
+            return redirect()->route('rates.index')->with('success', 'Data inserted successfully!');
         } catch (\Exception $e) {
-            return back()->with('fail', 'Something went wrong!');
+            return redirect()->route('rates.index')->with('fail', 'Something went wrong!');
         }
     }
 
@@ -280,8 +280,9 @@ class RateController extends Controller
     public function destroy($id)
     {
 
-        Rate::find($id)->delete();
-        return back()->with('success', 'Data removed successfully!');
+        Rate::where('rate_id',$id)->delete();
+        RoomRate::find($id)->delete();
+        return redirect()->route('rates.index')->with('success', 'Data removed successfully!');
     }
 
 

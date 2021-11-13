@@ -52,7 +52,7 @@ class ExtraActivityController extends Controller
         $act = $activity->create($request->only($activity->getFillable()));
 
         $act->image = $fileName;
-        $act->duration_type = $request->duration_type;
+       
         $act->save();
 
         return redirect()->route('activities.index')->with('success', 'Activity Created Successfully');
@@ -110,7 +110,7 @@ class ExtraActivityController extends Controller
             $activity->save();
         }
 
-        $activity->duration_type = $request->duration_type;
+       
         $activity->save();
 
         return redirect()->route('activities.index')->with('success', 'Activity Updated Successfully');

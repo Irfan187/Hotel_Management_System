@@ -36,10 +36,7 @@
                             <th>Title</th>
                             <td>{{ $activity->title }}</td>
                         </tr>
-                        <tr>
-                            <th>Sub Title</th>
-                            <td>{{ $activity->subtitle }}</td>
-                        </tr>
+                       
                         <tr>
                             <th>Description</th>
                             <td>{!! html_entity_decode($activity->description) !!}</td>

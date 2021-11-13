@@ -15,7 +15,7 @@
 		<div class="app-content">
         <div class="container">
             <div class="card">
-            <div class="row mt-5 ml-5">
+            <div class="row mt-5">
                 <div class="col-6">
                     <h2>Payment Methods</h2>
                 </div>
@@ -31,6 +31,7 @@
                 <table id="notificationTable" class="table table-striped table-bordered mt-5">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Payment Method</th>
 
 
@@ -42,7 +43,9 @@
                         @foreach($payment_methods as $payment_method)
 
                         <tbody>
+                        @php $i=1; @endphp
                             <tr>
+                                <td>{{$i++}}</td>
                                 <td>{{ $payment_method->payment_method }}</td>
 
                                 @if($payment_method->enable == 0)

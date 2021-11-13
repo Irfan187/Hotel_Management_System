@@ -26,46 +26,55 @@
                         <p>{{ $message }}</p>
                     </div>
                     @endif
-                    <table id="notificationTable" class="table table-striped table-bordered mt-5">
 
-                        <tr>
-                            <th>Room Name</th>
-                            <td>{{ $room->name }}</td>
-                        </tr>
-                        <tr>
-                            <th>Description</th>
-                            <td>{!! html_entity_decode($room->description) !!}</td>
-                        </tr>
-                        <tr>
-                            <th>Number of Rooms</th>
-                            <td>{{ $room->no_of_rooms }}</td>
-                        </tr>
-                        <tr>
-                            <th>Active</th>
-                            <td>{{ $room->active }}</td>
-                        </tr>
-                        <!-- <tr>
-                            <th>Status</th>
-                            <td>{{ $room->status }}</td>
-                        </tr> -->
-                        <tr>
-                            <th>Price (€)</th>
-                            <td>{{ $room->price1 }}</td>
-                        </tr>
-                        <tr>
-                            <th>Price (TND)</th>
-                            <td>{{ $room->price1 }}</td>
-                        </tr>
-                        <!-- <tr>
-                            <th>Capacity</th>
-                            <td>{{ $room->capacity }}</td>
-                        </tr> -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img src="{{asset('/storage/'.$room->image)}}" alt="">
+                        </div>
+                        <div class="col-lg-6">
+                        <table id="notificationTable" class="table table-striped table-bordered mt-5">
+
+                            <tr>
+                                <!-- <th>Room Name</th> -->
+                                <td>{{ $room->name }}</td>
+                            </tr>
+                            <tr>
+                                <!-- <th>Description</th> -->
+                                <td>{!! html_entity_decode($room->description) !!}</td>
+                            </tr>
+                            <tr>
+                                <!-- <th>Number of Rooms</th> -->
+                                <td>{{ $room->no_of_rooms }}</td>
+                            </tr>
+                            <tr>
+                                <!-- <th>Active</th> -->
+                                <td>{{ $room->active }}</td>
+                            </tr>
+                            <!-- <tr>
+                                <th>Status</th>
+                                <td>{{ $room->status }}</td>
+                            </tr> -->
+                            <tr>
+                                <!-- <th>Price (€)</th> -->
+                                <td>{{ $room->price1 }}</td>
+                            </tr>
+                            <tr>
+                                <!-- <th>Price (TND)</th> -->
+                                <td>{{ $room->price1 }}</td>
+                            </tr>
+                            <!-- <tr>
+                                <th>Capacity</th>
+                                <td>{{ $room->capacity }}</td>
+                            </tr> -->
 
 
 
 
 
-                    </table>
+                            </table>
+                        </div>
+                    </div>
+                    
 
 
                 </div>

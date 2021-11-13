@@ -34,7 +34,7 @@
                 <div class="col-12">
                     <div class="form-group">
                         <label for="coupon">Payment Method</label>
-                        <input type="text" class="form-control" value="{{ $payment_method->payment_method }}" name="coupon" id="coupon" placeholder="Coupon">
+                        <input type="text" class="form-control" value="{{ $payment_method->payment_method }}" name="payment_method" id="payment_method" placeholder="Coupon">
                     </div>
                     <div class="form-group">
                         <label for="enable">Enable</label>

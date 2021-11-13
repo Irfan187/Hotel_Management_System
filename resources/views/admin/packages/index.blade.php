@@ -14,7 +14,7 @@
         <div class="app-content">
             <div class="container">
                 <div class="card">
-                    <div class="row mt-5 ml-5">
+                    <div class="row mt-5">
                         <div class="col-6">
                             <h2>Packages</h2>
                         </div>
@@ -32,6 +32,7 @@
                     <table id="notificationTable" class="table table-striped table-bordered mt-5">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Name</th>
 
 
@@ -40,10 +41,12 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        @php $i=1; @endphp
                         @foreach($packages as $package)
 
                         <tbody>
                             <tr>
+                                <td>{{$i++}}</td>
                                 <td>{{ $package->name }}</td>
                                 @if($package->active == 0)
                                 <td><span class="badge badge-danger">Not Active</span></td>

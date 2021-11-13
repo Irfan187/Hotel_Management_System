@@ -36,8 +36,16 @@
                                     <input type="text" class="form-control" value="{{ $package->name }}" name="name" id="name" placeholder="Package Name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="detail">Detail</label>
-                                    <textarea name="detail" class="form-control" value="{{ $package->detail }}" id="detail" cols="100" rows="4">{{ $package->detail }}</textarea>
+                                <label for="description">Description</label>
+                                    <textarea name="detail" required class="form-control" id="description" cols="100" rows="4">{!! html_entity_decode($package->name) !!}</textarea>
+                                    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+                                    <script>
+                                        CKEDITOR.replace('detail', {
+                                            filebrowserUploadUrl: "",
+                                            filebrowserUploadMethod: 'form'
+                                        });
+                                    </script>
                                 </div>
 
                                 <div class="form-group">

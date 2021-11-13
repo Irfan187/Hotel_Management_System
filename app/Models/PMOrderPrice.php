@@ -11,5 +11,5 @@ class PMOrderPrice extends Model
 
     protected $table = "pm_orderprices";
 
-    protected $fillable = ['euro_price_1','euro_price_2','tnd_price_1','tnd_price_2','cc','in_person','bank_transfer','percentage_upfront','percentage_arrival'];
+    protected $fillable = ['euro_price_1','euro_price_2','tnd_price_1','tnd_price_2','cc','in_person','bank_transfer'];
 }

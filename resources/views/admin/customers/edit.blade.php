@@ -40,9 +40,19 @@
 
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{$customer->name}}" required>
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control" value="{{$customer->fname}}" name="f_name"  required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" value="{{$customer->lname}}" name="l_name"  required>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>

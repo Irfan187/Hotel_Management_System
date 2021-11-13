@@ -14,7 +14,7 @@
         <div class="app-content">
             <div class="container">
                 <div class="card">
-                    <div class="row mt-5 ml-5">
+                    <div class="row mt-5">
                         <div class="col-6">
                             <h2>Services</h2>
                         </div>
@@ -58,17 +58,20 @@
                     <table id="notificationTable" class="table table-striped table-bordered mt-5">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Service Name</th>
                                 <th>Price (€)</th>
                                 <th>Price (TND)</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        @php $i=1; @endphp
                         @if(!empty($services))
                         @foreach($services as $service)
 
                         <tbody>
                             <tr>
+                                <td>{{$i++}}</td>
                                 <td>{{ $service->name }}</td>
 
                                 <td>{{ $service->price1 }}</td>

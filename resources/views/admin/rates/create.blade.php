@@ -43,7 +43,10 @@
                                     <select name="room" id="room" class="form-control">
                                         <option value="">{{'-'}}</option>
                                         @foreach($rooms as $room)
+                                        @php $room_rate = App\Models\Rate::where('room_id',$room->id)->first(); @endphp
+                                        @if(empty($room_rate))
                                         <option value="{{$room->id}}">{{$room->name}}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                 </div>

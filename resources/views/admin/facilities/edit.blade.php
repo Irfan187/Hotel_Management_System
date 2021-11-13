@@ -43,10 +43,12 @@
                                     <label for="room_no">Title</label>
                                     <input type="text" class="form-control" name="title" id="title" value="{{$facility->title}}" required>
                                 </div>
+                                
                                 <div class="form-group">
-                                <input type="file" class="form-control" name="image" id="image">
-                                 <img src="{{ asset('/storage/'. $facility->image) }}" height="100" width="100" alt=""> 
+                                    <label for="image">Image</label>
+                                    <input type="file" class="dropify" data-default-file="{{asset('/storage/'.$facility->image)}}" data-height="180" name="image" id="image" required />
                                 </div>
+                               
                                 
                         
                                 <div class="form-group">

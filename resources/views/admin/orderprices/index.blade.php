@@ -15,7 +15,7 @@
 		<div class="app-content">
         <div class="container">
             <div class="card">
-            <div class="row mt-5 ml-5">
+            <div class="row mt-5">
                 <div class="col-6">
                     <h2>Order Prices</h2>
                 </div>
@@ -40,8 +40,7 @@
                                 <th>CC</th>
                                 <th>In Person</th>
                                 <th>Bank Transfer</th>
-                                <th>% UpFront</th>
-                                <th>% Arrival</th>
+                               
 
 
                                 <th>Action</th>
@@ -54,12 +53,23 @@
 
                                 <td>{{ $order_price->euro_price_1 }} - {{ $order_price->euro_price_2 }}</td>
                                 <td>{{ $order_price->tnd_price_1 }} - {{ $order_price->tnd_price_2 }}</td>
-
-                                <td>{{ $order_price->cc }}</td>
-                                <td>{{ $order_price->in_person }}</td>
-                                <td>{{ $order_price->bank_transfer }}</td>
-                                <td>{{ $order_price->percentage_upfront }}</td>
-                                <td>{{ $order_price->percentage_arrival }}</td>
+                                @if($order_price->cc != 0)
+                                <td>Active</td>
+                                @else
+                                <td>Disable</td>
+                                @endif
+                                @if($order_price->in_person != 0)
+                                <td>Active</td>
+                                @else
+                                <td>Disable</td>
+                                @endif
+                                @if($order_price->bank_transfer != 0)
+                                <td>Active</td>
+                                @else
+                                <td>Disable</td>
+                                @endif
+                                
+                                
 
 
                                 <td>

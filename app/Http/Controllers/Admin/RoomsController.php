@@ -19,6 +19,8 @@ use App\Models\RoomData;
 use App\Models\RoomServiceData;
 use App\Models\RoomActivityData;
 use App\Models\RoomRate;
+use App\Models\Rate;
+
 
 
 class RoomsController extends Controller
@@ -105,7 +107,7 @@ class RoomsController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Room Created Successfully');
+        return redirect()->route('rooms.index')->with('success', 'Room Deleted Successfully');
     }
 
     /**
@@ -182,22 +184,25 @@ class RoomsController extends Controller
 
         ]);
 
-        foreach ($request->facilities as $facility) {
-            $facility1 = RoomFacility::find($facility);
-            if (!empty($facility1)) {
-                $facility1->update([
-                    'room_id' => $id,
-                    'facility_id' => $facility
-                ]);
-            } else {
-                RoomFacility::create([
-                    'room_id' => $id,
-                    'facility_id' => $facility
-                ]);
+        if(!empty($request->facilities)){
+            foreach ($request->facilities as $facility) {
+                $facility1 = RoomFacility::find($facility);
+                if (!empty($facility1)) {
+                    $facility1->update([
+                        'room_id' => $id,
+                        'facility_id' => $facility
+                    ]);
+                } else {
+                    RoomFacility::create([
+                        'room_id' => $id,
+                        'facility_id' => $facility
+                    ]);
+                }
             }
         }
+       
 
-        return back()->with('success', 'Room Updated Successfully');
+        return redirect()->route('rooms.index')->with('success', 'Room Updated Successfully');
     }
 
     /**
@@ -216,8 +221,11 @@ class RoomsController extends Controller
         RoomFacility::where('room_id', $id)->delete();
         Rate::where('room_id', $id)->delete();
         RoomRate::where('room_id', $id)->delete();
-        $bb = Booking::where('booking_no',$b->booking_no)->first();
-        $bb->delete();
+        if(!empty($b)){
+            $bb = Booking::where('booking_no',$b->booking_no)->first();
+            $bb->delete();
+        }
+       
 
 
 

@@ -15,11 +15,13 @@
 		<div class="app-content">
         <div class="container">
             <div class="card">
-            <div class="row mt-5 ml-5">
+            <div class="row mt-5">
                 <div class="col-6">
-                    <h2>Cancellation Policy</h2>
+                    <h2>Facilities</h2>
                 </div>
-
+                <div class="col-6 mb-5">
+                            <a href="{{ route('facilities.create') }}" class="btn btn-success float-right"><i class="fa fa-plus"></i> Add Facility</a>
+                        </div>
 
 
             </div>

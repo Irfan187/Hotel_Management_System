@@ -10,16 +10,18 @@ class ExtraActivity extends Model
     use HasFactory;
     protected $fillable=[
          'title'
-     ,'subtitle'
+     
     ,'max_child'
    ,'max_adults'
    ,'max_people'
   ,'description'
        ,'price1'
        ,'price2'
-     ,'duration'
-     ,'latitude'
-    ,'longitude'
+     ,'duration',
+    'hours',
+    'minutes',
+    'total',
+    'days'
         ,'image'
     ];
 }

@@ -45,18 +45,28 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label>
-                                    <input type="file" class="form-control" name="image" id="image" required>
+                                    <input type="file" class="dropify" data-default-file="../assets/images/media/media1.jpg" data-height="180" name="image" id="image" required />
                                 </div>
                         
                                 <div class="form-group">
                                     <label for="onarrival">Standard Price (€)</label>
-                                    <input type="number" min="1" class="form-control" name="price1" id="price1"
-                                        required>
+                                    <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">€</span>
+                                    </div>
+                                    <input type="number" required name="price1" id="price1" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <label for="onarrival">Standard Price (TND)</label>
-                                    <input type="number" min="1" class="form-control" name="price2" id="price2"
-                                        required>
+                                    <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">TND</span>
+                                    </div>
+                                    <input type="number" required name="price2" id="price2" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                                    </div>
+                                       
                                 </div>
 
                                 <div class="form-group mt-5">

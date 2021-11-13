@@ -33,54 +33,36 @@
             <div class="row">
                 <div class="col-12">
 
-                    <div class="form-group">
+                <div class="form-group">
                         <label for="cc">CC</label>
                         <select name="cc" id="cc" class="form-control">
-                            @if($country->cc == 0)
-                            <option value="0" selected>0</option>
-                            <option value="{{ $cc->id }}">{{ $cc->id }}</option>
-                            @else
-                            <option value="0">0</option>
-                            <option value="{{ $cc->id }}" selected>{{ $cc->id }}</option>
-                            @endif
+
+                            <option value="0">Disable</option>
+                            <option value="{{ $cc->id }}">Active</option>
+
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="cc">In Person</label>
                         <select name="in_person" id="in_person" class="form-control">
-                            @if($country->in_person == 0)
-                            <option value="0" selected>0</option>
-                            <option value="{{ $in_person->id }}">{{ $in_person->id }}</option>
-                            @else
-                            <option value="0">0</option>
-                            <option value="{{ $in_person->id }}" selected>{{ $in_person->id }}</option>
-                            @endif
+
+                            <option value="0">Disable</option>
+                            <option value="{{ $in_person->id }}">Active</option>
+
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="bank_transfer">Bank Transfer</label>
                         <select name="bank_transfer" id="bank_transfer" class="form-control">
-                            @if($country->bank_transfer == 0)
-                            <option value="0" selected>0</option>
-                            <option value="{{ $bank_transfer->id }}">{{ $bank_transfer->id }}</option>
-                            @else
-                            <option value="0">0</option>
-                            <option value="{{ $bank_transfer->id }}" selected>{{ $bank_transfer->id }}</option>
-                            @endif
+
+                            <option value="0">Disable</option>
+                            <option value="{{ $bank_transfer->id }}">Active</option>
+
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="upfront">% UpFront</label>
-                        <input type="number" min="1" max="80" class="form-control" name="percentage_upfront" id="percentage_upfront" value="{{ $country->percentage_upfront }}">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="arrival">% Arrival</label>
-                        <input type="number" min="1" max="80" class="form-control" name="percentage_arrival" id="percentage_arrival" value="{{ $country->percentage_arrival }}">
-
-                    </div>
+                
 
 
 

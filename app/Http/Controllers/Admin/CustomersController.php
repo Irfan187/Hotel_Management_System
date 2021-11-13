@@ -53,7 +53,9 @@ class CustomersController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'fname' => $request->f_name,
+            'lname' => $request->l_name,
+            'name' => $request->f_name . " ".$request->l_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'mobno' => $request->phone,
@@ -105,14 +107,22 @@ class CustomersController extends Controller
         if(!empty($request->password)){
             $customer->password = Hash::make($request->password);
         }
-        if(!empty($request->name)){
-            $customer->name = $request->name;
+        if(!empty($request->f_name)){
+            $customer->fname = $request->f_name;
+        }
+        if(!empty($request->l_name)){
+            $customer->lname = $request->l_name;
         }
         if(!empty($request->email)){
             $customer->email = $request->email;
         }
         if(!empty($request->phone)){
             $customer->mobno = $request->phone;
+        }
+
+        if(!empty($request->f_name) && !empty($request->l_name)){
+            $customer->name = $request->f_name . " ".$request->l_name;
+
         }
 
         $customer->save();
@@ -179,8 +189,8 @@ class CustomersController extends Controller
         if(!empty($request->password)){
             $customer->password = Hash::make($request->password);
         }
-        if(!empty($request->last_name) && !empty($request->first_name)){
-            $customer->name = $request->first_name." ".$request->last_name;
+        if(!empty($request->l_name) && !empty($request->f_name)){
+            $customer->name = $request->f_name." ".$request->l_name;
         }
         if(!empty($request->email)){
             $customer->email = $request->email;

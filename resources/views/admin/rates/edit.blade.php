@@ -54,9 +54,7 @@
                                     <label for="room">Room</label>
                                     <select name="room" id="room" class="form-control">
                                         <option value="{{$room->id}}" selected>{{$room->name}}</option>
-                                        @foreach($rooms as $roomm)
-                                        <option value="{{$roomm->id}}">{{$roomm->name}}</option>
-                                        @endforeach
+                                       
                                     </select>
                                 </div>
                                 @foreach($rates as $ratee)

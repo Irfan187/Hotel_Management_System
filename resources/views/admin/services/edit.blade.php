@@ -38,16 +38,36 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" value="{{ $service->description }}" name="description" id="description"  required>{{ $service->description }}</textarea>
+                        <textarea name="description" required class="form-control" id="description" cols="100" rows="4">{!! $service->description !!}</textarea>
+                                    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+                                    <script>
+                                        CKEDITOR.replace('description', {
+                                            filebrowserUploadUrl: "",
+                                            filebrowserUploadMethod: 'form'
+                                        });
+                                    </script>
                     </div>
 
                     <div class="form-group">
                         <label for="price1">Price1 (€)</label>
-                        <input type="text" class="form-control" value="{{ $service->price1 }}" name="price1" id="price1"  required>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">€</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ $service->price1 }}" name="price1" id="price1"  required>
+
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="price2">Price2 (د.إ)</label>
-                        <input type="text" class="form-control" value="{{ $service->price2 }}" name="price2" id="price2"  required>
+                        <label for="price2">Price2 ()</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">TND</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ $service->price2 }}" name="price2" id="price2"  required>
+
+                        </div>
                     </div>
 
 

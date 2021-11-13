@@ -45,22 +45,24 @@
                                     <input type="text" class="form-control" name="name" value="{{$room->name}}" required>
                                 </div>
                                 <div class="form-group">
-                                    <input accept="image/*" type='file' id="imgInp" class="form-control" name="image" id="image">
-                                    <img id="blah" src="{{ asset('/storage/'. $room->image) }}" height="100" width="100" alt="">
+                                    <label for="image">Image</label>
+                                    <input type="file" class="dropify" data-default-file="{{ asset('/storage/'. $room->image) }}" data-height="180" name="image" id="image" required />
                                 </div>
+                                
 
                                 <div class="form-group">
                                     <label for="active">Active</label>
                                     <select name="active" id="active" class="form-control" required>
-                                        @php
-                                        if($room->active == 0)
-                                        $status='No';
-                                        else if($room->active == 1)
-                                        $status='Yes'
-                                        @endphp
-                                        <option value="{{$room->active}}" selected>{{$status}}</option>
-                                        <option value="0">No</option>
+                                       
+                                        @if($room->active == 0)
+                                        <option value="{{$room->active}}" selected>No</option>
                                         <option value="1">Yes</option>
+                                        @elseif($room->active == 1)
+                                        <option value="{{$room->active}}" selected>Yes</option>
+                                        <option value="0">No</option>
+                                        @endif
+                                        
+                                        
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -100,21 +102,26 @@
                                 <div class="form-group">
                                     <label for="">Room detail</label><br><br>
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            1. Maximum children<br><br><br>
-                                            2. Maximum adults<br><br><br>
-                                            <!-- 3. Maximum people<br><br><br>
-                                            4. Minimum people<br><br><br> -->
-                                            5. Number of rooms<br><br><br>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="number" min="1" max="100" id="max_child" name="max_child" value="{{$room->max_child}}"><br><br><br>
-                                            <input type="number" min="1" max="100" id="max_adults" name="max_adults" value="{{$room->max_adults}}"><br><br><br>
-                                            <!-- <input type="number" min="1" max="100" id="max_people" name="max_people" value="{{$room->max_people}}"><br><br><br> -->
-                                            <!-- <input type="number" min="1" max="100" id="min_people" name="min_people" value="{{$room->min_people}}"><br><br><br> -->
-                                            <input type="number" min="1" max="100" id="no_of_rooms" name="no_of_rooms" value="{{$room->no_of_rooms}}"><br><br><br>
 
+                                        <div class="col-md-4">
+                                        Maximum children
                                         </div>
+                                        <div class="col-md-4">
+                                        Maximum adults
+                                        </div>
+                                        <div class="col-md-4">
+                                        Number of rooms
+                                        </div>
+                                        <div class="col-md-4">
+                                        <input class="form-control" type="number" min="1" max="100" id="max_child" name="max_child" value="{{$room->max_child}}">
+                                        </div>
+                                        <div class="col-md-4">
+                                        <input class="form-control" type="number" min="1" max="100" id="max_adults" name="max_adults" value="{{$room->max_adults}}">
+                                        </div>
+                                        <div class="col-md-4">
+                                        <input class="form-control" type="number" min="1" max="100" id="no_of_rooms" name="no_of_rooms" value="{{$room->no_of_rooms}}">
+                                        </div>
+                                           
                                     </div>
 
 

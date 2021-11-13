@@ -1,104 +1,119 @@
-<html lang="{{ app()->getLocale() }}">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <!-- <title>{{ config('app.name', 'Laravel 8 User Roles and Permissions Tutorial') }}</title> -->
-    <!-- Scripts -->
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
 
-    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <title>Hotel Management System</title>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+
+    <!-- Styles -->
+    <!-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> -->
+    <link href="{{ asset('/assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('/assets/plugins/bootstrap-4.3.1/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <!-- Sidemenu Css -->
+    <link href="{{ asset('/assets/css/sidemenu.css')}}" rel="stylesheet" />
+
+    <!-- Dashboard Css -->
+    <link href="{{ asset('/assets/css/style.css')}}" rel="stylesheet" />
+    <link href="{{ asset('/assets/css/admin-custom.css')}}" rel="stylesheet" />
+
+    <!-- c3.js Charts Plugin -->
+    <link href="{{ asset('/assets/plugins/charts-c3/c3-chart.css')}}" rel="stylesheet" />
+
+    <!-- p-scroll bar css-->
+    <link href="{{ asset('/assets/plugins/pscrollbar/pscrollbar.css')}}" rel="stylesheet" />
+
+    <!---Font icons-->
+    <link href="{{ asset('/assets/css/icons.css')}}" rel="stylesheet" />
+
+    <!---P-scroll Bar css -->
+    <link href="{{ asset('/assets/plugins/pscrollbar/pscrollbar.css')}}" rel="stylesheet" />
+
+    <!-- Color Skin css -->
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{ asset('/assets/color-skins/color6.css')}}" />
+
+    <link rel="icon" href="{{ asset('/assets/images/brand/favicon.ico')}}" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/assets/images/brand/favicon.ico')}}" />
+
+    <!-- Data table css -->
+    <link href="{{ asset('/assets/plugins/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('/assets/plugins/datatable/jquery.dataTables.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jodit/3.4.25/jodit.min.css" />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+    <link href="{{ asset('assets/plugins/fullcalendar/fullcalendar.css')}}" rel='stylesheet' />
+    <link href="{{ asset('/assets/plugins/fullcalendar/fullcalendar.print.min.css')}}" rel='stylesheet' media='print' />
+
+    <!-- floara editotr -->
+    <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <style>
-        a .nav-link{
-            color:white !important;
+        tr th {
+            background-color: #a7947a;
+            color: white !important;
         }
+
+        div.r_detail {
+            background-color: white;
+            width: 600px;
+            height: 110px;
+            overflow: scroll;
+            padding: 10px;
+        }
+
+        /* tr td{
+			background-color: #a29b91;
+			color: white;
+		} */
     </style>
 </head>
-<body>
-@php
 
-$settings = App\Models\LoginRegisterPage::all();
-        $setting = $settings[0];
-        $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100">
+        @include('layouts.navigation')
 
-$str = $response->json()['features'][0]['properties']['address']['country_code'];
-@endphp
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background: #a29b91 !important;color:white">
-            <div class="container">
-                <a class="navbar-brand" href="#" style="color:white">
-                    HMS
-                </a>
-                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button> -->
+        <!-- Page Heading -->
+        
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto"></ul>
-
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if($str == "tn")
-                            <li><a class="nav-link" style="color:white" href="{{ route('login') }}">{{ $setting->login }}</a></li>
-                            <li><a class="nav-link" style="color:white" href="{{ route('register') }}">{{ $setting->register }}</a></li>
-                            @else
-                            <li><a class="nav-link" style="color:white" href="{{ route('login') }}">{{ $setting->login1 }}</a></li>
-                            <li><a class="nav-link" style="color:white" href="{{ route('register') }}">{{ $setting->register1 }}</a></li>
-                            @endif
-                        @else
-                            @role('Admin')
-                            <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
-
-                            <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
-                            @endrole
-                            <li class="nav-item dropdown">
-                                <!-- <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a> -->
-
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                       >
-                                        {{ __('Logout') }}
-                                    </a>
-
-
-
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
-        <main class="py-4">
-            <div class="container">
+        <!-- Page Content -->
+        <main>
             @yield('content')
-            </div>
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Data tables -->
+    <script src="{{ asset('/assets/js/jquery-3.2.1.min.js')}}"></script>
+
+    <!-- Bootstrap js -->
+    <script src="{{ asset('/assets/plugins/bootstrap-4.3.1/js/popper.min.js')}}"></script>
+    <script src="{{ asset('/assets/plugins/bootstrap-4.3.1/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{ asset('/assets/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js')}}"></script>
+    <script src="{{ asset('/assets/plugins/jquery-validation/dist/jquery.validate.min.js')}}"></script>
+    <script src="{{ asset('/assets/js/wizard.js')}}"></script>
+    <!-- <script src="{{ asset('/assets/js/myscript.js')}}"></script> -->
+    <script src="{{ asset('/assets/js/datatable.js')}}"></script>
+    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jodit/3.4.25/jodit.min.js"></script>
+    <script src="{{ asset('/assets/js/myscript.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/fullcalendar/moment.min.js')}}"></script>
+    <script src="{{ asset('/assets/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
+    <script src="{{ asset('/assets/js/fullcalendar.js')}}"></script>
+    <script src="{{asset('assets/plugins/select2/select2.full.min.js')}}"></script>
+    <script src="{{asset('assets/js/select2.js')}}"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/js/froala_editor.pkgd.min.js">
+    </script>
+
+
 </body>
+
 </html>

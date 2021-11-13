@@ -63,9 +63,9 @@ class FacilityController extends Controller
        }
 
        if($facility->save())
-       return back()->with('success','Data inserted successfully');
+       return redirect()->route('facilities.index')->with('success','Data inserted successfully');
        else
-       return back()->with('fail','Something went wrong');
+       return redirect()->route('facilities.index')->with('fail','Something went wrong');
 
     }
 
@@ -134,11 +134,11 @@ class FacilityController extends Controller
                'price2'=>$request->price2         
             ]);
 
-           return back()->with('success','Data updated successfully!');
+            return redirect()->route('facilities.index')->with('success','Data updated successfully!');
         }
         catch(Exception $e)
         {
-            return back()->with('fail','Something went wrong!');
+            return redirect()->route('facilities.index')->with('fail','Something went wrong!');
         }
     }
 
