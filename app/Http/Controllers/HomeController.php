@@ -2944,7 +2944,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             $response = [
                 'success' => "booking",
                 'data' => "Booking is completed",
-                'data1' => $status
+                'data1' => $status,
+                'bookingno' => $number
             ];
             
             return response()->json($response);
@@ -3092,7 +3093,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             $response = [
                 'success' => "booking",
                 'data' => "Booking is completed",
-                'data1' => $status
+                'data1' => $status,
+                'bookingno' => $number
             ];
             
             return response()->json($response);
