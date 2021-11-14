@@ -2454,10 +2454,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             if (!empty($user)) {
                 $a =  Auth::attempt(['email' => $request->email, 'password' => $request->password]);
                 // $token =  $user->createToken('MyApp')->accessToken;
+
                 if ($a == true) {
-                    if (auth()->user()->role == "Admin") {
+                    $u = auth()->user();
+                    if ($u->hasRole() == "Admin") {
                         $role = "Admin";
-                    } elseif (auth()->user()->role == "Customer"){
+                    } elseif ($u->hasRole() == "Customer"){
                         $role = "Customer";
                     }else{
                         $role = "Guest";
