@@ -76,7 +76,7 @@
                         <tr>
                             <td>{{$i++}}</td>
                             <td>{{$email->subject}}</td>
-                            <td>{{$email->message}}</td>
+                            <td>{!! html_entity_decode($email->message) !!}</td>
 
                         </tr>
                     </tbody>
