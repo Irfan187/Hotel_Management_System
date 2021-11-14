@@ -43,6 +43,10 @@
                                     <input type="text" class="form-control" name="name" required>
                                 </div>
                                 <div class="form-group">
+                                    <label>No of Beds</label>
+                                    <input type="text" class="form-control" name="no_of_beds" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="image">Image</label>
                                     <input type="file" class="dropify" data-default-file="../assets/images/media/media1.jpg" data-height="180" name="image" id="image" required />
                                 </div>

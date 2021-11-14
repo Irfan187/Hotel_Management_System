@@ -32,19 +32,33 @@
 
             @csrf
             <div class="row">
-            <label for="">logo</label>
-                        <img src="{{ asset('/storage/'.$setting->logo) }}" alt="">
-                        <input type="file" name="logo" value="{{ $setting->logo }}" class="form-control mb-5" >
-            <label for="">Background Image</label>
-                        <img src="{{ asset('/storage/'.$setting->back) }}" alt="">
-                        <input type="file" name="back" value="{{ $setting->back }}" class="form-control mb-5" >
-                <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="image">Logo</label>
+                        <input type="file" class="dropify" data-default-file="{{ asset('/storage/'. $setting->logo) }}" data-height="180" name="logo" id="image" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="image">Background Image</label>
+                        <input type="file" class="dropify" data-default-file="{{ asset('/storage/'. $setting->back) }}" data-height="180" name="back" id="image" />
+                    </div>
+                </div>
+                <div class="col-md-12">
                 
 
                     <div class="form-group">
 
                         <label for="">Address</label>
-                        <input type="text" name="address" value="{{ $setting->address }}" class="form-control" >
+                        <textarea name="address" class="form-control" id="description" cols="100" rows="4">{{ $setting->address }}</textarea>
+                                    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+                                    <script>
+                                        CKEDITOR.replace('address', {
+                                            filebrowserUploadUrl: "",
+                                            filebrowserUploadMethod: 'form'
+                                        });
+                                    </script>
                         <label for="">Buttons Color</label>
                         <input type="color" name="btncolor" value="{{$setting->btncolor}}" style="background:{{$setting->btncolor}}" class="form-control" >
                         

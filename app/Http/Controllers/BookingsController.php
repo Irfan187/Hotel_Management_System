@@ -241,6 +241,58 @@ class BookingsController extends Controller
 
     }
 
+
+    public function viewCustBBooking(Request $request){
+
+
+        $booking = Booking::where('booking_no',$request->booking_no)->first();
+
+        $all_data = [];
+        
+            $r_data = RoomData::where('booking_no',$booking->booking_no)
+                ->get();
+            $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)
+                        ->get();
+            $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
+                        ->get();
+            $a = "";
+            $b = "";
+            $s = "";
+            $r = "";
+
+            if(!empty($booking)){
+                $b = $booking;
+            }
+
+            if(count($r_data) > 0){
+                $r = $r_data;
+            }
+            if(count($r_s_data) > 0){
+                $s = $r_s_data;
+            }
+            if(count($r_a_data) > 0){
+                $a = $r_a_data;
+            }
+
+            $all_data = [
+                'booking' => $b,
+                'room_data' => $r,
+                'room_service_data' => $s,
+                'room_activity_data' => $a
+            ];
+
+ 
+       
+
+            $response = [
+                'success' => "true",
+                'data' => $all_data
+            ];
+
+            return response(json_encode($response));
+
+    }
+
     // public function bookings(){
 
     //     $date = date('Y-m-d');

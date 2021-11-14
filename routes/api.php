@@ -60,6 +60,9 @@ Route::get('/footer', [App\Http\Controllers\HomeController::class, 'Footer']);
 Route::get('/allpacks', [App\Http\Controllers\HomeController::class, 'allPackages']);
 Route::get('/allfacilities', [App\Http\Controllers\HomeController::class, 'allFacilities']);
 
+Route::post('/orderprices', [App\Http\Controllers\HomeController::class, 'orderPrices']);
+
+
 
 
 
@@ -72,6 +75,8 @@ Route::post('/customerbookings', [App\Http\Controllers\BookingsController::class
 
 
     Route::post('/viewbooking', [App\Http\Controllers\BookingsController::class, 'viewCustAllBooking'])->name('viewbook');
+    Route::post('/viewbbooking', [App\Http\Controllers\BookingsController::class, 'viewCustBBooking'])->name('viewbbook');
+
 
 Route::group(['middleware' => ['auth', 'role:Customer']], function () {
     // Route::get('/viewcustomerbooking/{id}', [App\Http\Controllers\BookingsController::class, 'viewBooking'])->name('customer-view-booking');

@@ -68,11 +68,23 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Price1 (€)</label>
-                        <input type="text" class="form-control" value="{{ $activity->price1 }}" name="price1" id="price1"  required>
+                        <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">€</span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{ $activity->price1 }}" name="price1" id="price1"  required>
+
+                                    </div>
                     </div>
                     <div class="form-group">
                         <label for="name">Price2 (TND)</label>
-                        <input type="text" class="form-control" value="{{ $activity->price2 }}" name="price2" id="price2"  required>
+                        <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">TND</span>
+                                        </div>
+                                        <input type="text" class="form-control" value="{{ $activity->price2 }}" name="price2" id="price2"  required>
+
+                                    </div>
                     </div>
                     <div class="form-group">
                         <div class="row">

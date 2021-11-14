@@ -10,6 +10,8 @@ use App\Models\RangePrice;
 use App\Models\Room;
 use App\Models\FlatRate;
 use App\Models\Facility;
+use App\Models\PMOrderPrice;
+
 
 
 use DateTime;
@@ -183,8 +185,8 @@ class HomeController extends Controller
             $facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
 
             
-            if($room->no_of_rooms > 0){
-                if ($kid1 == 0 && $kid2 == 0 && $adults == 1) {
+            if($room->no_of_rooms > 0 ){
+                if ($kid1 == 0 && $kid2 == 0 && $adults == 1 && $room->no_of_beds >=2) {
                     $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
                         ->where('rates.room_id', $room->id)->get();
                     // dd($rates);
@@ -2622,6 +2624,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
 
         $str = $response->json()['features'][0]['properties']['address']['country_code'];
         
+        $status = "";
 
         if ($request->payment == 'card') {
 
@@ -2659,6 +2662,11 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             if ($user) {
                 
                 $user_id = $user->id;
+                if($user->hasRole == "Admin"){
+                    $status = "Admin";
+                }else{
+                    $status = "Customer";
+                }
 
                 // Mail::to($user->email)->send(new PasswordSent('hhgjhg'));
                 // dd($res);
@@ -2684,6 +2692,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
     
                     $password = "123456";
                     $newuser->assignRole('Guest');
+
+                    $status = "Guest";
                 }else{
                     $newuser = new User();
                     $newuser->name = $request->fname . " " . $request->lname;
@@ -2706,6 +2716,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                     $newuser->assignRole('Customer');
 
                     Auth::login($newuser);
+
+                    $status = "Customer";
                 }
             }
 
@@ -2792,9 +2804,16 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             
 
             $user_id = 0;
+
+            $user_id = 0;
             if ($user) {
                 
                 $user_id = $user->id;
+                if($user->hasRole == "Admin"){
+                    $status = "Admin";
+                }else{
+                    $status = "Customer";
+                }
 
                 // Mail::to($user->email)->send(new PasswordSent('hhgjhg'));
                 // dd($res);
@@ -2820,6 +2839,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
     
                     $password = "123456";
                     $newuser->assignRole('Guest');
+
+                    $status = "Guest";
                 }else{
                     $newuser = new User();
                     $newuser->name = $request->fname . " " . $request->lname;
@@ -2842,6 +2863,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                     $newuser->assignRole('Customer');
 
                     Auth::login($newuser);
+
+                    $status = "Customer";
                 }
             }
 
@@ -2921,7 +2944,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
 
             $response = [
                 'success' => "booking",
-                'data' => "Booking is completed"
+                'data' => "Booking is completed",
+                'data1' => $status
             ];
             
             return response()->json($response);
@@ -2930,9 +2954,15 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
 
             
             $user_id = 0;
+            $user_id = 0;
             if ($user) {
                 
                 $user_id = $user->id;
+                if($user->hasRole == "Admin"){
+                    $status = "Admin";
+                }else{
+                    $status = "Customer";
+                }
 
                 // Mail::to($user->email)->send(new PasswordSent('hhgjhg'));
                 // dd($res);
@@ -2958,6 +2988,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
     
                     $password = "123456";
                     $newuser->assignRole('Guest');
+
+                    $status = "Guest";
                 }else{
                     $newuser = new User();
                     $newuser->name = $request->fname . " " . $request->lname;
@@ -2980,9 +3012,9 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                     $newuser->assignRole('Customer');
 
                     Auth::login($newuser);
+
+                    $status = "Customer";
                 }
-  
-                
             }
             $booking = new Booking();
             $booking->booking_no = $number;
@@ -3060,7 +3092,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
 
             $response = [
                 'success' => "booking",
-                'data' => "Booking is completed"
+                'data' => "Booking is completed",
+                'data1' => $status
             ];
             
             return response()->json($response);
@@ -3360,7 +3393,58 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
     }
 
 
-    /// Lowest Price Api
+    public function orderPrices(Request $request)
+    {
+        $price = $request->total;
+        $str = $request->country_code;
+        $cc = 0;
+        $bt = 0;
+        $inp = 0;
+        if($str == "tn" || $str == "TN"){
+            
+            $p = PMOrderPrice::first();
+            if($p->tnd_price_1 <= $price && $p->tnd_price_2 >= $price){
+                
+                if($p->cc != 0){
+                    $cc = 1;
+                }
+                if($p->in_person != 0){
+                    $inp = 1;
+                }
+                if($p->bank_transfer != 0){
+                    
+                    $bt = 1;
+                }
+            }
+        }else{
+            $p = PMOrderPrice::first();
+            if($p->euro_price_1 <= $price && $p->euro_price_2 >= $price){
+                if($p->cc != 0){
+                    $cc = 1;
+                }
+                if($p->in_person != 0){
+                    $inp = 1;
+                }
+                if($p->bank_transfer != 0){
+                    $bt = 1;
+                }
+            }
+        }
+
+        $data = [
+            'cc' => $cc,
+            'bt' => $bt,
+            'in_person' => $inp,
+        ];
+
+        
+            return response()->json([
+                'success' => true,
+                'data' => $data,
+            ]);
+        
+
+    }
     
     
 }

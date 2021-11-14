@@ -45,6 +45,10 @@
                                     <input type="text" class="form-control" name="name" value="{{$room->name}}" required>
                                 </div>
                                 <div class="form-group">
+                                    <label>No of Beds</label>
+                                    <input type="text" class="form-control" value="{{$room->no_of_beds}}" name="no_of_beds" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="image">Image</label>
                                     <input type="file" class="dropify" data-default-file="{{ asset('/storage/'. $room->image) }}" data-height="180" name="image" id="image" required />
                                 </div>

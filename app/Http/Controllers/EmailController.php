@@ -44,6 +44,8 @@ class EmailController extends Controller
     //    dd($request->all());
        $subject = $request->subject;
        $message = $request->message;
+
+       $all_users = [];
     //    dd(html_entity_decode($message));
        $users = User::all();
        if($request->countres != null){
@@ -51,6 +53,7 @@ class EmailController extends Controller
             foreach($users as $u){
 
                 if($u->country_code != null && in_array($u->country_code,$countries)){
+                    array_push($all_users,$u->id);
                     Mail::to($u->email)->send(new CriteriaEmail($subject,$message));
                 }
             }
@@ -63,6 +66,7 @@ class EmailController extends Controller
             if(!empty($booking)){
                 $d = explode(" ",$booking->created_at);
                 if($request->date == $d[0]){
+                    array_push($all_users,$u->id);
                     Mail::to($u->email)->send(new CriteriaEmail($subject,$message));
                 }
             }
@@ -72,6 +76,8 @@ class EmailController extends Controller
         $e = new Email();
         $e->subject = $subject;
         $e->message = $message;
+        $e->users = json_encode($all_users);
+
         $e->save();
 
         return redirect()->route('emails.index');

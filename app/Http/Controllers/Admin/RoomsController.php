@@ -107,7 +107,7 @@ class RoomsController extends Controller
             ]);
         }
 
-        return redirect()->route('rooms.index')->with('success', 'Room Deleted Successfully');
+        return redirect()->route('rooms.index')->with('success', 'Room Created Successfully');
     }
 
     /**

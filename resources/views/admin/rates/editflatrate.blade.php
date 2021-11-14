@@ -49,8 +49,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="room">Discount (%)</label>
-                                    <input type="number" min="1" max="100" name="discount" class="form-control" value="{{$flatrate->discount}}">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">%</span>
+                                        </div>
+                                        <input type="number" class="form-control" name="discount" value="{{$flatrate->discount}}" aria-describedby="basic-addon1">
+                                    </div>
                                 </div>
+                                
                                
 
                             </div>
