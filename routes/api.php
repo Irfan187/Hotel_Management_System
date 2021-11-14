@@ -25,7 +25,7 @@ Route::post('/getprice', [App\Http\Controllers\HomeController::class, 'getPrice'
 
 Route::post('/badges', [App\Http\Controllers\HomeController::class, 'badges'])->name('badges');
 
-Route::post('/activities', [App\Http\Controllers\HomeController::class, 'activities'])->name('activities');
+Route::get('/activities', [App\Http\Controllers\HomeController::class, 'activities'])->name('activities');
 
 Route::post('/signin', [App\Http\Controllers\HomeController::class, 'signIn']);
 
@@ -46,7 +46,7 @@ Route::get('/getminprice', [App\Http\Controllers\HomeController::class, 'getMinP
 
 Route::post('/tax', [App\Http\Controllers\HomeController::class, 'getTax']);
 
-Route::post('/getservices', [App\Http\Controllers\HomeController::class, 'getServices']);
+Route::get('/getservices', [App\Http\Controllers\HomeController::class, 'getServices']);
 Route::get('/getpolicy', [App\Http\Controllers\HomeController::class, 'getPolicy']);
 
 Route::post('/bookinginfo', [App\Http\Controllers\HomeController::class, 'bookingInfo']);
