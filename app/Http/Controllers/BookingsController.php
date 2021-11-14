@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use \willvincent\Rateable\Rating;
 use App\Models\User;
+use App\Models\Tax;
+
 class BookingsController extends Controller
 {
 
