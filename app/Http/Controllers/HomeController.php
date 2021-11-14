@@ -2428,17 +2428,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
     }
     public function activities(Request $request)
     {
-
-        
-
-        
-
-        
-        
-
-
-
-
+    
         $activities = ExtraActivity::all();
 
         if (count($activities) > 0) {
@@ -2458,18 +2448,25 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
         
 
         if (!empty($request->email) && !empty($request->password)) {
-
+            $role = "";
 
             $user = User::where('email', $request->email)->first();
             if (!empty($user)) {
                 $a =  Auth::attempt(['email' => $request->email, 'password' => $request->password]);
                 // $token =  $user->createToken('MyApp')->accessToken;
                 if ($a == true) {
-                    if (auth()->user()->role == "admin") {
-                        return redirect('/rooms');
-                    } else {
-                        return response()->json(['success'=>true,'data'=>auth()->user()]);
+                    if (auth()->user()->role == "Admin") {
+                        $role = "Admin";
+                    } elseif (auth()->user()->role == "Customer"){
+                        $role = "Customer";
+                    }else{
+                        $role = "Guest";
                     }
+
+                    return response()->json([
+                        'success' => true,
+                        'data' => $role
+                    ]);
                 } else {
                     return response()->json([
                         'error' => true,
