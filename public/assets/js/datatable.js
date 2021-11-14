@@ -82,7 +82,7 @@ function addDateRange1() {
 		'<div class="form-group"><label for="no_advance2">No advance (TND)</label><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">TND</span></div><input type="number" min="1" class="form-control" name="no_advance2[]" id="no_advance2" required></div></div>' +
 
 		'<div class="form-group mt-5"><button onclick="addDateRange1()" id="firstbutton" type="button" class="btn btn-success"><i class="fa fa-plus"></i> Add Date Range</button></div>';
-	var data = '<div class="card">' + packages[0].innerHTML + fieldHTML1 + price1 + '</div>';
+	var data = '<div class="">' + packages[0].innerHTML + fieldHTML1 + price1 + '</div>';
 	console.log(data);
 	if (x < max_fields) {
 		x++;
@@ -161,8 +161,8 @@ function addDateRange() {
 		'<div class="form-group"><label for="no_advance2">No advance (TND)</label><div class="input-group mb-3"><div class="input-group-prepend"><span class="input-group-text" id="basic-addon1">TND</span></div><input type="number" min="1" class="form-control" name="no_advance2[]" id="no_advance2" required></div></div>' +
 
 		'<div class="form-group mt-5"><button onclick="addDateRange1()" id="firstbutton" type="button" class="btn btn-success"><i class="fa fa-plus"></i> Add Date Range</button></div>';
-	var data = '<div class="card">' + packages[0].innerHTML + fieldHTML1 + price1 + '</div>';
-	var data = '<div class="card">' + packages[0].innerHTML + fieldHTML1 + price1 + '</div>';
+	var data = '<div class="">' + packages[0].innerHTML + fieldHTML1 + price1 + '</div>';
+	var data = '<div class="">' + packages[0].innerHTML + fieldHTML1 + price1 + '</div>';
 	console.log(data);
 	if (x < max_fields) {
 		x++;

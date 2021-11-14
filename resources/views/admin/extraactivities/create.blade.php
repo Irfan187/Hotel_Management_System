@@ -98,7 +98,7 @@
                             <div class="col-md-3">
                                 <label for="name">Hours</label>
                                 <select name="hours" id="hours" class="form-control">
-                                @for($i = 1;$i <= 12; $i++)
+                                @for($i = 1;$i <= 24; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
                                     @endfor
                                     
@@ -170,11 +170,17 @@
       $('#day').on('change', function() {
         d = this.value;
         if(m != 0 && h != 0){
-                var dd = d;
-                var ddd = Math.floor(h/24);
-                var mmm = Math.floor(m/3600);
+            var dd = d;
+                var ddd = Math.floor(h/1440);
+                var mmm = Math.floor(m/86400);
+                if(ddd == 0){
+                    ddd = h;
+                }
+                if(mmm == 0){
+                    mmm = m;
+                }
+                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
 
-                var total = d + ddd + mmm;
                 $('#total').val(total);
                 
             }
@@ -182,23 +188,39 @@
         $('#hours').on('change', function() {
         h = this.value;
         if(d != 0 && m != 0){
-                var dd = d;
-                var ddd = Math.floor(h/24);
-                var mmm = Math.floor(m/3600);
+            
+            var dd = d;
+                var ddd = Math.floor(h/1440);
+                var mmm = Math.floor(m/86400);
+                if(ddd == 0){
+                    ddd = h;
+                }
+                if(mmm == 0){
+                    mmm = m;
+                }
+                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
 
-                var total = d + ddd + mmm;
                 $('#total').val(total);
+
                 
             }
         });
         $('#minutes').on('change', function() {
         m = this.value;
             if(d != 0 && h != 0){
+                
                 var dd = d;
-                var ddd = Math.floor(h/24);
-                var mmm = Math.floor(m/3600);
+                var ddd = Math.floor(h/1440);
+                var mmm = Math.floor(m/86400);
+                if(ddd == 0){
+                    ddd = h;
+                }
+                if(mmm == 0){
+                    mmm = m;
+                }
+                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
+               
 
-                var total = d + ddd + mmm;
                 $('#total').val(total);
                 
             }

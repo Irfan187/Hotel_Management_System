@@ -92,16 +92,24 @@
                                 <label for="name">Days</label>
                                 <select name="day" id="day" class="form-control">
                                     @for($i = 1;$i <= 10; $i++)
+                                    @if($activity->days == $i)
+                                    <option value="{{$i}}" selected>{{$i}}</option>
+                                    @else
                                     <option value="{{$i}}">{{$i}}</option>
+                                    @endif
                                     @endfor
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <label for="name">Hours</label>
                                 <select name="hours" id="hours" class="form-control">
-                                @for($i = 1;$i <= 12; $i++)
+                                @for($i = 1;$i <= 24; $i++)
+                                    @if($activity->hours == $i)
+                                    <option value="{{$i}}" selected>{{$i}}</option>
+                                    @else
                                     <option value="{{$i}}">{{$i}}</option>
-                                    @endfor
+                                    @endif
+                                @endfor
                                     
                                 </select>
                             </div>
@@ -109,14 +117,20 @@
                                 <label for="name">Minutes</label>
                                 <select name="minutes" id="minutes" class="form-control">
                                     @for($i = 1;$i <= 60; $i++)
-                                    <option value="{{$i}}">{{$i}}</option>
+                                        @if($activity->minutes == $i)
+                                        <option value="{{$i}}" selected>{{$i}}</option>
+                                        @else
+                                        <option value="{{$i}}">{{$i}}</option>
+                                        @endif
                                     @endfor
                                     
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <label for="">Total Duration</label>
-                                <input type="text" name="total" id="total" class="form-control" readonly>
+                               
+                                    <input type="text" name="total" id="total" value="{{$activity->total}}" class="form-control" readonly>
+                                
                             </div>
                         </div>
                         
@@ -142,18 +156,24 @@
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
   crossorigin="anonymous"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-     var h = 0;
+  <script>
+      var h = 0;
       var m = 0;
       var d = 0;
       $('#day').on('change', function() {
         d = this.value;
         if(m != 0 && h != 0){
-                var dd = d;
-                var ddd = Math.floor(h/24);
-                var mmm = Math.floor(m/3600);
+            var dd = d;
+                var ddd = Math.floor(h/1440);
+                var mmm = Math.floor(m/86400);
+                if(ddd == 0){
+                    ddd = h;
+                }
+                if(mmm == 0){
+                    mmm = m;
+                }
+                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
 
-                var total = d + ddd + mmm;
                 $('#total').val(total);
                 
             }
@@ -161,28 +181,87 @@
         $('#hours').on('change', function() {
         h = this.value;
         if(d != 0 && m != 0){
-                var dd = d;
-                var ddd = Math.floor(h/24);
-                var mmm = Math.floor(m/3600);
+            
+            var dd = d;
+                var ddd = Math.floor(h/1440);
+                var mmm = Math.floor(m/86400);
+                if(ddd == 0){
+                    ddd = h;
+                }
+                if(mmm == 0){
+                    mmm = m;
+                }
+                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
 
-                var total = d + ddd + mmm;
                 $('#total').val(total);
+
                 
             }
         });
         $('#minutes').on('change', function() {
         m = this.value;
             if(d != 0 && h != 0){
+                
                 var dd = d;
-                var ddd = Math.floor(h/24);
-                var mmm = Math.floor(m/3600);
+                var ddd = Math.floor(h/1440);
+                var mmm = Math.floor(m/86400);
+                if(ddd == 0){
+                    ddd = h;
+                }
+                if(mmm == 0){
+                    mmm = m;
+                }
+                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
+               
 
-                var total = d + ddd + mmm;
                 $('#total').val(total);
                 
             }
         });
 
-</script>
+        
+    $("#max_people").focusout(function(){
+        var c = $('#max_child').val();
+        var a = $('#max_adults').val();
+        var p = $('#max_people').val();
+
+
+        if(c != '' && a !=''){
+            if( (parseInt(a) + parseInt(c)) <= parseInt(p) ){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Great...',
+                    text: 'Data is correct',
+
+                })
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Sum of Child and Adult should be less or equal to People',
+
+                })
+                    document.getElementById('max_child').value = '';
+                    document.getElementById('max_adults').value = '';
+                    document.getElementById('max_people').value = '';
+
+
+            }
+        }else{
+
+            Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Max child and Max adults can not be null',
+
+                })
+
+                document.getElementById('max_child').value = '';
+                    document.getElementById('max_adults').value = '';
+                    document.getElementById('max_people').value = '';
+        }
+
+    });
+ </script>
 
 @endsection

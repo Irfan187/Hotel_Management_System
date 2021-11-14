@@ -122,7 +122,7 @@ class HomeController extends Controller
         $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
         // return response()->json($response);
 
-        $str = $response->json()['features'][0]['properties']['address']['country_code'];
+        $str = $request->country_code;
 
 
 

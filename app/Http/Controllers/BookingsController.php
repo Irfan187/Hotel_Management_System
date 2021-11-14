@@ -151,13 +151,20 @@ class BookingsController extends Controller
                         ->where('user_id',$request->id)->get();
             $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
                         ->where('user_id',$request->id)->get();
+            $room_tax = Tax::where('booking_no',$booking->booking_no)->get();
+            
             $a = "";
             $b = "";
             $s = "";
             $r = "";
+            $t = "";
 
             if(!empty($booking)){
                 $b = $booking;
+            }
+
+            if(count($room_tax) > 0){
+                $t = $room_tax;
             }
 
             if(count($r_data) > 0){
@@ -174,7 +181,9 @@ class BookingsController extends Controller
                 'booking' => $b,
                 'room_data' => $r,
                 'room_service_data' => $s,
-                'room_activity_data' => $a
+                'room_activity_data' => $a,
+                'room_tax' => $t
+
             ];
 
  
@@ -255,13 +264,20 @@ class BookingsController extends Controller
                     ->get();
         $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
                     ->get();
+        $room_tax = Tax::where('booking_no',$booking->booking_no)->get();
         $a = "";
         $b = "";
         $s = "";
         $r = "";
+        $t = "";
+
 
         if(!empty($booking)){
             $b = $booking;
+        }
+
+        if(count($room_tax) > 0){
+            $t = $room_tax;
         }
 
         if(count($r_data) > 0){
@@ -278,7 +294,9 @@ class BookingsController extends Controller
             'booking' => $b,
             'room_data' => $r,
             'room_service_data' => $s,
-            'room_activity_data' => $a
+            'room_activity_data' => $a,
+            'room_tax' => $t
+
         ];
 
 
