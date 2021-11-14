@@ -51,6 +51,7 @@
     <link href="{{asset('/assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css" />
     <!-- floara editotr -->
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    
     <style>
         tr th {
             background-color: #a7947a;
@@ -393,6 +394,10 @@
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('policy.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Cancellation
                                 Policy</span></a>
                     </li>
+                    <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('emails.index') }}"><i class="side-menu__icon fa fa-envelope"></i><span class="side-menu__label"> 
+                                Email Management</span></a>
+                    </li>
                     <!-- <li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ route('coupons.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Coupons</span></a>
                         </li> -->
@@ -491,7 +496,14 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@3.1.0/js/froala_editor.pkgd.min.js">
     </script>
-
+<script>
+        $(function() {
+            $('.js-example-basic-single').select2({
+                tags: true,
+                tokenSeparators: [',', ' ']
+            });
+        });
+    </script>
 
 </body>
 

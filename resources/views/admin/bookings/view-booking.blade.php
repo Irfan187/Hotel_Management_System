@@ -62,6 +62,7 @@
                                                             $k = 1;
                             @endphp
                             <tbody>
+                                @if(count($r_data) > 0 && count($r_a_data) > 0 && count($r_s_data))
                                 @for($i = 0;$i < count($r_data); $i++)
                                     @php $package = App\Models\Package::find($r_data[$i]->package_id); @endphp
                                     <tr>
@@ -77,6 +78,7 @@
 
                                     </tr>
                                 @endfor
+                                @endif
                             </tbody>
 
                         </table>

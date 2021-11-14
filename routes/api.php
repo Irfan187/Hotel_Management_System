@@ -71,6 +71,8 @@ Route::post('/customerbookings', [App\Http\Controllers\BookingsController::class
     Route::get('/pastbookings', [App\Http\Controllers\BookingsController::class, 'pbookingHistory']);
 
 
+    Route::post('/viewbooking', [App\Http\Controllers\BookingsController::class, 'viewCustAllBooking'])->name('viewbook');
+
 Route::group(['middleware' => ['auth', 'role:Customer']], function () {
     // Route::get('/viewcustomerbooking/{id}', [App\Http\Controllers\BookingsController::class, 'viewBooking'])->name('customer-view-booking');
     // Route::get('/bookingshistory', [App\Http\Controllers\BookingsController::class, 'bookingHistory'])->name('booking-history');

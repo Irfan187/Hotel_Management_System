@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\PMCouponController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PMSeasonsController;
+use App\Http\Controllers\EmailController;
+
 
 
 use App\Http\Controllers\Admin\RoomtypesController;
@@ -327,6 +329,15 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/flatrates', [RateController::class, 'getFlatRate'])->name('flatrates.index');
     Route::get('/flatrates/{id}/edit', [RateController::class, 'editFlatRate'])->name('flatrates.edit');
     Route::post('/flatrates/{id}', [RateController::class, 'updateFlatRate'])->name('flatrates.update');
+
+
+    //Email Management
+    Route::get('/emailindex', [EmailController::class, 'index'])->name('emails.index');
+    Route::post('/viewsendemail', [EmailController::class, 'view'])->name('emails.view');
+    Route::post('/sendemail', [EmailController::class, 'send'])->name('emails.send');
+
+
+
 });
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('do-logout');
