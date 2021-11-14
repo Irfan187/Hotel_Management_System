@@ -2457,9 +2457,9 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
 
                 if ($a == true) {
                     $u = auth()->user();
-                    if ($u->hasRole() == "Admin") {
+                    if ($u->hasRole("Admin")) {
                         $role = "Admin";
-                    } elseif ($u->hasRole() == "Customer"){
+                    } elseif ($u->hasRole("Customer")){
                         $role = "Customer";
                     }else{
                         $role = "Guest";
@@ -2661,7 +2661,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             if ($user) {
                 
                 $user_id = $user->id;
-                if($user->hasRole() == "Admin"){
+                if($user->hasRole("Admin")){
                     $status = "Admin";
                 }else{
                     $status = "Customer";
@@ -2808,7 +2808,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             if ($user) {
                 
                 $user_id = $user->id;
-                if($user->hasRole() == "Admin"){
+                if($user->hasRole("Admin")){
                     $status = "Admin";
                 }else{
                     $status = "Customer";
@@ -2958,7 +2958,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             if ($user) {
                 
                 $user_id = $user->id;
-                if($user->hasRole() == "Admin"){
+                if($user->hasRole("Admin")){
                     $status = "Admin";
                 }else{
                     $status = "Customer";
