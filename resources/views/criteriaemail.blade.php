@@ -28,7 +28,7 @@
 
 <body>
 
-<p>{{ $mes }}<br>
+<p>{!! html_entity_decode($mes) !!}<br>
 <br>Thank you.
 </p>
 

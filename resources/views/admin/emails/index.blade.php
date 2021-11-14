@@ -68,6 +68,7 @@
                         <th>#</th>
                         <th>Subject</th>
                         <th>Message</th>
+                        <th>Action</th>
                     </tr>
                     @php $i = 1; @endphp
                     @if(!empty($emails))
@@ -76,7 +77,10 @@
                         <tr>
                             <td>{{$i++}}</td>
                             <td>{{$email->subject}}</td>
-                            <td>{!! html_entity_decode($email->message) !!}</td>
+                            <td>{!! html_entity_decode(substr($email->message,0,70)) !!}</td>
+                            <td>
+                                <a href="{{route('emails.vieww',$email->id)}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
+                            </td>
 
                         </tr>
                     </tbody>

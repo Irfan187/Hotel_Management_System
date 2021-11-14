@@ -248,48 +248,57 @@ class BookingsController extends Controller
         $booking = Booking::where('booking_no',$request->booking_no)->first();
 
         $all_data = [];
-        
+        if(!empty($booking)){
             $r_data = RoomData::where('booking_no',$booking->booking_no)
-                ->get();
-            $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)
-                        ->get();
-            $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
-                        ->get();
-            $a = "";
-            $b = "";
-            $s = "";
-            $r = "";
+            ->get();
+        $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)
+                    ->get();
+        $r_a_data = RoomActivityData::where('booking_no',$booking->booking_no)
+                    ->get();
+        $a = "";
+        $b = "";
+        $s = "";
+        $r = "";
 
-            if(!empty($booking)){
-                $b = $booking;
-            }
+        if(!empty($booking)){
+            $b = $booking;
+        }
 
-            if(count($r_data) > 0){
-                $r = $r_data;
-            }
-            if(count($r_s_data) > 0){
-                $s = $r_s_data;
-            }
-            if(count($r_a_data) > 0){
-                $a = $r_a_data;
-            }
+        if(count($r_data) > 0){
+            $r = $r_data;
+        }
+        if(count($r_s_data) > 0){
+            $s = $r_s_data;
+        }
+        if(count($r_a_data) > 0){
+            $a = $r_a_data;
+        }
 
-            $all_data = [
-                'booking' => $b,
-                'room_data' => $r,
-                'room_service_data' => $s,
-                'room_activity_data' => $a
-            ];
+        $all_data = [
+            'booking' => $b,
+            'room_data' => $r,
+            'room_service_data' => $s,
+            'room_activity_data' => $a
+        ];
 
- 
-       
 
+   
+
+        $response = [
+            'success' => "true",
+            'data' => $all_data
+        ];
+
+        return response(json_encode($response));
+        }else{
             $response = [
-                'success' => "true",
-                'data' => $all_data
+                'error' => "true",
+                'data' => "No Booking Exist"
             ];
-
+    
             return response(json_encode($response));
+        }
+            
 
     }
 

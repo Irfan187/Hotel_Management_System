@@ -76,11 +76,17 @@ class EmailController extends Controller
         $e = new Email();
         $e->subject = $subject;
         $e->message = $message;
-        $e->users = json_encode($all_users);
+        $e->users = json_encode(array_unique($all_users));
 
         $e->save();
 
         return redirect()->route('emails.index');
         
+    }
+
+    public function viewEmail($id){
+        $email = Email::find($id);
+
+        return view('admin.emails.view',compact('email'));
     }
 }

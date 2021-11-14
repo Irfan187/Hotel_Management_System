@@ -341,6 +341,10 @@
 							<a class="side-menu__item" data-toggle="slide" href="{{ route('dashboard') }}"><i class="side-menu__icon fe fe-airplay"></i><span class="side-menu__label">Dashboard</span></a>
                     </li> --}}
                     <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('bookings') }}"><i class="side-menu__icon fa fa-list"></i><span class="side-menu__label">
+                                Bookings</span></a>
+                    </li>
+                    <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('rooms.index') }}"><i class="side-menu__icon fa fa-home"></i><span class="side-menu__label"> Rooms</span></a>
                     </li>
                     <li class="slide">
@@ -378,10 +382,7 @@
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('facilities.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
                                 Facilities</span></a>
                     </li>
-                    <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('bookings') }}"><i class="side-menu__icon fa fa-list"></i><span class="side-menu__label">
-                                Bookings</span></a>
-                    </li>
+                    
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('customers.index') }}"><i class="side-menu__icon fa fa-users"></i><span class="side-menu__label">
                                 Customers</span></a>
