@@ -31,6 +31,7 @@ class GoogleController extends Controller
         try {
     
             $user = Socialite::driver('google')->user();
+            // dd($user);
      
             $finduser = User::where('google_id', $user->id)->first();
      
@@ -38,7 +39,7 @@ class GoogleController extends Controller
      
                 Auth::login($finduser);
     
-                return redirect('/');
+                return redirect('https://book.djerbaplaza.com/');
      
             }else{
                 $newUser = User::create([
@@ -50,11 +51,11 @@ class GoogleController extends Controller
     
                 Auth::login($newUser);
      
-                return redirect('/');
+                return redirect('https://book.djerbaplaza.com/');
             }
     
         } catch (Exception $e) {
-            dd($e->getMessage());
+           
         }
     }
 }

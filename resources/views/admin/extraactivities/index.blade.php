@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="row mt-5">
                         <div class="col-6">
-                            <h2>Extra Activities</h2>
+                            <h2>Activities</h2>
                         </div>
                         <div class="col-6 mb-5">
                             <a href="{{ route('activities.create') }}" class="btn btn-success float-right"><i

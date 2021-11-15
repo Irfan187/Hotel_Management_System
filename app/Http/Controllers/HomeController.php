@@ -2627,7 +2627,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
         $user = User::find($request->user_id);
         $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
 
-        $str = $response->json()['features'][0]['properties']['address']['country_code'];
+        $str = $request->country_code;
         
         $status = "";
 
@@ -2667,6 +2667,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             if ($user) {
                 
                 $user_id = $user->id;
+                $user->country_code = strtoupper($str);
+                $user->save();
                 if($user->hasRole("Admin")){
                     $status = "Admin";
                 }else{
@@ -2688,6 +2690,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                     $newuser->email = $request->email;
                     $newuser->mobno = $input['mobno'];
                     $newuser->notes = $input['notes'];
+                    $newuser->country_code = strtoupper($str);
+                   
     
     
     
@@ -2712,7 +2716,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                     $newuser->notes = $input['notes'];
     
     
-    
+                    $newuser->country_code = strtoupper($str);
+                    
                     $newuser->save();
     
                     $user_id = $newuser->id;
@@ -2775,6 +2780,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 $r_s_data = new RoomServiceData();
                 $r_s_data->user_id = $user_id;
                 $r_s_data->booking_no = $number;
+                $r_s_data->unique_id = $d['unique_id'];
                 $r_s_data->room_id = $d['room_id'];
                 $r_s_data->package_id = $d['package_id'];
                 $r_s_data->service_id = $d['room_service_id'];
@@ -2789,6 +2795,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 $r_a_data->user_id = $user_id;
                 $r_a_data->booking_no = $number;
                 $r_a_data->room_id = $d['room_id'];
+                $r_a_data->unique_id = $d['unique_id'];
                 $r_a_data->package_id = $d['package_id'];
                 $r_a_data->activity_id = $d['activity_id'];
                 $r_a_data->title = $d['activity_title'];
@@ -2810,10 +2817,13 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
 
             $user_id = 0;
 
-            $user_id = 0;
+            
+           
             if ($user) {
                 
                 $user_id = $user->id;
+                $user->country_code = strtoupper($str);
+                $user->save();
                 if($user->hasRole("Admin")){
                     $status = "Admin";
                 }else{
@@ -2835,6 +2845,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                     $newuser->email = $request->email;
                     $newuser->mobno = $input['mobno'];
                     $newuser->notes = $input['notes'];
+                    $newuser->country_code = strtoupper($str);
+                   
     
     
     
@@ -2859,7 +2871,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                     $newuser->notes = $input['notes'];
     
     
-    
+                    $newuser->country_code = strtoupper($str);
+                    
                     $newuser->save();
     
                     $user_id = $newuser->id;
@@ -2924,6 +2937,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 $r_s_data = new RoomServiceData();
                 $r_s_data->user_id = $user_id;
                 $r_s_data->booking_no = $number;
+                $r_s_data->unique_id = $d['unique_id'];
                 $r_s_data->room_id = $d['room_id'];
                 $r_s_data->package_id = $d['package_id'];
                 $r_s_data->service_id = $d['room_service_id'];
@@ -2938,6 +2952,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 $r_a_data->user_id = $user_id;
                 $r_a_data->booking_no = $number;
                 $r_a_data->room_id = $d['room_id'];
+                $r_a_data->unique_id = $d['unique_id'];
                 $r_a_data->package_id = $d['package_id'];
                 $r_a_data->activity_id = $d['activity_id'];
                 $r_a_data->title = $d['activity_title'];
@@ -2960,10 +2975,11 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
 
             
             $user_id = 0;
-            $user_id = 0;
             if ($user) {
                 
                 $user_id = $user->id;
+                $user->country_code = strtoupper($str);
+                $user->save();
                 if($user->hasRole("Admin")){
                     $status = "Admin";
                 }else{
@@ -2985,6 +3001,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                     $newuser->email = $request->email;
                     $newuser->mobno = $input['mobno'];
                     $newuser->notes = $input['notes'];
+                    $newuser->country_code = strtoupper($str);
+                   
     
     
     
@@ -3009,7 +3027,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                     $newuser->notes = $input['notes'];
     
     
-    
+                    $newuser->country_code = strtoupper($str);
+                    
                     $newuser->save();
     
                     $user_id = $newuser->id;
@@ -3072,6 +3091,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 $r_s_data = new RoomServiceData();
                 $r_s_data->user_id = $user_id;
                 $r_s_data->booking_no = $number;
+                $r_s_data->unique_id = $d['unique_id'];
                 $r_s_data->room_id = $d['room_id'];
                 $r_s_data->package_id = $d['package_id'];
                 $r_s_data->service_id = $d['room_service_id'];
@@ -3086,6 +3106,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 $r_a_data->user_id = $user_id;
                 $r_a_data->booking_no = $number;
                 $r_a_data->room_id = $d['room_id'];
+                $r_a_data->unique_id = $d['unique_id'];
                 $r_a_data->package_id = $d['package_id'];
                 $r_a_data->activity_id = $d['activity_id'];
                 $r_a_data->title = $d['activity_title'];

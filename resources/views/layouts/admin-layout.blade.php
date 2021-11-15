@@ -352,7 +352,7 @@
                                 Rates</span></a>
                     </li>
                     <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('packages.index') }}"><i class="side-menu__icon fas fa-box"></i><span class="side-menu__label">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('packages.index') }}"><i class="side-menu__icon fa fa-archive"></i><span class="side-menu__label">
                                 Packages</span></a>
                     </li>
                     <li class="slide">
@@ -360,7 +360,7 @@
                                 Activities</span></a>
                     </li>
                     <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('services.index') }}"><i class="side-menu__icon fab fa-servicestack"></i><span class="side-menu__label">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('services.index') }}"><img src="{{asset('/img/ser.png')}}" alt="">&nbsp;&nbsp;<span class="side-menu__label">
                                 Services</span></a>
                     </li>
                     <li class="slide">
@@ -379,7 +379,7 @@
                                 Flat Rate</span></a>
                     </li>
                     <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('facilities.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('facilities.index') }}"><img src="{{asset('/img/buil.png')}}" alt="">&nbsp;&nbsp;<span class="side-menu__label">
                                 Facilities</span></a>
                     </li>
                     
@@ -392,7 +392,7 @@
                                 Discount</span></a>
                     </li>
                     <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="{{ route('policy.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Cancellation
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('policy.index') }}"><img src="{{asset('/img/cancel.png')}}" alt="">&nbsp;&nbsp;<span class="side-menu__label"> Cancellation
                                 Policy</span></a>
                     </li>
                     <li class="slide">
@@ -423,7 +423,7 @@
                                 Home Page </span></a>
                               
 
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.header') }}"><i class="side-menu__icon fa fa-heading"></i><span class="side-menu__label">Header/Footer</span></a>
+                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('setting.header') }}"><img src="{{asset('/img/header.png')}}" alt="">&nbsp;&nbsp;<span class="side-menu__label">Header/Footer</span></a>
 
                                
 
@@ -437,15 +437,15 @@
                                 Payment Methods
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('payment_methods.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Payment
+                            <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('payment_methods.index') }}"><i class="side-menu__icon fa fa-dollar"></i><span class="side-menu__label"> Payment
                                 Methods</span></a>
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('countries.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> PM
+                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('countries.index') }}"><i class="side-menu__icon fa fa-flag"></i><span class="side-menu__label"> PM
                                         Countries</span></a>
 
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('order_prices.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> PM Order
+                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('order_prices.index') }}"><i class="side-menu__icon fa fa-dollar"></i><span class="side-menu__label"> PM Order
                                         Prices</span></a>
 
-                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('coupons.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> PM Coupons</span></a>
+                                <a class="side-menu__item dropdown-item" data-toggle="slide" href="{{ route('coupons.index') }}"><img src="{{asset('/img/tag.png')}}" alt="">&nbsp;&nbsp;<span class="side-menu__label"> PM Coupons</span></a>
 
                             </div>
                         </div>

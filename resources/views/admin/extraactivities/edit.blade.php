@@ -160,18 +160,46 @@
       var h = 0;
       var m = 0;
       var d = 0;
+      var k = 0;
+      var j = 0;
+
       $('#day').on('change', function() {
         d = this.value;
         if(m != 0 && h != 0){
             var dd = d;
                 var ddd = Math.floor(h/1440);
                 var mmm = Math.floor(m/86400);
+                
                 if(ddd == 0){
-                    ddd = h;
+                    if(h%24 == 0){
+                        ddd = 0;
+                        d= parseInt(d)+parseInt(1);
+                        k=1;
+                    }else{
+                        ddd = h;
+                        if(k==1){
+                            d= parseInt(d)-parseInt(1);
+                            k=0;
+                        }
+                        
+                    }
                 }
+
                 if(mmm == 0){
-                    mmm = m;
+                    if(m%60 == 0){
+                        mmm = 0;
+                        h= parseInt(h)-parseInt(1);
+                        j=1;
+                    }else{
+                        mmm = m;
+                        if(j==1){
+                            h= parseInt(h)+parseInt(1);
+                            j=0;
+                        }
+                        
+                    }
                 }
+                
                 var total = d + " d   "+ ddd+ " h    " + mmm + " m";
 
                 $('#total').val(total);
@@ -186,12 +214,34 @@
                 var ddd = Math.floor(h/1440);
                 var mmm = Math.floor(m/86400);
                 if(ddd == 0){
-                    ddd = h;
+                    if(h%24 == 0){
+                        ddd = 0;
+                        d= parseInt(d)+parseInt(1);
+                        k=1;
+                    }else{
+                        ddd = h;
+                        if(k==1){
+                            d= parseInt(d)-parseInt(1);
+                            k=0;
+                        }
+                        
+                    }
                 }
                 if(mmm == 0){
-                    mmm = m;
+                    if(m%60 == 0){
+                        mmm = 0;
+                        h= parseInt(h)-parseInt(1);
+                        j=1;
+                    }else{
+                        mmm = m;
+                        if(j==1){
+                            h= parseInt(h)+parseInt(1);
+                            j=0;
+                        }
+                        
+                    }
                 }
-                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
+                var total = d+ " d   "+ ddd+ " h    " + mmm + " m";
 
                 $('#total').val(total);
 
@@ -206,10 +256,32 @@
                 var ddd = Math.floor(h/1440);
                 var mmm = Math.floor(m/86400);
                 if(ddd == 0){
-                    ddd = h;
+                    if(h%24 == 0){
+                        ddd = 0;
+                        d= parseInt(d)+parseInt(1);
+                        k=1;
+                    }else{
+                        ddd = h;
+                        if(k==1){
+                            d= parseInt(d)-parseInt(1);
+                            k=0;
+                        }
+                        
+                    }
                 }
                 if(mmm == 0){
-                    mmm = m;
+                    if(m%60 == 0){
+                        mmm = 0;
+                        h= parseInt(h)-parseInt(1);
+                        j=1;
+                    }else{
+                        mmm = m;
+                        if(j==1){
+                            h= parseInt(h)+parseInt(1);
+                            j=0;
+                        }
+                        
+                    }
                 }
                 var total = d + " d   "+ ddd+ " h    " + mmm + " m";
                
