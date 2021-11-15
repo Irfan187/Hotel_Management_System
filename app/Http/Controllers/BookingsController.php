@@ -419,4 +419,22 @@ class BookingsController extends Controller
         return json_encode($response);
     }
 
+
+
+
+    public function change(Request $request){
+
+        $booking = Booking::find($request->id);
+        $booking->status = $request->val;
+        $booking->save();
+
+            $response = [
+                'status' => "success",
+                'message' => "Status Changed"
+            ];
+        
+
+        return json_encode($response);
+    }
+
 }

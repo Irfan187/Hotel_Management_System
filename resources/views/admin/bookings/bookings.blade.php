@@ -101,7 +101,7 @@ $str = $response->json()['features'][0]['properties']['address']['country_code']
                                         @endif
                                         @if($booking->status == "Pending")
                                         <td>
-                                            <select name="status" id="status" class="form-control">
+                                            <select name="status" id="status{{$booking->id}}" class="form-control">
                                                 <option value="Pending" selected>Pending</option>
                                                 <option value="Confirmed">Confirmed</option>
                                             </select>
@@ -118,8 +118,24 @@ $str = $response->json()['features'][0]['properties']['address']['country_code']
                                         
 
                                     </tr>
-                               
-                                
+                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                                    <script>
+                                        $('select').on('change', function() {
+                                            var val = this.value ;
+                                            $.ajax({
+                                                'url': "{{ url('change') }}",
+                                                'type':"json",
+                                                'method' : "GET",
+                                                'data': {
+                                                    val:val,
+                                                    id:<?php  echo $booking->id;?>;
+                                                    success: function(data){
+                                                        location.reload();
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    </script>
 
 
                                 
@@ -142,6 +158,5 @@ $str = $response->json()['features'][0]['properties']['address']['country_code']
 </div>
 
 
-</script>
 
 @endsection

@@ -339,6 +339,8 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::get('/emailview/{id}', [EmailController::class, 'viewEmail'])->name('emails.vieww');
     Route::post('/resendemail', [EmailController::class, 'resend'])->name('resend');
 
+    Route::get('change', [BookingsController::class, 'change'])->name('change');
+
 
 
 
