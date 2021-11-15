@@ -64,7 +64,9 @@
                                 $r_a_data = App\Models\RoomActivityData::where('booking_no',$booking->booking_no)
                                                             ->get();
                                                      $k = 1;
-                                                     
+                              $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
+
+$str = $response->json()['features'][0]['properties']['address']['country_code'];                     
                                 $room_names = "";
                                 $package_names = "";
 
@@ -91,8 +93,11 @@
 
                                         @endforeach
                                         </td>
-                                        
-                                        <td>{{$booking->total_price}}</td>
+                                        @if($str == "tn")
+                                        <td>{{$booking->total_price}} TND</td>
+                                        @else
+                                        <td>{{$booking->total_price}} €</td>
+                                        @endif
                                         <td><a href="https://book.djerbaplaza.com/bookings_invoice/{{$booking->booking_no}}" style="background-color: orange;border:none" class="btn btn-primary">View</a></td>
 
                                         
