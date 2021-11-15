@@ -28,7 +28,7 @@
             </div>
 
             <div class="container" style="margin-top: 50px;">
-                <div class="card">
+                <div class="">
                     <h2 class="mb-5 ml-5 mt-5">Edit Room</h2>
                     @foreach($errors->all() as $error)
                     <div class="alert alert-danger">{{ $error }}</div>
