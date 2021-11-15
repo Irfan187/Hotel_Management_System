@@ -180,7 +180,8 @@ class RoomsController extends Controller
             'no_of_rooms' => $request->no_of_rooms,
             'price1' => $request->price1,
             'price2' => $request->price2,
-            'active' => $request->active
+            'active' => $request->active,
+            'no_of_beds' => $request->no_of_beds
 
         ]);
 
