@@ -128,7 +128,7 @@ $str = $response->json()['features'][0]['properties']['address']['country_code']
                                                 'method' : "GET",
                                                 'data': {
                                                     val:val,
-                                                    id:<?php  echo $booking->id;?>;
+                                                    id:<?php  echo $booking->id;?>,
                                                     success: function(data){
                                                         location.reload();
                                                     }
