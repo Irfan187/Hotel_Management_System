@@ -155,7 +155,8 @@ class RateController extends Controller
         $room = Room::join('rates', 'rates.room_id', 'rooms.id')->select('rooms.*')->first();
         $rooms = Room::all();
         $packages = Package::all();
-        $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')->get();
+        $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                        ->where('room_rates.deleted_at',NULL)->get();
 
 
         return view('admin.rates.edit', compact('roomrate', 'packages', 'rooms', 'room', 'rates'));

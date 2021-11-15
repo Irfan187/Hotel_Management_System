@@ -58,7 +58,7 @@
                                     </select>
                                 </div>
                                 @foreach($rates as $ratee)
-
+                                
                                 @php
                                 $room = App\Models\Room::find($ratee->room_id);
                                 $package = App\Models\Package::find($ratee->package_id);
