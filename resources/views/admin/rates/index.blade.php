@@ -56,7 +56,7 @@
 
 
                         @endphp
-                        @if(!empty($rat))
+                        @if(!empty($rat) && !empty($room))
                         <tbody>
 
                             <tr>
