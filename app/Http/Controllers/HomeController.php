@@ -2736,6 +2736,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             $booking->user_id = $user_id;
 
             $booking->total_price = $request->totalprice;
+            $booking->status = "Confirmed";
+
             $booking->save();
 
             foreach($request->room_tax as $d){
@@ -2891,6 +2893,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             $booking->user_id = $user_id;
 
             $booking->total_price = $request->totalprice;
+            $booking->status = "Pending";
             $booking->save();
 
 
@@ -3046,6 +3049,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             $booking->user_id = $user_id;
 
             $booking->total_price = $request->totalprice;
+            $booking->status = "Pending";
             $booking->save();
 
 

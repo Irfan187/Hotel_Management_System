@@ -47,6 +47,7 @@
                                 <th>Rooms</th>
                                 <th>Package</th>
                                 <th>Total Price</th>
+                                <th>Status</th>
                                 <th>Action</th>
 
 
@@ -97,6 +98,20 @@ $str = $response->json()['features'][0]['properties']['address']['country_code']
                                         <td>{{$booking->total_price}} TND</td>
                                         @else
                                         <td>{{$booking->total_price}} €</td>
+                                        @endif
+                                        @if($booking->status == "Pending")
+                                        <td>
+                                            <select name="status" id="status" class="form-control">
+                                                <option value="Pending" selected>Pending</option>
+                                                <option value="Confirmed">Confirmed</option>
+                                            </select>
+                                        </td>
+                                        @else
+                                        <td>
+                                            <select name="status" id="status" class="form-control">
+                                                <option value="Confirmed">Confirmed</option>
+                                            </select>
+                                        </td>
                                         @endif
                                         <td><a href="https://book.djerbaplaza.com/bookings_invoice/{{$booking->booking_no}}" style="background-color: orange;border:none" class="btn btn-primary">View</a></td>
 
