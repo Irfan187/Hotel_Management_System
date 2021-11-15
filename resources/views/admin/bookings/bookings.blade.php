@@ -93,7 +93,7 @@
                                         </td>
                                         
                                         <td>{{$booking->total_price}}</td>
-                                        <td><a href="{{ route('viewbook',$booking->id) }}" style="background-color: orange;border:none" class="btn btn-primary">View</a></td>
+                                        <td><a href="https://book.djerbaplaza.com/bookings_invoice/{{$booking->booking_no}}" style="background-color: orange;border:none" class="btn btn-primary">View</a></td>
 
                                         
 
