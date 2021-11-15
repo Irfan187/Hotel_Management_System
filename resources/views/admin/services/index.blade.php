@@ -7,6 +7,10 @@
         position: inherit !important;
         padding: 14px;
     }
+
+    .fa .fa-eye{
+        color:white !important;
+    }
 </style>
 
 <div class="page" style="margin-top: 100px;">
@@ -29,8 +33,12 @@
                         <p>{{ $message }}</p>
                     </div>
                     @endif
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
                     <script>
+                        $(document).ready( function () {
+                            $('#notificationTable').DataTable();
+                        } );
                         function myFunction() {
                                       // Declare variables
                                       var input, filter, table, tr, td, i, txtValue;
@@ -53,15 +61,15 @@
                                       }
                                     }
                     </script>
-                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()"
-                        placeholder="Search for names.." title="Type in a name">
+                    <!-- <input type="text" id="myInput" class="form-control" onkeyup="myFunction()"
+                        placeholder="Search for names.." title="Type in a name"> -->
                     <table id="notificationTable" class="table table-striped table-bordered mt-5">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Service Name</th>
-                                <th>Price (€)</th>
-                                <th>Price (TND)</th>
+                                <th>Price Per Person Per Night</th>
+                                <th>Price Per Person Per Night</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -74,14 +82,14 @@
                                 <td>{{$i++}}</td>
                                 <td>{{ $service->name }}</td>
 
-                                <td>{{ $service->price1 }}</td>
-                                <td>{{ $service->price2 }}</td>
+                                <td>€ {{ $service->price1 }}</td>
+                                <td>TND {{ $service->price2 }}</td>
 
                                 <td>
                                     <a href="{{ route('services.edit',$service->id) }}" class="btn btn-primary"><i
                                             class="fa fa-edit"></i></a>
                                     <a href="{{ route('services.show',$service->id) }}"
-                                        style="background-color: #925f0c;" class="btn"><i class="fa fa-eye"></i></a>
+                                        style="background-color: orange;" class="btn"><i class="fa fa-eye"></i></a>
 
                                     {!! Form::open(['method' => 'DELETE','route' => ['services.destroy', $service->id],
                                     'onsubmit' => 'return ConfirmDelete()','style'=>'display:inline']) !!}

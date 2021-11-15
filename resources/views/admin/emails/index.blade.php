@@ -36,7 +36,7 @@
             @csrf
 
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Select Countries</label>
                         <select name="country[]" id="country" class="form-control js-example-basic-single" multiple>
@@ -45,17 +45,24 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="">Last Booking Date</label>
                         <input type="date" name="date" class="form-control">
                     </div>
 
-
-                    <div class="form-group mt-5">
-                            <span><button type="submit" id="su" type="submit" class="btn btn-info"> <i class="fa fa-save"></i> Next </button></span>&nbsp;&nbsp;
-                    </div>
-
                 </div>
+                <div class="col-md-12">
+                    <center>
+                        <div class="form-group mt-5">
+                                <span><button type="submit" id="su" type="submit" class="btn btn-info"> <i class="fa fa-save"></i> Next </button></span>&nbsp;&nbsp;
+                        </div>
+                    </center>
+                    
+                </div>
+                
+                
 
             </div>
             </form>
@@ -63,7 +70,12 @@
 
         <div class="container">
             <div class="card">
-                <table class="table">
+            <script>
+                $(document).ready( function () {
+                    $('#email').DataTable();
+                });
+            </script>
+                <table class="table" id="email">
                     <tr>
                         <th>#</th>
                         <th>Subject</th>
@@ -87,6 +99,7 @@
                     @endforeach
                     @endif
                 </table>
+                {{$emails->links()}}
             </div>
         </div>
 
@@ -94,5 +107,7 @@
       </div>
  </div>
 </div>
+
+
             
 @endsection

@@ -39,18 +39,23 @@
                         @csrf
 
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Room Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{$room->name}}" required>
+                                    <input type="text" class="form-control" value="{{ $room->name }}" name="name" required>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>No of Beds</label>
-                                    <input type="text" class="form-control" value="{{$room->no_of_beds}}" name="no_of_beds" required>
+                                    <label>No. of Beds</label>
+                                    <input type="text" class="form-control" value="{{ $room->no_of_beds }}" name="no_of_beds" required>
                                 </div>
+                            </div>
+                            <div class="col-12">
+                                
                                 <div class="form-group">
                                     <label for="image">Image</label>
-                                    <input type="file" class="dropify" data-default-file="{{ asset('/storage/'. $room->image) }}" data-height="180" name="image" id="image" required />
+                                    <input type="file" class="dropify" data-default-file="{{ asset('/storage/'. $room->image) }}" data-height="180" name="image" id="image" />
                                 </div>
                                 
 

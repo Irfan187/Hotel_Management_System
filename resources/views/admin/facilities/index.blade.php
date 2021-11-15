@@ -35,8 +35,8 @@
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Price1</th>
-                                <th>Price2</th>
+                                <th>Price Per Person Per Night</th>
+                                <th>Price Per Person Per Night</th>
 
 
                                 <th>Action</th>
@@ -47,8 +47,8 @@
                         <tbody>
                             <tr>
                                 <td>{{$facility->title}}</td>
-                                <td>{{$facility->price1}}</td>
-                                <td>{{$facility->price2}}</td>
+                                <td>€ {{ $facility->price1 }}</td>
+                                <td>TND {{ $facility->price2 }}</td>
 
                                 <td>
                                     <a href="{{route('facilities.edit',$facility->id)}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>

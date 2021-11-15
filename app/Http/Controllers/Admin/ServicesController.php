@@ -40,6 +40,7 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $service = new Service();
 
         $service->create($request->only($service->getFillable()));
@@ -86,6 +87,7 @@ class ServicesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $service = Service::find($id);
         $service->update($request->only($service->getFillable()));
 

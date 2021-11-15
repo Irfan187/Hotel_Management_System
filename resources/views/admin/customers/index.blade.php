@@ -75,7 +75,7 @@
                         @php $i=1;@endphp
                         @if(!empty($customers))
                         @foreach($customers as $customer)
-                        @if($customer->hasRole('Customer'))
+                        @if(!$customer->hasRole('Admin'))
                         <tbody>
                             <tr>
                                 <td>{{$i++}}</td>
@@ -87,7 +87,7 @@
 
                                 <td>
                                     <a href="{{ route('customers.edit',$customer->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                    <a href="{{ route('customers.show',$customer->id) }}" style="background:#925F0C" class="btn"><i class="fa fa-eye text-white"></i></a>
+                                    <a href="{{ route('customers.show',$customer->id) }}" style="background:orange" class="btn"><i class="fa fa-eye text-white"></i></a>
 
                                     {!! Form::open(['method' => 'DELETE','route' => ['customers.destroy', $customer->id],
                                     'onsubmit' => 'return ConfirmDelete()','style'=>'display:inline']) !!}
@@ -105,6 +105,7 @@
                         </tbody>
                         @endif
                         @endforeach
+                       
                         @endif
                     </table>
                     {{$customers->links()}}

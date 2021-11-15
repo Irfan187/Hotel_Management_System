@@ -56,7 +56,7 @@
                                 @endif
                                 <td>
                                     <a href="{{ route('packages.edit',$package->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                    <a href="{{ route('packages.show',$package->id) }}" style="background-color: #925f0c;" class="btn"><i class="fa fa-eye"></i></a>
+                                    <a href="{{ route('packages.show',$package->id) }}" style="background-color: orange;" class="btn"><i class="fa fa-eye"></i></a>
 
                                     {!! Form::open(['method' => 'DELETE','route' => ['packages.destroy', $package->id], 'onsubmit' => 'return ConfirmDelete()','style'=>'display:inline']) !!}
                                     {!! Form::button('<a class="fa fa-trash-o"></a>', ['type' => 'submit','class' => 'btn btn-danger']) !!}

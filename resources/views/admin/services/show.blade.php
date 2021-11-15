@@ -35,7 +35,7 @@
                                 </tr>
                                 <tr>
                                     <th>Description</th>
-                                    <td>{{ $service->description }}</td>
+                                    <td>{!!  html_entity_decode($service->description) !!}</td>
                                 </tr>
                                 <tr>
                                     <th>Price (€)</th>

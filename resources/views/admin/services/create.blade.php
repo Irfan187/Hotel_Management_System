@@ -64,7 +64,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">TND</span>
                             </div>
-                            <input type="text" class="form-control" name="price1" id="price1"  required>
+                            <input type="text" class="form-control" name="price2" id="price2"  required>
 
                         </div>
                     </div>

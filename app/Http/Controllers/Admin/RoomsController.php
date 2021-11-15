@@ -213,18 +213,18 @@ class RoomsController extends Controller
      */
     public function destroy($id)
     {
-        $b = RoomData::where('room_id', $id)->first();
-        RoomData::where('room_id', $id)->delete();
-        RoomServiceData::where('room_id', $id)->delete();
-        RoomActivityData::where('room_id', $id)->delete();
-        RoomActivityData::where('room_id', $id)->delete();
-        RoomFacility::where('room_id', $id)->delete();
-        Rate::where('room_id', $id)->delete();
-        RoomRate::where('room_id', $id)->delete();
-        if(!empty($b)){
-            $bb = Booking::where('booking_no',$b->booking_no)->first();
-            $bb->delete();
-        }
+        // $b = RoomData::where('room_id', $id)->first();
+        // RoomData::where('room_id', $id)->delete();
+        // RoomServiceData::where('room_id', $id)->delete();
+        // RoomActivityData::where('room_id', $id)->delete();
+        // RoomActivityData::where('room_id', $id)->delete();
+        // RoomFacility::where('room_id', $id)->delete();
+        // Rate::where('room_id', $id)->delete();
+        // RoomRate::where('room_id', $id)->delete();
+        // if(!empty($b)){
+        //     $bb = Booking::where('booking_no',$b->booking_no)->first();
+        //     $bb->delete();
+        // }
        
 
 

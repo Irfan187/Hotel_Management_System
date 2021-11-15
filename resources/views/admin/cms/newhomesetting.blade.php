@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="image">Background Image</label>
+                        <label for="image">Background Image (Recommended Size: 1500x400)</label>
                         <input type="file" class="dropify" data-default-file="{{ asset('/storage/'. $setting->back) }}" data-height="180" name="back" id="image" />
                     </div>
                 </div>

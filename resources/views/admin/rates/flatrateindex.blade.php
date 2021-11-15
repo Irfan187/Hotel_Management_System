@@ -14,7 +14,7 @@
         <div class="app-content">
             <div class="container">
                 <div class="card">
-                    <div class="row mt-5 ml-5">
+                    <div class="row mt-5">
                         <div class="col-6">
                             <h2>Flat Rate</h2>
                         </div>
@@ -46,7 +46,7 @@
                             <tr>
                                 <td>{{$i}}</td>
                                 <td>{{$flatrate->name}}</td>
-                                <td>{{$flatrate->discount}}</td>
+                                <td>{{$flatrate->discount}} %</td>
                                 
                                 <td>
                                     <a href="{{route('flatrates.edit',$flatrate->id)}}" class="btn btn-primary"><i class="fa fa-edit"></i></a>

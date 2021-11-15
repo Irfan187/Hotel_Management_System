@@ -65,6 +65,21 @@
                         @endforeach
                     </div>
 
+                    <div class="form-group mt-5">
+                        
+                        @php $user_ids = json_decode($email->users); @endphp
+                       
+                        <form action="{{route('resend')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="userids" value="{{ $email->users }}">
+                            <input type="hidden" name="message" value="{{ $email->message }}">
+                            <input type="hidden" name="subject" value="{{ $email->subject }}">
+
+                            <button type="submit" class="btn btn-info"><i class="fa fa-paper-plane"></i> Re-Send</button>
+                        </form>
+                       
+                    </div>
+
                 </div>
 
             </div>

@@ -49,25 +49,25 @@
                                 </div>
                         
                                 <div class="form-group">
-                                    <label for="onarrival">Standard Price (€)</label>
-                                    <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">€</span>
-                                    </div>
-                                    <input type="number" required name="price1" id="price1" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                    </div>
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <label for="onarrival">Standard Price (TND)</label>
-                                    <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">TND</span>
-                                    </div>
-                                    <input type="number" required name="price2" id="price2" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                    </div>
-                                       
-                                </div>
+                        <label for="price1">Standard Price (€)</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">€</span>
+                            </div>
+                            <input type="text" class="form-control" name="price1" id="price1"  required>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price2">Standard Price (TND)</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">TND</span>
+                            </div>
+                            <input type="text" class="form-control" name="price2" id="price2"  required>
+
+                        </div>
+                    </div>
 
                                 <div class="form-group mt-5">
                                     <span><button type="submit" id="su" type="submit" class="btn btn-info"> <i

@@ -23,7 +23,7 @@ class EmailController extends Controller
         $all_dates = [];
         // $users = User::join('bookings','bookings.user_id','users.id')
         $countries = PMCountry::all();
-        $emails = Email::all();
+        $emails = Email::paginate(5);
         return view('admin.emails.index',compact('countries','emails'));
     }
 
@@ -41,7 +41,7 @@ class EmailController extends Controller
     }
 
     public function send(Request $request){
-    //    dd($request->all());
+  
        $subject = $request->subject;
        $message = $request->message;
 
@@ -73,16 +73,46 @@ class EmailController extends Controller
         }
         }
 
-        $e = new Email();
-        $e->subject = $subject;
-        $e->message = $message;
-        $e->users = json_encode(array_unique($all_users));
-
-        $e->save();
+        if(count($all_users) > 0){
+            $e = new Email();
+            $e->subject = $subject;
+            $e->message = $message;
+            $e->users = json_encode(array_unique($all_users));
+    
+            $e->save();
+        }
+       
 
         return redirect()->route('emails.index');
         
     }
+
+
+
+    public function resend(Request $request){
+  
+        // dd($request->all());
+        $userids = json_decode($request->userids);
+        $subject = $request->subject;
+        $message = $request->message;
+     //    dd(html_entity_decode($message));
+        $users = User::all();
+        
+ 
+        if(count($userids) > 0){
+         
+         foreach($users as $u){
+             
+                 if(in_array($u->id,$userids)){
+                     Mail::to($u->email)->send(new CriteriaEmail($subject,$message));
+                 }
+            }
+         }
+        
+ 
+         return redirect()->route('emails.index');
+         
+     }
 
     public function viewEmail($id){
         $email = Email::find($id);

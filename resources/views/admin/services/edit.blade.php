@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="price1">Price1 (€)</label>
+                        <label for="price1">Price per person per night (€)</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">€</span>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="price2">Price2 ()</label>
+                        <label for="price2">Price per person per night (TND)</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">TND</span>

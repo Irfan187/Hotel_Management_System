@@ -23,7 +23,16 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = User::paginate(6);
+        $customers = User::paginate(5);
+        // $customers = [];
+        // foreach($cust as $c){
+        //     if($c->hasRole('Admin')){
+
+        //     }else{
+        //         array_push($customers,$c);
+        //     }
+        // }
+        // dd($customers);
 
         return view('admin.customers.index',compact('customers'));
     }

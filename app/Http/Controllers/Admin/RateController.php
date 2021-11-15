@@ -280,7 +280,7 @@ class RateController extends Controller
     public function destroy($id)
     {
 
-        Rate::where('rate_id',$id)->delete();
+        // Rate::where('rate_id',$id)->delete();
         RoomRate::find($id)->delete();
         return redirect()->route('rates.index')->with('success', 'Data removed successfully!');
     }

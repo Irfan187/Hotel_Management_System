@@ -39,7 +39,7 @@
                 <div class="col-12">
                 <div class="form-group">
                                     <label for="image">Image</label>
-                                    <input type="file" class="dropify" data-default-file="{{ asset('/storage/'. $activity->image) }}" data-height="180" name="image" id="image" required />
+                                    <input type="file" class="dropify" data-default-file="{{ asset('/storage/'. $activity->image) }}" data-height="180" name="image" id="image" />
                                 </div>
                     
                     <div class="form-group">
@@ -53,6 +53,14 @@
                     <div class="form-group">
                         <label for="name">Description</label>
                         <textarea class="form-control" name="description" id="description"   required>{{ $activity->title }}</textarea>
+                        <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+                                    <script>
+                                        CKEDITOR.replace('description', {
+                                            filebrowserUploadUrl: "",
+                                            filebrowserUploadMethod: 'form'
+                                        });
+                                    </script>
                     </div>
                     <div class="form-group">
                         <label for="name">Maximum Children</label>
@@ -62,10 +70,7 @@
                         <label for="name">Maximum Adults</label>
                         <input type="number" min="1" class="form-control" value="{{ $activity->max_adults }}" name="max_adults" id="max_adults"  required>
                     </div>
-                    <div class="form-group">
-                        <label for="name">Maximum People</label>
-                        <input type="number" min="1" class="form-control" value="{{ $activity->max_people }}" name="max_people" id="max_people"  required>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="name">Price1 (€)</label>
                         <div class="input-group mb-3">
@@ -91,7 +96,7 @@
                             <div class="col-md-3">
                                 <label for="name">Days</label>
                                 <select name="day" id="day" class="form-control">
-                                    @for($i = 1;$i <= 10; $i++)
+                                    @for($i = 0;$i <= 10; $i++)
                                     @if($activity->days == $i)
                                     <option value="{{$i}}" selected>{{$i}}</option>
                                     @else
@@ -200,8 +205,7 @@
                     }
                 }
                 
-                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
-
+                var total = d + " D   "+ ddd+ " H    " + mmm + " M";
                 $('#total').val(total);
                 
             }
@@ -241,7 +245,7 @@
                         
                     }
                 }
-                var total = d+ " d   "+ ddd+ " h    " + mmm + " m";
+                var total = d + " D   "+ ddd+ " H    " + mmm + " M";
 
                 $('#total').val(total);
 
@@ -283,7 +287,7 @@
                         
                     }
                 }
-                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
+                var total = d + " D   "+ ddd+ " H    " + mmm + " M";
                
 
                 $('#total').val(total);
@@ -292,48 +296,48 @@
         });
 
         
-    $("#max_people").focusout(function(){
-        var c = $('#max_child').val();
-        var a = $('#max_adults').val();
-        var p = $('#max_people').val();
+    // $("#max_people").focusout(function(){
+    //     var c = $('#max_child').val();
+    //     var a = $('#max_adults').val();
+    //     var p = $('#max_people').val();
 
 
-        if(c != '' && a !=''){
-            if( (parseInt(a) + parseInt(c)) <= parseInt(p) ){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Great...',
-                    text: 'Data is correct',
+    //     if(c != '' && a !=''){
+    //         if( (parseInt(a) + parseInt(c)) <= parseInt(p) ){
+    //             Swal.fire({
+    //                 icon: 'success',
+    //                 title: 'Great...',
+    //                 text: 'Data is correct',
 
-                })
-            }else{
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Sum of Child and Adult should be less or equal to People',
+    //             })
+    //         }else{
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Oops...',
+    //                 text: 'Sum of Child and Adult should be less or equal to People',
 
-                })
-                    document.getElementById('max_child').value = '';
-                    document.getElementById('max_adults').value = '';
-                    document.getElementById('max_people').value = '';
+    //             })
+    //                 document.getElementById('max_child').value = '';
+    //                 document.getElementById('max_adults').value = '';
+    //                 document.getElementById('max_people').value = '';
 
 
-            }
-        }else{
+    //         }
+    //     }else{
 
-            Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Max child and Max adults can not be null',
+    //         Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Oops...',
+    //                 text: 'Max child and Max adults can not be null',
 
-                })
+    //             })
 
-                document.getElementById('max_child').value = '';
-                    document.getElementById('max_adults').value = '';
-                    document.getElementById('max_people').value = '';
-        }
+    //             document.getElementById('max_child').value = '';
+    //                 document.getElementById('max_adults').value = '';
+    //                 document.getElementById('max_people').value = '';
+    //     }
 
-    });
+    // });
  </script>
 
 @endsection

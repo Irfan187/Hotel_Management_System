@@ -55,9 +55,13 @@
                             }
                         }
                     </script>
-                    <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                    <!-- <input type="text" id="myInput" class="form-control" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> -->
 
-
+<script>
+    $(document).ready( function () {
+        $('#notificationTable').DataTable();
+    });
+</script>
                     <table id="notificationTable" class="table table-striped table-bordered mt-5">
                         <thead>
                             <tr>
@@ -93,7 +97,7 @@
 
                                 <td>
                                     <a href="{{ route('rooms.edit',$room->id) }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                    <a href="{{ route('rooms.show',$room->id) }}" style="background:#925F0C" class="btn"><i class="fa fa-eye text-white"></i></a>
+                                    <a href="{{ route('rooms.show',$room->id) }}" style="background:orange" class="btn"><i class="fa fa-eye text-white"></i></a>
 
                                     {!! Form::open(['method' => 'DELETE','route' => ['rooms.destroy', $room->id],
                                     'onsubmit' => 'return ConfirmDelete()','style'=>'display:inline']) !!}

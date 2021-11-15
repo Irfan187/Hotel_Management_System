@@ -46,21 +46,31 @@
                                 
                                 <div class="form-group">
                                     <label for="image">Image</label>
-                                    <input type="file" class="dropify" data-default-file="{{asset('/storage/'.$facility->image)}}" data-height="180" name="image" id="image" required />
+                                    <input type="file" class="dropify" data-default-file="{{asset('/storage/'.$facility->image)}}" data-height="180" name="image" id="image" />
                                 </div>
                                
                                 
                         
                                 <div class="form-group">
-                                    <label for="onarrival">Standard Price (€)</label>
-                                    <input type="number" min="1" class="form-control" name="price1" value="{{$facility->price1}}" id="price1"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="onarrival">Standard Price (TND)</label>
-                                    <input type="number" min="1" class="form-control" name="price2" value="{{$facility->price2}}" id="price2"
-                                        required>
-                                </div>
+                        <label for="price1">Standard Price (€)</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">€</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{$facility->price1}}"  name="price1" id="price1"  required>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price2">Standard Price (TND)</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">TND</span>
+                            </div>
+                            <input type="text" class="form-control" value="{{$facility->price2}}" name="price2" id="price2"  required>
+
+                        </div>
+                    </div>
 
                                 <div class="form-group mt-5">
                                     <span><button type="submit" id="su" type="submit" class="btn btn-info"> <i

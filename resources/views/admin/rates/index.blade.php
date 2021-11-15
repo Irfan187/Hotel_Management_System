@@ -50,10 +50,13 @@
                         where('rate_id',$rate->id)->first();
                         $rat1 = App\Models\Rate::
                         where('rate_id',$rate->id)->get();
-                        $room = App\Models\Room::find($rat->room_id);
+                        if(!empty($rat)){
+                            $room = App\Models\Room::find($rat->room_id);
+                        }
 
 
                         @endphp
+                        @if(!empty($rat))
                         <tbody>
 
                             <tr>
@@ -90,6 +93,7 @@
 
                             </tr>
                         </tbody>
+                        @endif
                         @endforeach
                     </table>
 

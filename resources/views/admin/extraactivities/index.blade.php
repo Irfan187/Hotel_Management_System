@@ -93,7 +93,7 @@
                                 <td>
                                     <a href="{{ route('activities.edit',$activity->id) }}" class="btn btn-primary"><i
                                             class="fa fa-edit"></i></a>
-                                    <a href="{{ route('activities.show',$activity->id) }}" style="background:#925F0C"
+                                    <a href="{{ route('activities.show',$activity->id) }}" style="background:orange"
                                         class="btn"><i class="fa fa-eye text-white"></i></a>
 
                                     {!! Form::open(['method' => 'DELETE','route' => ['activities.destroy', $activity->id],
