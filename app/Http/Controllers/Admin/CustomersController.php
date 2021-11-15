@@ -192,6 +192,14 @@ class CustomersController extends Controller
         if(!empty($request->l_name) && !empty($request->f_name)){
             $customer->name = $request->f_name." ".$request->l_name;
         }
+
+        if(!empty($request->l_name)){
+            $customer->lname = $request->l_name;
+        }
+
+        if(!empty($request->f_name)){
+            $customer->fname = $request->f_name;
+        }
         if(!empty($request->email)){
             $customer->email = $request->email;
         }
