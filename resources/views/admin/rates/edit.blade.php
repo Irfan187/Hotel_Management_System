@@ -68,7 +68,7 @@
                                 @endphp
 
 
-
+                                @if(!empty($rate))
                                 <div class="form-group">
                                     <label for="start_date">Start date</label>
                                     <input type="date" class="form-control" name="start_date1[]" id="start_date" value="{{$rate->start_date}}" required>
@@ -187,6 +187,7 @@
                                         </div>
                                     </div>
                                     <br><br><br><br><br><br>
+                                    @endif
                                     @endforeach
 
 
