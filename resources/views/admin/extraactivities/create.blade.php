@@ -174,7 +174,13 @@
                 var ddd = Math.floor(h/1440);
                 var mmm = Math.floor(m/86400);
                 if(ddd == 0){
-                    ddd = h;
+                    if(h%24 == 0){
+                        ddd = 0;
+                        d= parseInt(d)+parseInt(1);
+                    }else{
+                        ddd = h;
+                        d = d ;
+                    }
                 }
                 if(mmm == 0){
                     mmm = m;
@@ -193,12 +199,18 @@
                 var ddd = Math.floor(h/1440);
                 var mmm = Math.floor(m/86400);
                 if(ddd == 0){
-                    ddd = h;
+                    if(h%24 == 0){
+                        ddd = 0;
+                        d = parseInt(d)+parseInt(1);
+                    }else{
+                        ddd = h;
+                        d = d;
+                    }
                 }
                 if(mmm == 0){
                     mmm = m;
                 }
-                var total = d + " d   "+ ddd+ " h    " + mmm + " m";
+                var total = d+ " d   "+ ddd+ " h    " + mmm + " m";
 
                 $('#total').val(total);
 
@@ -213,7 +225,13 @@
                 var ddd = Math.floor(h/1440);
                 var mmm = Math.floor(m/86400);
                 if(ddd == 0){
-                    ddd = h;
+                    if(h%24 == 0){
+                        ddd = 0;
+                        d = parseInt(d)+parseInt(1);
+                    }else{
+                        ddd = h;
+                        d = d;
+                    }
                 }
                 if(mmm == 0){
                     mmm = m;

@@ -2467,7 +2467,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
 
                     return response()->json([
                         'success' => true,
-                        'data' => $role
+                        'data' => $role,
+                        'user' => $u,
                     ]);
                 } else {
                     return response()->json([
