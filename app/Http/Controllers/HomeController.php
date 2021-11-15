@@ -2465,10 +2465,15 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                         $role = "Guest";
                     }
 
+                    $data = [
+                        'role' => $role,
+                        'user' => $u
+                    ];
+
                     return response()->json([
                         'success' => true,
-                        'data' => $role,
-                        'user' => $u,
+                        'data' => $data,
+                        
                     ]);
                 } else {
                     return response()->json([
