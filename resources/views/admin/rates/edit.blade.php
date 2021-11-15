@@ -92,7 +92,7 @@
                                     </select>
                                 </div>
 
-                                <div class="card">
+                                <div class="">
                                     <label for="">Pricing</label> <br>
                                     <div class="form-group">
                                         <label for="price_per_night1">Price per night (€)</label>
@@ -196,7 +196,7 @@
 
                                 </div>
 
-                                <div class="card" style="display: none;" id="new">
+                                <div class="" style="display: none;" id="new">
 
                                     <div class="form-group mt-5 input_fields_wrap">
 
@@ -207,7 +207,7 @@
 
 
 
-                                <div class="form-group card">
+                                <div class="form-group ">
                                     <label for="">Apply Discounts (%)</label><br>
                                     <div class="row">
                                         <div class="col-lg-6">
