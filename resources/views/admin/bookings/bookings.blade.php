@@ -120,7 +120,7 @@ $str = $response->json()['features'][0]['properties']['address']['country_code']
                                     </tr>
                                     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
                                     <script>
-                                        $('#status'+<?php  echo $booking->id;?>).on('change', function() {
+                                        $('select'+<?php  echo $booking->id;?>).on('change', function() {
                                             var val = this.value ;
                                             $.ajax({
                                                 'url': "{{ url('change') }}",

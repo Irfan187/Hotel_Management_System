@@ -2818,7 +2818,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             
 
             $user_id = 0;
-
+            $payment_method = PaymentMethod::find(2);
             
            
             if ($user) {
@@ -2969,7 +2969,8 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 'success' => "booking",
                 'data' => "Booking is completed",
                 'data1' => $status,
-                'bookingno' => $number
+                'bookingno' => $number,
+                'bank' => $payment_method
             ];
             
             return response()->json($response);
