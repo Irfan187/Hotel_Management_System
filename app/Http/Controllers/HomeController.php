@@ -2818,7 +2818,6 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             
 
             $user_id = 0;
-            $payment_method = PaymentMethod::find(2);
             
            
             if ($user) {
@@ -2970,7 +2969,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                 'data' => "Booking is completed",
                 'data1' => $status,
                 'bookingno' => $number,
-                'bank' => $payment_method
+               
             ];
             
             return response()->json($response);
@@ -3140,6 +3139,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
         $booking = Booking::latest()->take(1)->first();
         $user = User::find($booking->user_id);
         $room_tax = Tax::where('booking_no',$booking->booking_no)->get();
+        $payment_method = PaymentMethod::find(2);
 
         $r_data = RoomData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
         $r_s_data = RoomServiceData::where('booking_no',$booking->booking_no)->where('user_id',$request->id)->get();
@@ -3153,6 +3153,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
             'room_data' => $r_data,
             'room_service_data' => $r_s_data,
             'room_activity_data' => $r_a_data,
+            'bank' => $payment_method
 
         ];
 
