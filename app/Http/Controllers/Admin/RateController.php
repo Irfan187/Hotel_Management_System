@@ -152,7 +152,11 @@ class RateController extends Controller
     public function edit($id)
     {
         $roomrate = RoomRate::find($id);
-        $room = Room::join('rates', 'rates.room_id', 'rooms.id')->select('rooms.*')->first();
+        $room = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                        ->join('rooms', 'rooms.id', 'rates.room_id')
+                        ->where('room_rates.deleted_at',NULL)
+                        ->where('rates.rate_id',$id)
+            ->select('rooms.*')->first();
         $rooms = Room::all();
         $packages = Package::all();
         $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
