@@ -43,7 +43,11 @@
                                     <select name="room" id="room" class="form-control">
                                         <option value="">{{'-'}}</option>
                                         @foreach($rooms as $room)
-                                        @php $room_rate = App\Models\Rate::where('room_id',$room->id)->first(); @endphp
+                                        @php 
+                                        $room_rate = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                                                    ->where('room_rates.deleted_at',NULL)
+                                                    ->where('rates.room_id',$room->id)->first();
+                                        @endphp
                                         @if(empty($room_rate))
                                         <option value="{{$room->id}}">{{$room->name}}</option>
                                         @endif
