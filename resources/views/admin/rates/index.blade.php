@@ -66,8 +66,11 @@
                                 <td>
                                     @foreach($rat1 as $r)
                                     @php $pack = App\Models\Package::find($r->package_id); @endphp
+                                    @if(!empty($pack)
                                     <u>{{ $pack->name }}</u><br>
-
+                                    @else
+                                     <u>No Package</u><br>
+                                    @endif
                                     @endforeach
                                 </td>
                                 <td>
