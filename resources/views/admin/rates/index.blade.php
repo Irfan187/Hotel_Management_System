@@ -45,9 +45,11 @@
                         </thead>
                         @php $i = 1; @endphp
                         @foreach($rates as $rate)
+                        
                         @php
                         $rat = App\Models\Rate::
                         where('rate_id',$rate->id)->first();
+                        @dump($rat);
                         $rat1 = App\Models\Rate::
                         where('rate_id',$rate->id)->get();
                         if(!empty($rat)){
