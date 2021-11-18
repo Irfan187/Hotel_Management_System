@@ -50,7 +50,14 @@
 
                         <div class="row">
                             <div class="col-12">
-                                
+                                @if(!empty($room))
+                                  <div class="form-group">
+                                    <label for="room">Room</label>
+                                    <select name="room" id="room" class="form-control">
+                                        <option value="{{$room->id}}" selected>{{$room->name}}</option>
+                                       
+                                    </select>
+                                    @endif
                                 @foreach($rates as $ratee)
                                 
                                 @php
@@ -61,14 +68,7 @@
                                 $discount_rooms = App\Models\DiscountRoom::where('room_id', $room->id)->get();
 
                                 @endphp
-                                   @if(!empty($room))
-                                  <div class="form-group">
-                                    <label for="room">Room</label>
-                                    <select name="room" id="room" class="form-control">
-                                        <option value="{{$room->id}}" selected>{{$room->name}}</option>
-                                       
-                                    </select>
-                                    @endif
+                                   
                                 </div>
                                 @if(!empty($rate))
                                 <div class="form-group">
