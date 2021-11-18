@@ -44,7 +44,7 @@
                                         <option value="">{{'-'}}</option>
                                         @foreach($rooms as $room)
                                         @php 
-                                        $room_rate = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
+                                        $room_rate = App\Models\RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
                                                     ->where('room_rates.deleted_at',NULL)
                                                     ->where('rates.room_id',$room->id)->first();
                                         @endphp
