@@ -160,7 +160,8 @@ class RateController extends Controller
         $rooms = Room::all();
         $packages = Package::all();
         $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
-                        ->where('room_rates.deleted_at',NULL)->get();
+                        ->where('room_rates.deleted_at',NULL)
+            ->where('rates.rate_id',$id)->get();
         
 
         return view('admin.rates.edit', compact('roomrate', 'packages', 'rooms', 'room', 'rates'));
