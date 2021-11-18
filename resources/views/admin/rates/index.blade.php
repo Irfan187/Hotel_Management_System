@@ -54,7 +54,7 @@
                         where('rate_id',$rate->id)->get();
                         if(!empty($rat)){
                             $room = App\Models\Room::find($rat->room_id);
-                            @dump($room);
+                            
                         }
 
 
