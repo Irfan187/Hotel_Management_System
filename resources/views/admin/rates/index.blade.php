@@ -49,11 +49,12 @@
                         @php
                         $rat = App\Models\Rate::
                         where('rate_id',$rate->id)->first();
-                        @dump($rat);
+                        
                         $rat1 = App\Models\Rate::
                         where('rate_id',$rate->id)->get();
                         if(!empty($rat)){
                             $room = App\Models\Room::find($rat->room_id);
+                            @dump($room);
                         }
 
 
