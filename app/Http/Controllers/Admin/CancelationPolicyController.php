@@ -98,9 +98,9 @@ class CancelationPolicyController extends Controller
     }
     public function update(Request $request, $id)
     {
-        // $policy = CancelPolicy::find($id);
+        $policy = CancelPolicy::find($id);
 
-        $policy = new CancelPolicy();
+        // $policy = new CancelPolicy();
         $policy->title = $request->title;
         $policy->policy = $request->policy;
         $policy->save();
