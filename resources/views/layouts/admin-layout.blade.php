@@ -438,12 +438,12 @@
                                 Email Management</span></a>
                     </li>
                     @endcan
-                    @can('roles')
+                  
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('roles.index') }}"><i class="side-menu__icon fa fa-users"></i><span class="side-menu__label"> 
                                 Roles</span></a>
                     </li>
-                    @endcan
+                   
                     @can('site-settings')
                     
                     <li class="slide">

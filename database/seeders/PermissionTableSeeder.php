@@ -17,22 +17,21 @@ class PermissionTableSeeder extends Seeder
         $permissions = [
             'discount',
            'policy',
-        //    'role-edit',
-        //    'role-delete',
-        //    'bookings',
-        //    'rooms',
-        //    'rates',
-        //    'packages',
-        //    'activities',
-        //    'services',
-        //    'badges',
-        //    'flat-rate',
-        //    'facilities',
-        //    'customers',
-        //    'email-management',
-        //    'roles',
-        //    'site-settings',
-        //    'payment-methods'
+           
+           'bookings',
+           'rooms',
+           'rates',
+           'packages',
+           'activities',
+           'services',
+           'badges',
+           'flat-rate',
+           'facilities',
+           'customers',
+           'email-management',
+           'roles',
+           'site-settings',
+           'payment-methods'
 
         ];
 
