@@ -424,6 +424,7 @@ class BookingsController extends Controller
 
     public function change(Request $request){
 
+        // dd($request->all());
         $booking = Booking::find($request->id);
         $booking->status = $request->val;
         $booking->save();

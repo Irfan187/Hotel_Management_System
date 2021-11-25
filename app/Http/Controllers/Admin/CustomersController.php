@@ -10,6 +10,8 @@ use App\Models\RoomServiceData;
 use App\Models\RoomActivityData;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+
 
 
 
@@ -23,7 +25,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $customers = User::paginate(5);
+        $customers = User::with('roles')->paginate(5);
         // $customers = [];
         // foreach($cust as $c){
         //     if($c->hasRole('Admin')){
@@ -44,7 +46,9 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        return view('admin.customers.create');
+        $roles = Role::orderBy('id','DESC')->where('name','!=','Admin')->get();
+
+        return view('admin.customers.create',compact('roles'));
 
     }
 
@@ -57,6 +61,7 @@ class CustomersController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request->all());
         $this->validate($request,[
             'email' => 'required|unique:users'
         ]);
@@ -71,9 +76,9 @@ class CustomersController extends Controller
 
         ]);
 
-        $user->assignRole('Customer');
+        $user->assignRole($request->role);
 
-        return redirect()->route('customers.index')->with('success','Customer Created Successfully');
+        return redirect()->route('customers.index')->with('success','User Created Successfully');
     }
 
     /**
@@ -98,8 +103,9 @@ class CustomersController extends Controller
     public function edit($id)
     {
         $customer = User::find($id);
+        $roles = Role::orderBy('id','DESC')->where('name','!=','Admin')->get();
 
-        return view('admin.customers.edit',compact('customer'));
+        return view('admin.customers.edit',compact('customer','roles'));
     }
 
     /**
@@ -129,6 +135,11 @@ class CustomersController extends Controller
             $customer->mobno = $request->phone;
         }
 
+        if(!empty($request->role)){
+            $customer->roles()->detach();
+            $customer->assignRole($request->role);
+        }
+
         if(!empty($request->f_name) && !empty($request->l_name)){
             $customer->name = $request->f_name . " ".$request->l_name;
 
@@ -138,7 +149,7 @@ class CustomersController extends Controller
 
        
 
-        return redirect()->route('customers.index')->with('success','Customer Updated Successfully');
+        return redirect()->route('customers.index')->with('success','User Updated Successfully');
     }
 
     /**

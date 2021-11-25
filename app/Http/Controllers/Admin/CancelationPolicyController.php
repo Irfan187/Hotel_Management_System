@@ -100,6 +100,8 @@ class CancelationPolicyController extends Controller
     {
         $policy = CancelPolicy::find($id);
 
+        // $policy = new CancelPolicy();
+        $policy->title = $request->title;
         $policy->policy = $request->policy;
         $policy->save();
 

@@ -54,7 +54,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">€</span>
                             </div>
-                            <input type="text" class="form-control" name="price1" id="price1"  required>
+                            <input type="number" class="form-control" name="price1" id="price1"  required>
 
                         </div>
                     </div>
@@ -64,7 +64,51 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">TND</span>
                             </div>
-                            <input type="text" class="form-control" name="price2" id="price2"  required>
+                            <input type="number" class="form-control" name="price2" id="price2"  required>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="price1">Price per person (€)</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">€</span>
+                            </div>
+                            <input type="number" class="form-control" name="person_price1" id="p1"  required>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price2">Price per person (TND)</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">TND</span>
+                            </div>
+                            <input type="number" class="form-control" name="person_price2" id="p2"  required>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="price1">Flat Rate (€)</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">€</span>
+                            </div>
+                            <input type="number" class="form-control" name="flat_price1" id="f1"  required>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price2">Flat Rate (TND)</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">TND</span>
+                            </div>
+                            <input type="number" class="form-control" name="flat_price2" id="f2"  required>
 
                         </div>
                     </div>

@@ -40,7 +40,7 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $service = new Service();
 
         $service->create($request->only($service->getFillable()));

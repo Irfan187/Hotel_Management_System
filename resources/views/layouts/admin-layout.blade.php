@@ -360,78 +360,91 @@
                     {{-- <li class="slide">
 							<a class="side-menu__item" data-toggle="slide" href="{{ route('dashboard') }}"><i class="side-menu__icon fe fe-airplay"></i><span class="side-menu__label">Dashboard</span></a>
                     </li> --}}
+                    @can('bookings')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('bookings') }}"><i class="side-menu__icon fa fa-list"></i><span class="side-menu__label">
                                 Bookings</span></a>
                     </li>
+                    @endcan
+                    @can('rooms')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('rooms.index') }}"><i class="side-menu__icon fa fa-home"></i><span class="side-menu__label"> Rooms</span></a>
                     </li>
+                    @endcan
+                    @can('rates')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('rates.index') }}"><i class="side-menu__icon fa fa-dollar"></i><span class="side-menu__label">
                                 Rates</span></a>
                     </li>
+                    @endcan
+                    @can('packages')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('packages.index') }}"><i class="side-menu__icon fa fa-archive"></i><span class="side-menu__label">
                                 Packages</span></a>
                     </li>
+                    @endcan
+                    @can('activities')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('activities.index') }}"><img src="{{asset('/img/active.jpeg')}}" alt="" height="18" width="18">&nbsp;&nbsp;<span class="side-menu__label">
                                 Activities</span></a>
                     </li>
+                    @endcan
+                    @can('services')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('services.index') }}"><img src="{{asset('/img/ser.png')}}" alt="" height="18" width="18">&nbsp;&nbsp;<span class="side-menu__label">
                                 Services</span></a>
                     </li>
+                    @endcan
+                    @can('badges')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('badges.index') }}"><i class="side-menu__icon fa fa-certificate"></i><span class="side-menu__label">
                                 Badges</span></a>
                     </li>
-
-
-                    
-                    
-                    
-                    
-                   
+                    @endcan
+                    @can('flat-rate')                 
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('flatrates.index') }}"><i class="side-menu__icon fa fa-dollar"></i><span class="side-menu__label">
                                 Flat Rate</span></a>
                     </li>
+                    @endcan
+                    @can('facilities')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('facilities.index') }}"><img src="{{asset('/img/buil.png')}}" alt="" height="18" width="18">&nbsp;&nbsp;<span class="side-menu__label">
                                 Facilities</span></a>
                     </li>
-                    
+                    @endcan
+                    @can('customers')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('customers.index') }}"><i class="side-menu__icon fa fa-users"></i><span class="side-menu__label">
                                 Customers</span></a>
                     </li>
+                    @endcan
+                    @can('discount')
+                    
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('admin.discount') }}"><i class="side-menu__icon fa fa-percentage">%</i><span class="side-menu__label">
                                 Discount</span></a>
                     </li>
+                    @endcan
+                    @can('policy')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('policy.index') }}"><img src="{{asset('/img/cancel.png')}}" alt="" height="18" width="18">&nbsp;&nbsp;<span class="side-menu__label"> Cancellation
                                 Policy</span></a>
                     </li>
+                    @endcan
+                    @can('email-management')
                     <li class="slide">
                         <a class="side-menu__item" data-toggle="slide" href="{{ route('emails.index') }}"><i class="side-menu__icon fa fa-envelope"></i><span class="side-menu__label"> 
                                 Email Management</span></a>
                     </li>
-                    <!-- <li class="slide">
-							<a class="side-menu__item" data-toggle="slide" href="{{ route('coupons.index') }}"><i class="side-menu__icon fa fa-paste"></i><span class="side-menu__label"> Coupons</span></a>
-                        </li> -->
-                   
-                    
-                     <!-- <li class="slide">
-                        
-                    </li> -->
-                    {{-- <li class="slide">
-                        <a class="side-menu__item" data-toggle="slide" href="/projects/HMS/public/"><i
-                                class="side-menu__icon fa fa-paste"></i><span class="side-menu__label">Back to
-                                Home</span></a>
-                    </li> --}}
+                    @endcan
+                    @can('roles')
+                    <li class="slide">
+                        <a class="side-menu__item" data-toggle="slide" href="{{ route('roles.index') }}"><i class="side-menu__icon fa fa-users"></i><span class="side-menu__label"> 
+                                Roles</span></a>
+                    </li>
+                    @endcan
+                    @can('site-settings')
                     
                     <li class="slide">
                         <div class="dropdown">
@@ -451,6 +464,9 @@
 
                         </div>
                     </li>
+
+                    @endcan
+                    @can('payment-methods')
                     <li class="slide">
                         <div class="dropdown">
                         <i class=" fa fa-cogs"></i><button class="btn dropdown-toggle" style="font-weight: 500;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -470,6 +486,7 @@
                             </div>
                         </div>
                     </li>
+                    @endcan
 
 
 

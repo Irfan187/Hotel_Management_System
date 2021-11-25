@@ -62,11 +62,19 @@
                                 </div><div class="form-group">
                                     <label>Password</label>
                                     <input type="password" class="form-control" name="password" required>
-                                </div><div class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label>Phone</label>
                                     <input type="text" class="form-control" name="phone" required>
                                 </div>
-                                
+                                <div class="form-group">
+                                    <label>Assign Role</label>
+                                    <select name="role" id="role" class="form-control">
+                                        @foreach($roles as $role)
+                                            <option value="{{$role->name}}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 
 

@@ -32,16 +32,19 @@
                 <table id="notificationTable" class="table table-striped table-bordered mt-5">
                         <thead>
                             <tr>
+                                <th>#</th>
+                                <th>Title</th>
                                 <th>Policy</th>
-
-
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        @php $i=1; @endphp
                         @foreach($policies as $policy)
 
                         <tbody>
                             <tr>
+                                <td>{{$i++}}</td>
+                                <td>{{ $policy->title }}</td>
                                 <td>{!! html_entity_decode($policy->policy) !!}</td>
 
 

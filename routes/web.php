@@ -244,7 +244,7 @@ Route::group(['middleware' => ['auth', 'role:Admin']], function () {
     Route::resource('badges', BadgesController::class);
     Route::resource('customers', CustomersController::class);
 
-
+    Route::resource('roles', RoleController::class);
 
 
     Route::get('/removeservice', [PackagesController::class, 'removeService'])->name('removeservice');

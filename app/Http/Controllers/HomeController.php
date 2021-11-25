@@ -142,6 +142,8 @@ class HomeController extends Controller
         $kid2 = $request['kid2'];
         $kids = $kid1 + $kid2;
 
+        $total_person = $adults + $kid1 + $kid2;
+
 
         //Seperate date and month
         $dff = explode("-", $datefrom);
@@ -181,11 +183,13 @@ class HomeController extends Controller
         ];
 
         $k = 0;
+
+        $policies = CancelPolicy::all();
         foreach ($rooms as $room) {
             $facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
 
-            
-            if($room->no_of_rooms > 0 ){
+            $room_capacity = $room->max_child + $room->max_adults;
+            if($room->no_of_rooms > 0 && $kids <= $room->max_child && $adults <= $room->max_adults ){
                 if ($kid1 == 0 && $kid2 == 0 && $adults == 1 && $room->no_of_beds >=2) {
                     $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
                         ->where('rates.room_id', $room->id)->get();
@@ -200,6 +204,7 @@ class HomeController extends Controller
                                 if ($str == "tn") {
                                     $data = [
                                         'room' => $room,
+                                        'policies' => $policies,
                                         'rate' => $rate,
                                         'package' => $package,
                                         'price' => $days * ($rate->price_per_night2 + (int)50) * ((100 - $disc) / 100),
@@ -219,6 +224,7 @@ class HomeController extends Controller
                                 } else {
                                     $data = [
                                         'room' => $room,
+                                        'policies' => $policies,
                                         'rate' => $rate,
                                         'package' => $package,
                                         'price' => $days * ($rate->price_per_night1 + (int)50) * ((100 - $disc) / 100),
@@ -237,6 +243,7 @@ class HomeController extends Controller
                                 if ($str == "tn") {
                                     $data = [
                                         'room' => $room,
+                                        'policies' => $policies,
                                         'rate' => $rate,
                                         'package' => $package,
                                         'price' => $days * ($rate->price_per_night2 + (int)70) * ((100 - $disc) / 100),
@@ -252,6 +259,7 @@ class HomeController extends Controller
                                 } else {
                                     $data = [
                                         'room' => $room,
+                                        'policies' => $policies,
                                         'rate' => $rate,
                                         'package' => $package,
                                         'price' => $days * ($rate->price_per_night1 + (int)70) * ((100 - $disc) / 100),
@@ -276,6 +284,7 @@ class HomeController extends Controller
                                 if ($str == "tn") {
                                     $data = [
                                         'room' => $room,
+                                        'policies' => $policies,
                                         'rate' => $rate,
                                         'package' => $package,
                                         'price' => $days * ($rate->price_per_night2 + (int)50) * ((100 - $disc) / 100),
@@ -291,6 +300,7 @@ class HomeController extends Controller
                                 } else {
                                     $data = [
                                         'room' => $room,
+                                        'policies' => $policies,
                                         'rate' => $rate,
                                         'package' => $package,
                                         'price' => $days * ($rate->price_per_night1 + (int)50) * ((100 - $disc) / 100),
@@ -315,12 +325,12 @@ class HomeController extends Controller
                     }
                 }
         }
-    
+        
                 // return response()->json($new_array);
                 if ($k != 1) {
                     foreach ($rooms as $room) {
-$facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
-                        if (!empty($room) && $room->no_of_rooms > 0) {
+                        $facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
+                        if (!empty($room) && $room->no_of_rooms > 0 && $kids <= $room->max_child && $adults <= $room->max_adults) {
     
                             $discounts = DiscountRoom::where('room_id', $room->id)->get();
                             if ($kid1 == 1 && $kid2 == 0 && $adults <= 2) { // FIRST Condition
@@ -336,6 +346,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
@@ -346,11 +357,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
@@ -361,13 +373,14 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
@@ -378,11 +391,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
@@ -393,7 +407,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -408,48 +422,52 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[0]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -481,6 +499,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
@@ -491,11 +510,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
@@ -506,13 +526,14 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                            'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
@@ -523,11 +544,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
@@ -538,7 +560,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -548,48 +570,52 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[1]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                    'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                    'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -614,6 +640,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
@@ -624,11 +651,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
@@ -639,13 +667,14 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
@@ -656,11 +685,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
@@ -671,7 +701,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                            'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -681,48 +711,52 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[2]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -750,6 +784,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
@@ -760,11 +795,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
@@ -775,13 +811,14 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
@@ -792,11 +829,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
@@ -807,7 +845,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                            'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -817,48 +855,52 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $discounts[3]->discount) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                            'symbol' => "€",
                                                     ];
                                                 }
                                             } else {
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                            'symbol' => "TND",
                                                     ];
                                                 } else {
                                                     $data = [
                                                         'room'  => $room,
+                                                        'policies'  => $policies,
                                                         'rate' => $rate,
                                                         'package'  => $package,
                                                         'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - 0) / 100) * ((100 - $disc) / 100))),
                                                         'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                            'symbol' => "€",
                                                     ];
                                                 }
                                             }
@@ -882,6 +924,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                 $data = [
                                                     
                                                     'room' => $room,
+                                                    'policies'  => $policies,
                                                     'rate' => $rate,
                                                     'package' => $package,
                                                     'price' => ($adults * $rate->price_per_night2 * $days) + (((($kids * $days * $rate->price_per_night2)) * ((100 - $disc) / 100))),
@@ -892,11 +935,12 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                     'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                 ];
                                             } else {
                                                 $data = [
                                                     'room' => $room,
+                                                    'policies' => $policies,
                                                     'rate' => $rate,
                                                     'package' => $package,
                                                     'price' => ($adults * $rate->price_per_night1 * $days) + (((($kids * $days * $rate->price_per_night1)) * ((100 - $disc) / 100))),
@@ -907,7 +951,7 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                                     'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                 ];
                                             }
                                         } else {
@@ -916,24 +960,26 @@ $facilities = Facility::join('room_facilities','room_facilities.facility_id','fa
                                             if ($str == "tn") {
                                                 $data = [
                                                     'room' => $room,
+                                                    'policies' => $policies,
                                                     'rate' => $rate,
                                                     'package' => $package,
                                                     'price' => ($adults * $room->price2 * $days) + (((($kids * $days * $room->price2)) * ((100 - $disc) / 100))),
                                                     'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "TND",
+                        'symbol' => "TND",
                                                 ];
                                             } else {
                                                 $data = [
                                                     'room' => $room,
+                                                    'policies' => $policies,
                                                     'rate' => $rate,
                                                     'package' => $package,
                                                     'price' => ($adults * $room->price1 * $days) + (((($kids * $days * $room->price1)) * ((100 - $disc) / 100))),
                                                     'facilities' => ['room_id'=>$room->id,
                        'room_name'=>$room->name,
                         'room_facilities'=>$facilities],
-'symbol' => "€",
+                        'symbol' => "€",
                                                 ];
                                             }
                                         }

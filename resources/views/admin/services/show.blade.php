@@ -39,11 +39,29 @@
                                 </tr>
                                 <tr>
                                     <th>Price (€)</th>
-                                    <td>{{ $service->price1 }}</td>
+                                    <td>{{ $service->price1 }} €</td>
                                 </tr>
                                 <tr>
-                                    <th>Price (د.إ)</th>
-                                    <td>{{ $service->price1 }}</td>
+                                    <th>Price (TND)</th>
+                                    <td>{{ $service->price2 }} TND</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Price per Person (€)</th>
+                                    <td>{{ $service->person_price1 }} €</td>
+                                </tr>
+                                <tr>
+                                    <th>Price per Person (TND)</th>
+                                    <td>{{ $service->person_price2 }}TND</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Flat Price (€)</th>
+                                    <td>{{ $service->flat_price1 }} €</td>
+                                </tr>
+                                <tr>
+                                    <th>Flat (TND)</th>
+                                    <td>{{ $service->flat_price2 }} TND</td>
                                 </tr>
 
 

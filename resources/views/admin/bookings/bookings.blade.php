@@ -56,6 +56,7 @@
                             </tr>
                         </thead>
                         @if(count($bookings) > 0)
+                        @php $k = 1;@endphp
                         @foreach($bookings as $booking)
                         @php
                                 $r_data = App\Models\RoomData::where('booking_no',$booking->booking_no)
@@ -64,7 +65,7 @@
                                                             ->get();
                                 $r_a_data = App\Models\RoomActivityData::where('booking_no',$booking->booking_no)
                                                             ->get();
-                                                     $k = 1;
+                                                     
                               $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
 
 $str = $response->json()['features'][0]['properties']['address']['country_code'];                     
@@ -106,11 +107,10 @@ $str = $response->json()['features'][0]['properties']['address']['country_code']
                                                 <option value="Confirmed">Confirmed</option>
                                             </select>
                                         </td>
-                                        @else
+                                        @elseif($booking->status == "Confirmed")
                                         <td>
-                                            <select name="status" id="status" class="form-control">
-                                                <option value="Confirmed">Confirmed</option>
-                                            </select>
+                                            <span class="badge badge-success">Confirmed</span>
+                                            
                                         </td>
                                         @endif
                                         <td><a href="https://book.djerbaplaza.com/bookings_invoice/{{$booking->booking_no}}" style="background-color: orange;border:none" class="btn btn-primary">View</a></td>
@@ -120,20 +120,25 @@ $str = $response->json()['features'][0]['properties']['address']['country_code']
                                     </tr>
                                     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
                                     <script>
-                                        $('select'+<?php  echo $booking->id;?>).on('change', function() {
+                                        $('#status'+<?php  echo $booking->id;?>).on('change', function() {
                                             var val = this.value ;
+                                            // alert(val);
                                             $.ajax({
-                                                'url': "{{ url('change') }}",
+                                                'url': "{{ route('change') }}",
                                                 'type':"json",
                                                 'method' : "GET",
                                                 'data': {
                                                     val:val,
                                                     id:<?php  echo $booking->id;?>,
                                                     success: function(data){
-                                                        location.reload();
-                                                    }
+                                                        
+                                                        
+                                                    },
+                                                   
                                                 }
                                             });
+
+                                            window.location = "{{ route('bookings') }}";
                                         });
                                     </script>
 

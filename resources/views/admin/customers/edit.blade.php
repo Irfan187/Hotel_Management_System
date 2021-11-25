@@ -64,7 +64,18 @@
                                     <label>Phone</label>
                                     <input type="text" class="form-control" name="phone" value="{{$customer->mobno}}" required>
                                 </div>
-                                
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select name="role" id="role" class="form-control">
+                                        @foreach($roles as $role)
+                                            @if($customer->hasRole($role->name))
+                                            <option value="{{$role->name}}" selected>{{ $role->name }}</option>
+                                            @else
+                                            <option value="{{$role->name}}">{{ $role->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 
 

@@ -33,15 +33,10 @@
             <div class="row">
                 <div class="col-12">
 
+                    <label for="">Title</label>
+                    <input type="text" name="title" value="{{ $policy->title }}" class="form-control">
                     <label for="">Policy</label>
                     <textarea name="policy" id="policy" cols="30" rows="10">{{ $policy->policy }}</textarea>
-
-
-
-
-
-
-
                     <div class="form-group mt-5">
                             <span><button type="submit" id="su" type="submit" class="btn btn-info"> <i class="fa fa-save"></i> Save </button></span>&nbsp;&nbsp;
                     </div>

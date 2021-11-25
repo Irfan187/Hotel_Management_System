@@ -66,6 +66,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
+                                <th>Role</th>
                                 <!-- <th>Price per person per night (€)</th> -->
 
                                 <th>Action</th>
@@ -83,6 +84,11 @@
                                 <td>{{ $customer->email }}</td>
 
                                 <td>{{ $customer->mobno }}</td>
+                                <td>
+                                    
+                                    <label class="badge badge-success">{{ $customer->roles[0]->name }}</label>
+                                    
+                                </td>
 
 
                                 <td>
