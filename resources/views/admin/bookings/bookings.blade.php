@@ -65,10 +65,7 @@
                                                             ->get();
                                 $r_a_data = App\Models\RoomActivityData::where('booking_no',$booking->booking_no)
                                                             ->get();
-                                                     
-                              $response = Http::get('https://nominatim.openstreetmap.org/reverse?format=geojson&lat=36.7394816&lon=10.2039552');
-
-$str = $response->json()['features'][0]['properties']['address']['country_code'];                     
+                               $str = "tn";                
                                 $room_names = "";
                                 $package_names = "";
 
@@ -124,7 +121,7 @@ $str = $response->json()['features'][0]['properties']['address']['country_code']
                                             var val = this.value ;
                                             // alert(val);
                                             $.ajax({
-                                                'url': "{{ route('change') }}",
+                                                'url': "{{ url('/change') }}",
                                                 'type':"json",
                                                 'method' : "GET",
                                                 'data': {
