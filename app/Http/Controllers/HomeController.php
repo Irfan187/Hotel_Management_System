@@ -340,7 +340,7 @@ class HomeController extends Controller
                 if ($k != 1) {
                     foreach ($rooms as $room) {
                         $facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
-                        if($room->no_of_rooms > 0 && $kids > $room->max_child && $adults > $room->max_adults ){
+                        if($room->no_of_rooms > 0 && ($adults > $room->max_adults || $kids > $room->max_child)){
                             $status = "capacity";
                         }
                         elseif(!empty($room) && $room->no_of_rooms > 0 && $kids <= $room->max_child && $adults <= $room->max_adults) {
