@@ -183,13 +183,14 @@ class HomeController extends Controller
         ];
 
         $k = 0;
-
+        $status = "";
         $policies = CancelPolicy::all();
         foreach ($rooms as $room) {
             $facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
 
             $room_capacity = $room->max_child + $room->max_adults;
             if($room->no_of_rooms > 0 && $kids <= $room->max_child && $adults <= $room->max_adults ){
+                $status = "capacity";
                 if ($kid1 == 0 && $kid2 == 0 && $adults == 1 && $room->no_of_beds >=2) {
                     $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
                         ->where('rates.room_id', $room->id)->get();
@@ -198,7 +199,7 @@ class HomeController extends Controller
                         foreach ($rates as $rate) {
                             $package = Package::find($rate->package_id);
                             if (($df_month == "07" && $df_day >= "19" && $dt_month == "07" && $dt_day <= "31")) {
-    
+                                $status = "date";
                                 $k = 1;
     
                                 if ($str == "tn") {
@@ -222,6 +223,7 @@ class HomeController extends Controller
                                     ];
                                     
                                 } else {
+                                    
                                     $data = [
                                         'room' => $room,
                                         'policies' => $policies,
@@ -240,6 +242,7 @@ class HomeController extends Controller
                                 }
                             } else if (($df_month == "08" && $df_day >= "01" && $dt_month == "08" && $dt_day <= "29")) {
                                 $k = 1;
+                                $status = "date";
                                 if ($str == "tn") {
                                     $data = [
                                         'room' => $room,
@@ -280,6 +283,7 @@ class HomeController extends Controller
                                 //     'package'  => $package,
     
                                 // ];
+                                $status = "date";
                                 $k = 1;
                                 if ($str == "tn") {
                                     $data = [
@@ -316,8 +320,10 @@ class HomeController extends Controller
                                 }
                             }
                                 if(!empty($data)){
-
+                                    $status = "Show Rooms";
                                     array_push($new_array, $data);  
+                                }else{
+                                    $status = "No Rooms Aavailable";
                                 }
     
                             // array_push($new_pricing, $pricing);
@@ -331,7 +337,7 @@ class HomeController extends Controller
                     foreach ($rooms as $room) {
                         $facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
                         if (!empty($room) && $room->no_of_rooms > 0 && $kids <= $room->max_child && $adults <= $room->max_adults) {
-    
+                            $status = "capacity";
                             $discounts = DiscountRoom::where('room_id', $room->id)->get();
                             if ($kid1 == 1 && $kid2 == 0 && $adults <= 2) { // FIRST Condition
                                 $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
@@ -341,7 +347,7 @@ class HomeController extends Controller
                                         $package = Package::find($rate->package_id);
     
                                         if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
-                                           
+                                            $status = "date";
                                             if (count($discounts) > 0) {
                                                 if ($str == "tn") {
                                                     $data = [
@@ -473,9 +479,11 @@ class HomeController extends Controller
                                             }
                                         }
                                         if(!empty($data)){
-                                array_push($new_array, $data);
-    
-                            }
+                                            $status = "Show Rooms";
+                                            array_push($new_array, $data);  
+                                        }else{
+                                            $status = "No Rooms Aavailable";
+                                        }
                                     }
                                 }
                             } elseif ($kid1 == 0 && $kid2 == 1 && $adults == 1) { // SECOND Condition
@@ -495,6 +503,7 @@ class HomeController extends Controller
                                             //     'package'  => $package,
     
                                             // ];
+                                            $status = "date";
                                             if (count($discounts) > 0) {
                                                 if ($str == "tn") {
                                                     $data = [
@@ -621,9 +630,11 @@ class HomeController extends Controller
                                             }
                                         }
                                         if(!empty($data)){
-                                array_push($new_array, $data);
-    
-                            }
+                                            $status = "Show Rooms";
+                                            array_push($new_array, $data);  
+                                        }else{
+                                            $status = "No Rooms Aavailable";
+                                        }
                                        
                                     }
                                 }
@@ -635,7 +646,7 @@ class HomeController extends Controller
                                         $package = Package::find($rate->package_id);
     
                                         if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
-                                           
+                                           $date = "date";
                                             if (count($discounts) > 0) {
                                                 if ($str == "tn") {
                                                     $data = [
@@ -762,9 +773,11 @@ class HomeController extends Controller
                                             }
                                         }
                                         if(!empty($data)){
-                                array_push($new_array, $data);
-    
-                            }
+                                            $status = "Show Rooms";
+                                            array_push($new_array, $data);  
+                                        }else{
+                                            $status = "No Rooms Aavailable";
+                                        }
                                         
                                     }
                                 }
@@ -779,7 +792,7 @@ class HomeController extends Controller
                                         $package = Package::find($rate->package_id);
     
                                         if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
-                                            
+                                            $status = "date";
                                             if (count($discounts) > 0) {
                                                 if ($str == "tn") {
                                                     $data = [
@@ -906,7 +919,10 @@ class HomeController extends Controller
                                             }
                                         }
                                         if(!empty($data)){
-                                            array_push($new_array, $data);
+                                            $status = "Show Rooms";
+                                            array_push($new_array, $data);  
+                                        }else{
+                                            $status = "No Rooms Aavailable";
                                         }
                                         
                                     }
@@ -919,7 +935,7 @@ class HomeController extends Controller
                                         $package = Package::find($rate->package_id);
     
                                         if ($rate->start_date <= $datefrom && $rate->end_date >= $dateto) {
-                                           
+                                           $status = "date";
                                             if ($str == "tn") {
                                                 $data = [
                                                     
@@ -984,9 +1000,11 @@ class HomeController extends Controller
                                             }
                                         }
                                         if(!empty($data)){
-                                array_push($new_array, $data);
-    
-                            }
+                                            $status = "Show Rooms";
+                                            array_push($new_array, $data);  
+                                        }else{
+                                            $status = "No Rooms Aavailable";
+                                        }
                                         
                                     }
                                 }
@@ -998,6 +1016,7 @@ class HomeController extends Controller
             }
                 return response()->json([
                     'success'               =>  true,
+                    'status'                => $status,
                     'data_array'            =>  $dataarray,
                     'data'                  =>  $new_array,
                     // 'pricing'               =>  $new_pricing
