@@ -389,6 +389,7 @@ class HomeController extends Controller
                                                     ];
                                                 }
                                             } else {
+                                                $status = "nodate";
                                                 if ($str == "tn") {
                                                     $data = [
                                                         'room'  => $room,
@@ -484,7 +485,7 @@ class HomeController extends Controller
                                                 }
                                             }
                                         }
-                                        if(!empty($data)){
+                                        if(!empty($data) && $status != "nodate"){
                                             $status = "Show Rooms";
                                             array_push($new_array, $data);  
                                         }else{
@@ -580,7 +581,7 @@ class HomeController extends Controller
                                                 }
                                             }
                                         } else {
-                                            
+                                            $status = "nodate";
                                             if (count($discounts) > 0) {
                                                 if ($str == "tn") {
                                                     $data = [
@@ -635,7 +636,7 @@ class HomeController extends Controller
                                                 }
                                             }
                                         }
-                                        if(!empty($data)){
+                                        if(!empty($data) && $status != "nodate"){
                                             $status = "Show Rooms";
                                             array_push($new_array, $data);  
                                         }else{
@@ -723,7 +724,7 @@ class HomeController extends Controller
                                                 }
                                             }
                                         } else {
-                                            
+                                            $status = "nodate";
                                             if (count($discounts) > 0) {
                                                 if ($str == "tn") {
                                                     $data = [
@@ -778,7 +779,7 @@ class HomeController extends Controller
                                                 }
                                             }
                                         }
-                                        if(!empty($data)){
+                                        if(!empty($data) && $status != "nodate"){
                                             $status = "Show Rooms";
                                             array_push($new_array, $data);  
                                         }else{
@@ -869,7 +870,7 @@ class HomeController extends Controller
                                                 }
                                             }
                                         } else {
-                                            
+                                            $status = "nodate";
                                             if (count($discounts) > 0) {
                                                 if ($str == "tn") {
                                                     $data = [
@@ -924,7 +925,7 @@ class HomeController extends Controller
                                                 }
                                             }
                                         }
-                                        if(!empty($data)){
+                                        if(!empty($data) $status != "nodate"){
                                             $status = "Show Rooms";
                                             array_push($new_array, $data);  
                                         }else{
@@ -977,7 +978,7 @@ class HomeController extends Controller
                                                 ];
                                             }
                                         } else {
-                                           
+                                            $status = "nodate";
     
                                             if ($str == "tn") {
                                                 $data = [
@@ -1005,7 +1006,7 @@ class HomeController extends Controller
                                                 ];
                                             }
                                         }
-                                        if(!empty($data)){
+                                        if(!empty($data) && $status != "nodate"){
                                             $status = "Show Rooms";
                                             array_push($new_array, $data);  
                                         }else{
