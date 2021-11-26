@@ -184,13 +184,17 @@ class HomeController extends Controller
 
         $k = 0;
         $status = "";
+
         $policies = CancelPolicy::all();
         foreach ($rooms as $room) {
             $facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
 
             $room_capacity = $room->max_child + $room->max_adults;
-            if($room->no_of_rooms > 0 && $kids <= $room->max_child && $adults <= $room->max_adults ){
+            if($room->no_of_rooms > 0 && $kids > $room->max_child && $adults > $room->max_adults ){
                 $status = "capacity";
+            }
+            elseif($room->no_of_rooms > 0 && $kids <= $room->max_child && $adults <= $room->max_adults ){
+                
                 if ($kid1 == 0 && $kid2 == 0 && $adults == 1 && $room->no_of_beds >=2) {
                     $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
                         ->where('rates.room_id', $room->id)->get();
@@ -336,8 +340,10 @@ class HomeController extends Controller
                 if ($k != 1) {
                     foreach ($rooms as $room) {
                         $facilities = Facility::join('room_facilities','room_facilities.facility_id','facilities.id')->where('room_facilities.room_id',$room->id)->get();
-                        if (!empty($room) && $room->no_of_rooms > 0 && $kids <= $room->max_child && $adults <= $room->max_adults) {
+                        if($room->no_of_rooms > 0 && $kids > $room->max_child && $adults > $room->max_adults ){
                             $status = "capacity";
+                        }
+                        elseif(!empty($room) && $room->no_of_rooms > 0 && $kids <= $room->max_child && $adults <= $room->max_adults) {
                             $discounts = DiscountRoom::where('room_id', $room->id)->get();
                             if ($kid1 == 1 && $kid2 == 0 && $adults <= 2) { // FIRST Condition
                                 $rates = RoomRate::join('rates', 'rates.rate_id', 'room_rates.id')
