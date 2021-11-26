@@ -925,7 +925,7 @@ class HomeController extends Controller
                                                 }
                                             }
                                         }
-                                        if(!empty($data) $status != "nodate"){
+                                        if(!empty($data)&& $status != "nodate"){
                                             $status = "Show Rooms";
                                             array_push($new_array, $data);  
                                         }else{
